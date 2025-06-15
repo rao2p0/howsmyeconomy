@@ -98,8 +98,8 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
   return (
     <div className={`card-playful ${bgClass} rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-105 animate-bounce-in border-4 border-white/50 h-[520px] relative`}>
       
-      {/* Header */}
-      <div className="text-center pt-6 px-6">
+      {/* Header - Fixed Height Container */}
+      <div className="text-center pt-6 px-6 h-32">
         <div className="flex items-center justify-center gap-2 mb-3">
           {getTrendIcon()}
           <h3 className="text-xl font-playful font-bold text-gray-800 text-shadow-fun">
@@ -107,15 +107,15 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
           </h3>
           <span className="text-2xl animate-wiggle">{scoreResult.score >= 70 ? '🎉' : scoreResult.score >= 40 ? '🤔' : '😅'}</span>
         </div>
-        <div className="h-20 flex items-center justify-center">
+        <div className="h-16 flex items-center justify-center">
           <p className="text-sm font-modern text-gray-700 leading-relaxed bg-white/50 backdrop-blur-sm rounded-2xl p-3 border-2 border-white/30">
             {question.question}
           </p>
         </div>
       </div>
 
-      {/* Score and Chart */}
-      <div className="relative flex flex-col items-center px-6 pt-4">
+      {/* Score and Chart - Fixed Height Container */}
+      <div className="relative flex flex-col items-center px-6 h-80">
         <div className="relative w-36 h-36 mb-4">
           <canvas
             ref={chartRef}
@@ -149,10 +149,10 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
         </div>
       </div>
 
-      {/* ABSOLUTE POSITIONED BUTTON - GUARANTEED TO BE INSIDE */}
+      {/* CENTERED BUTTON - FIXED POSITION ON ALL CARDS */}
       <button
         onClick={handleShare}
-        className="absolute bottom-6 left-6 right-6 btn-playful flex items-center justify-center gap-3 py-4 px-4 rounded-2xl font-playful font-bold text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+        className="absolute bottom-6 left-1/2 transform -translate-x-1/2 w-64 btn-playful flex items-center justify-center gap-3 py-4 px-4 rounded-2xl font-playful font-bold text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
         aria-label={`Share ${question.title} score on X`}
       >
         <Share size={18} className="animate-pulse" />

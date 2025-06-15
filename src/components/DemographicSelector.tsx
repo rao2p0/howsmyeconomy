@@ -1,6 +1,9 @@
 import React from 'react';
 import { Demographics } from '../types';
 import { RotateCcw, Settings, Sparkles } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 
 interface DemographicSelectorProps {
   demographics: Demographics;
@@ -27,104 +30,105 @@ export function DemographicSelector({ demographics, onDemographicsChange, onRese
           <Sparkles className="text-yellow-300 animate-pulse" size={20} />
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4 items-end">
-          {/* Age Group */}
-          <div className="space-y-2">
-            <label className="block text-sm font-playful font-semibold text-white drop-shadow-sm" htmlFor="age-group">
-              🎂 Age Vibes
-            </label>
-            <select
-              id="age-group"
-              value={demographics.ageGroup}
-              onChange={(e) => handleChange('ageGroup', e.target.value)}
-              className="w-full border-3 border-white/30 rounded-2xl p-3 focus:ring-4 focus:ring-yellow-300 focus:border-transparent bg-white/95 backdrop-blur-sm text-gray-800 font-medium shadow-lg transition-all duration-300 hover:shadow-xl"
-              aria-label="Select age group"
-            >
-              <option value="18-24">18-24 (Gen Z Energy! 🚀)</option>
-              <option value="25-34">25-34 (Millennial Hustle 💪)</option>
-              <option value="35-44">35-44 (Peak Power! ⭐)</option>
-              <option value="45-54">45-54 (Wisdom Mode 🧠)</option>
-              <option value="55-64">55-64 (Almost There! 🎯)</option>
-              <option value="65+">65+ (Living the Dream! 🌴)</option>
-            </select>
-          </div>
+        <Card className="bg-white/10 backdrop-blur-sm border-white/20">
+          <CardContent className="p-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4 items-end">
+              {/* Age Group */}
+              <div className="space-y-2">
+                <label className="block text-sm font-playful font-semibold text-white drop-shadow-sm">
+                  🎂 Age Vibes
+                </label>
+                <Select value={demographics.ageGroup} onValueChange={(value) => handleChange('ageGroup', value)}>
+                  <SelectTrigger className="w-full border-3 border-white/30 rounded-2xl bg-white/95 backdrop-blur-sm text-gray-800 font-medium shadow-lg transition-all duration-300 hover:shadow-xl">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="18-24">18-24 (Gen Z Energy! 🚀)</SelectItem>
+                    <SelectItem value="25-34">25-34 (Millennial Hustle 💪)</SelectItem>
+                    <SelectItem value="35-44">35-44 (Peak Power! ⭐)</SelectItem>
+                    <SelectItem value="45-54">45-54 (Wisdom Mode 🧠)</SelectItem>
+                    <SelectItem value="55-64">55-64 (Almost There! 🎯)</SelectItem>
+                    <SelectItem value="65+">65+ (Living the Dream! 🌴)</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
 
-          {/* Household Income */}
-          <div className="space-y-2">
-            <label className="block text-sm font-playful font-semibold text-white drop-shadow-sm" htmlFor="income">
-              💰 Money Mood
-            </label>
-            <select
-              id="income"
-              value={demographics.householdIncome}
-              onChange={(e) => handleChange('householdIncome', e.target.value)}
-              className="w-full border-3 border-white/30 rounded-2xl p-3 focus:ring-4 focus:ring-yellow-300 focus:border-transparent bg-white/95 backdrop-blur-sm text-gray-800 font-medium shadow-lg transition-all duration-300 hover:shadow-xl"
-              aria-label="Select household income"
-            >
-              <option value="<$30K">Under $30K (Starter Pack 🌱)</option>
-              <option value="$30-60K">$30-60K (Getting There! 📈)</option>
-              <option value="$60-100K">$60-100K (Solid Vibes ✨)</option>
-              <option value="$100-150K">$100-150K (Doing Great! 🎉)</option>
-              <option value="$150K+">$150K+ (Living Large! 👑)</option>
-            </select>
-          </div>
+              {/* Household Income */}
+              <div className="space-y-2">
+                <label className="block text-sm font-playful font-semibold text-white drop-shadow-sm">
+                  💰 Money Mood
+                </label>
+                <Select value={demographics.householdIncome} onValueChange={(value) => handleChange('householdIncome', value)}>
+                  <SelectTrigger className="w-full border-3 border-white/30 rounded-2xl bg-white/95 backdrop-blur-sm text-gray-800 font-medium shadow-lg transition-all duration-300 hover:shadow-xl">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="<$30K">Under $30K (Starter Pack 🌱)</SelectItem>
+                    <SelectItem value="$30-60K">$30-60K (Getting There! 📈)</SelectItem>
+                    <SelectItem value="$60-100K">$60-100K (Solid Vibes ✨)</SelectItem>
+                    <SelectItem value="$100-150K">$100-150K (Doing Great! 🎉)</SelectItem>
+                    <SelectItem value="$150K+">$150K+ (Living Large! 👑)</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
 
-          {/* Geography */}
-          <div className="space-y-2">
-            <label className="block text-sm font-playful font-semibold text-white drop-shadow-sm" htmlFor="geography">
-              🗺️ Location Vibes
-            </label>
-            <select
-              id="geography"
-              value={demographics.geography}
-              onChange={(e) => handleChange('geography', e.target.value)}
-              className="w-full border-3 border-white/30 rounded-2xl p-3 focus:ring-4 focus:ring-yellow-300 focus:border-transparent bg-white/95 backdrop-blur-sm text-gray-800 font-medium shadow-lg transition-all duration-300 hover:shadow-xl"
-              aria-label="Select geography"
-            >
-              <option value="US Average">🇺🇸 US Average</option>
-              <option value="California">🌴 California</option>
-              <option value="Texas">🤠 Texas</option>
-              <option value="New York">🗽 New York</option>
-              <option value="Florida">🏖️ Florida</option>
-            </select>
-          </div>
+              {/* Geography */}
+              <div className="space-y-2">
+                <label className="block text-sm font-playful font-semibold text-white drop-shadow-sm">
+                  🗺️ Location Vibes
+                </label>
+                <Select value={demographics.geography} onValueChange={(value) => handleChange('geography', value)}>
+                  <SelectTrigger className="w-full border-3 border-white/30 rounded-2xl bg-white/95 backdrop-blur-sm text-gray-800 font-medium shadow-lg transition-all duration-300 hover:shadow-xl">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="US Average">🇺🇸 US Average</SelectItem>
+                    <SelectItem value="California">🌴 California</SelectItem>
+                    <SelectItem value="Texas">🤠 Texas</SelectItem>
+                    <SelectItem value="New York">🗽 New York</SelectItem>
+                    <SelectItem value="Florida">🏖️ Florida</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
 
-          {/* Household Size */}
-          <div className="space-y-2">
-            <label className="block text-sm font-playful font-semibold text-white drop-shadow-sm" htmlFor="household-size">
-              👨‍👩‍👧‍👦 Squad Size: {demographics.householdSize}
-            </label>
-            <div className="relative">
-              <input
-                id="household-size"
-                type="range"
-                min="1"
-                max="5"
-                step="0.5"
-                value={demographics.householdSize}
-                onChange={(e) => handleChange('householdSize', parseFloat(e.target.value))}
-                className="w-full h-3 slider appearance-none cursor-pointer rounded-full shadow-lg"
-                aria-label="Select household size"
-              />
-              <div className="flex justify-between text-xs text-white/80 mt-1 font-medium">
-                <span>Solo 🙋</span>
-                <span>Big Fam! 👨‍👩‍👧‍👦</span>
+              {/* Household Size */}
+              <div className="space-y-2">
+                <label className="block text-sm font-playful font-semibold text-white drop-shadow-sm">
+                  👨‍👩‍👧‍👦 Squad Size: {demographics.householdSize}
+                </label>
+                <div className="relative">
+                  <input
+                    type="range"
+                    min="1"
+                    max="5"
+                    step="0.5"
+                    value={demographics.householdSize}
+                    onChange={(e) => handleChange('householdSize', parseFloat(e.target.value))}
+                    className="w-full h-3 slider appearance-none cursor-pointer rounded-full shadow-lg bg-gradient-to-r from-purple-500 to-pink-500"
+                    aria-label="Select household size"
+                  />
+                  <div className="flex justify-between text-xs text-white/80 mt-1 font-medium">
+                    <span>Solo 🙋</span>
+                    <span>Big Fam! 👨‍👩‍👧‍👦</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Reset Button */}
+              <div className="flex justify-center lg:justify-start">
+                <Button
+                  onClick={onReset}
+                  variant="playful"
+                  className="font-playful font-semibold text-white px-6 py-3 rounded-full shadow-lg animate-pulse-glow gap-2"
+                  aria-label="Reset to median household"
+                >
+                  <RotateCcw size={18} className="animate-spin" style={{ animationDuration: '2s' }} />
+                  Reset Magic! ✨
+                </Button>
               </div>
             </div>
-          </div>
-
-          {/* Reset Button */}
-          <div className="flex justify-center lg:justify-start">
-            <button
-              onClick={onReset}
-              className="btn-playful flex items-center gap-2 font-playful font-semibold text-white px-6 py-3 rounded-full hover:scale-105 transform transition-all duration-300 shadow-lg animate-pulse-glow"
-              aria-label="Reset to median household"
-            >
-              <RotateCcw size={18} className="animate-spin" style={{ animationDuration: '2s' }} />
-              Reset Magic! ✨
-            </button>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

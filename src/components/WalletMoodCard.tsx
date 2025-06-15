@@ -2,6 +2,9 @@ import React, { useEffect, useRef } from 'react';
 import { Chart, registerables } from 'chart.js';
 import { Share, TrendingUp, TrendingDown, Minus } from 'lucide-react';
 import { WalletMoodQuestion, ScoreResult } from '../types';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 Chart.register(...registerables);
 
@@ -11,23 +14,23 @@ interface WalletMoodCardProps {
 }
 
 const cardBackgrounds = [
-  'bg-gradient-to-br from-pink-100 to-purple-100',
-  'bg-gradient-to-br from-blue-100 to-cyan-100',
-  'bg-gradient-to-br from-green-100 to-emerald-100',
-  'bg-gradient-to-br from-yellow-100 to-orange-100',
-  'bg-gradient-to-br from-red-100 to-pink-100',
-  'bg-gradient-to-br from-indigo-100 to-purple-100',
-  'bg-gradient-to-br from-teal-100 to-green-100',
-  'bg-gradient-to-br from-orange-100 to-red-100',
-  'bg-gradient-to-br from-purple-100 to-pink-100',
-  'bg-gradient-to-br from-cyan-100 to-blue-100',
+  'from-pink-100 to-purple-100',
+  'from-blue-100 to-cyan-100',
+  'from-green-100 to-emerald-100',
+  'from-yellow-100 to-orange-100',
+  'from-red-100 to-pink-100',
+  'from-indigo-100 to-purple-100',
+  'from-teal-100 to-green-100',
+  'from-orange-100 to-red-100',
+  'from-purple-100 to-pink-100',
+  'from-cyan-100 to-blue-100',
 ];
 
 export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
   const chartRef = useRef<HTMLCanvasElement>(null);
   const chartInstanceRef = useRef<Chart | null>(null);
   const cardIndex = parseInt(question.id.slice(-1)) || 0;
-  const bgClass = cardBackgrounds[cardIndex % cardBackgrounds.length];
+  const bgGradient = cardBackgrounds[cardIndex % cardBackgrounds.length];
 
   useEffect(() => {
     if (!chartRef.current) return;
@@ -96,26 +99,30 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
   };
 
   return (
-    <div className={`card-playful ${bgClass} rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-105 animate-bounce-in border-4 border-white/50 h-[520px] relative`}>
-      
+    <Card className={cn(
+      "relative h-[520px] overflow-hidden transition-all duration-500 transform hover:-translate-y-2 hover:scale-105 animate-bounce-in border-4 border-white/50 shadow-xl hover:shadow-2xl",
+      `bg-gradient-to-br ${bgGradient}`
+    )}>
       {/* Header - Fixed Height Container */}
-      <div className="text-center pt-6 px-6 h-32">
+      <CardHeader className="text-center h-32 pb-0">
         <div className="flex items-center justify-center gap-2 mb-3">
           {getTrendIcon()}
-          <h3 className="text-xl font-playful font-bold text-gray-800 text-shadow-fun">
+          <CardTitle className="text-xl font-playful font-bold text-gray-800 text-shadow-fun">
             {question.title}
-          </h3>
-          <span className="text-2xl animate-wiggle">{scoreResult.score >= 70 ? '🎉' : scoreResult.score >= 40 ? '🤔' : '😅'}</span>
+          </CardTitle>
+          <span className="text-2xl animate-wiggle">
+            {scoreResult.score >= 70 ? '🎉' : scoreResult.score >= 40 ? '🤔' : '😅'}
+          </span>
         </div>
         <div className="h-16 flex items-center justify-center">
-          <p className="text-sm font-modern text-gray-700 leading-relaxed bg-white/50 backdrop-blur-sm rounded-2xl p-3 border-2 border-white/30">
+          <CardDescription className="text-sm font-modern text-gray-700 leading-relaxed bg-white/50 backdrop-blur-sm rounded-2xl p-3 border-2 border-white/30">
             {question.question}
-          </p>
+          </CardDescription>
         </div>
-      </div>
+      </CardHeader>
 
       {/* Score and Chart - Fixed Height Container */}
-      <div className="relative flex flex-col items-center px-6 h-80">
+      <CardContent className="relative flex flex-col items-center h-80 px-6">
         <div className="relative w-36 h-36 mb-4">
           <canvas
             ref={chartRef}
@@ -147,18 +154,18 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
             </p>
           </div>
         </div>
-      </div>
+      </CardContent>
 
       {/* CENTERED BUTTON - FIXED POSITION ON ALL CARDS */}
-      <button
+      <Button
         onClick={handleShare}
-        className="absolute bottom-6 left-1/2 transform -translate-x-1/2 w-64 btn-playful flex items-center justify-center gap-3 py-4 px-4 rounded-2xl font-playful font-bold text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+        variant="playful"
+        className="absolute bottom-6 left-1/2 transform -translate-x-1/2 w-64 font-playful font-bold gap-3 py-4 px-4 rounded-2xl shadow-lg hover:shadow-xl"
         aria-label={`Share ${question.title} score on X`}
       >
         <Share size={18} className="animate-pulse" />
         Share the Vibes! 🚀
-      </button>
-      
-    </div>
+      </Button>
+    </Card>
   );
 }

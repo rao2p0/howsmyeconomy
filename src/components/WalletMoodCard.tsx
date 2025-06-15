@@ -96,68 +96,75 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
   };
 
   return (
-    <div className={`card-playful ${bgClass} p-6 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-105 animate-bounce-in border-4 border-white/50 h-[520px] flex flex-col`}>
-      {/* Header - Fixed height */}
-      <div className="text-center mb-6 flex-shrink-0">
-        <div className="flex items-center justify-center gap-2 mb-3">
-          {getTrendIcon()}
-          <h3 className="text-xl font-playful font-bold text-gray-800 text-shadow-fun">
-            {question.title}
-          </h3>
-          <span className="text-2xl animate-wiggle">{scoreResult.score >= 70 ? '🎉' : scoreResult.score >= 40 ? '🤔' : '😅'}</span>
-        </div>
-        <div className="h-20 flex items-center justify-center">
-          <p className="text-sm font-modern text-gray-700 leading-relaxed bg-white/50 backdrop-blur-sm rounded-2xl p-3 border-2 border-white/30">
-            {question.question}
-          </p>
-        </div>
-      </div>
-
-      {/* Score and Chart - Fixed height */}
-      <div className="relative flex flex-col items-center mb-6 flex-shrink-0">
-        <div className="relative w-36 h-36 mb-4">
-          <canvas
-            ref={chartRef}
-            className="w-full h-full drop-shadow-lg"
-            aria-describedby={`insight-${question.id}`}
-          />
-          <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <div className="text-4xl mb-2 animate-bounce" style={{ animationDuration: '2s' }}>
-              {scoreResult.emoji}
-            </div>
-            <div className="text-2xl font-playful font-bold text-gray-800 text-shadow-fun">
-              {scoreResult.score}/100
-            </div>
-          </div>
-        </div>
+    <div className={`card-playful ${bgClass} rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-105 animate-bounce-in border-4 border-white/50 h-[520px] flex flex-col`}>
+      {/* INNER CONTAINER - This creates the actual padding and constraints */}
+      <div className="p-6 flex flex-col h-full">
         
-        <div className="text-center space-y-2">
-          <div className="inline-block bg-white/70 backdrop-blur-sm px-4 py-2 rounded-full border-2 border-white/50">
-            <div className="text-lg font-playful font-bold text-gray-800">
-              {scoreResult.mood}
-            </div>
+        {/* Header - Fixed height */}
+        <div className="text-center mb-6 flex-shrink-0">
+          <div className="flex items-center justify-center gap-2 mb-3">
+            {getTrendIcon()}
+            <h3 className="text-xl font-playful font-bold text-gray-800 text-shadow-fun">
+              {question.title}
+            </h3>
+            <span className="text-2xl animate-wiggle">{scoreResult.score >= 70 ? '🎉' : scoreResult.score >= 40 ? '🤔' : '😅'}</span>
           </div>
-          <div className="h-16 flex items-center justify-center">
-            <p 
-              id={`insight-${question.id}`}
-              className="text-sm font-medium text-gray-600 bg-white/40 backdrop-blur-sm rounded-xl p-3 border border-white/30"
-            >
-              {scoreResult.insight}
+          <div className="h-20 flex items-center justify-center">
+            <p className="text-sm font-modern text-gray-700 leading-relaxed bg-white/50 backdrop-blur-sm rounded-2xl p-3 border-2 border-white/30">
+              {question.question}
             </p>
           </div>
         </div>
-      </div>
 
-      {/* Share Button - Well inside the card with proper spacing */}
-      <div className="mt-auto flex-shrink-0">
-        <button
-          onClick={handleShare}
-          className="w-full btn-playful flex items-center justify-center gap-3 py-4 px-4 rounded-2xl font-playful font-bold text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 mx-4 mb-2"
-          aria-label={`Share ${question.title} score on X`}
-        >
-          <Share size={18} className="animate-pulse" />
-          Share the Vibes! 🚀
-        </button>
+        {/* Score and Chart - Fixed height */}
+        <div className="relative flex flex-col items-center mb-6 flex-shrink-0">
+          <div className="relative w-36 h-36 mb-4">
+            <canvas
+              ref={chartRef}
+              className="w-full h-full drop-shadow-lg"
+              aria-describedby={`insight-${question.id}`}
+            />
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <div className="text-4xl mb-2 animate-bounce" style={{ animationDuration: '2s' }}>
+                {scoreResult.emoji}
+              </div>
+              <div className="text-2xl font-playful font-bold text-gray-800 text-shadow-fun">
+                {scoreResult.score}/100
+              </div>
+            </div>
+          </div>
+          
+          <div className="text-center space-y-2">
+            <div className="inline-block bg-white/70 backdrop-blur-sm px-4 py-2 rounded-full border-2 border-white/50">
+              <div className="text-lg font-playful font-bold text-gray-800">
+                {scoreResult.mood}
+              </div>
+            </div>
+            <div className="h-16 flex items-center justify-center">
+              <p 
+                id={`insight-${question.id}`}
+                className="text-sm font-medium text-gray-600 bg-white/40 backdrop-blur-sm rounded-xl p-3 border border-white/30"
+              >
+                {scoreResult.insight}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Share Button - STRICTLY INSIDE with additional margin */}
+        <div className="mt-auto flex-shrink-0">
+          <div className="m-4">
+            <button
+              onClick={handleShare}
+              className="w-full btn-playful flex items-center justify-center gap-3 py-4 px-4 rounded-2xl font-playful font-bold text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+              aria-label={`Share ${question.title} score on X`}
+            >
+              <Share size={18} className="animate-pulse" />
+              Share the Vibes! 🚀
+            </button>
+          </div>
+        </div>
+        
       </div>
     </div>
   );

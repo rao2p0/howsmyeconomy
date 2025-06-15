@@ -141,7 +141,7 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
         
         <div className="text-center space-y-2">
           <div className="inline-block bg-white/70 backdrop-blur-sm px-4 py-2 rounded-full border-2 border-white/50">
-            <div className="text-lg font-playful font-bold text-gray-800">
+            <div className="text-lg font-playful font-semibold text-gray-800">
               {scoreResult.mood}
             </div>
           </div>

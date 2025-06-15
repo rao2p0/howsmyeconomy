@@ -148,11 +148,11 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
         </div>
       </div>
 
-      {/* Share Button - Well inside the card with generous padding */}
-      <div className="mt-auto flex-shrink-0 px-6 pb-4">
+      {/* Share Button - Well inside the card with proper spacing */}
+      <div className="mt-auto flex-shrink-0">
         <button
           onClick={handleShare}
-          className="w-full btn-playful flex items-center justify-center gap-3 py-4 px-6 rounded-2xl font-playful font-bold text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+          className="w-full btn-playful flex items-center justify-center gap-3 py-4 px-4 rounded-2xl font-playful font-bold text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 mx-4 mb-2"
           aria-label={`Share ${question.title} score on X`}
         >
           <Share size={18} className="animate-pulse" />

@@ -96,9 +96,9 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
   };
 
   return (
-    <div className={`card-playful ${bgClass} p-6 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-105 animate-bounce-in border-4 border-white/50`}>
-      {/* Header */}
-      <div className="text-center mb-6">
+    <div className={`card-playful ${bgClass} p-6 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-105 animate-bounce-in border-4 border-white/50 h-[520px] flex flex-col`}>
+      {/* Header - Fixed height */}
+      <div className="text-center mb-6 flex-shrink-0">
         <div className="flex items-center justify-center gap-2 mb-3">
           {getTrendIcon()}
           <h3 className="text-xl font-playful font-bold text-gray-800 text-shadow-fun">
@@ -106,13 +106,15 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
           </h3>
           <span className="text-2xl animate-wiggle">{scoreResult.score >= 70 ? '🎉' : scoreResult.score >= 40 ? '🤔' : '😅'}</span>
         </div>
-        <p className="text-sm font-modern text-gray-700 leading-relaxed bg-white/50 backdrop-blur-sm rounded-2xl p-3 border-2 border-white/30">
-          {question.question}
-        </p>
+        <div className="h-20 flex items-center justify-center">
+          <p className="text-sm font-modern text-gray-700 leading-relaxed bg-white/50 backdrop-blur-sm rounded-2xl p-3 border-2 border-white/30">
+            {question.question}
+          </p>
+        </div>
       </div>
 
-      {/* Score and Chart */}
-      <div className="relative flex flex-col items-center mb-6">
+      {/* Score and Chart - Fixed height */}
+      <div className="relative flex flex-col items-center mb-6 flex-shrink-0">
         <div className="relative w-36 h-36 mb-4">
           <canvas
             ref={chartRef}
@@ -135,24 +137,28 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
               {scoreResult.mood}
             </div>
           </div>
-          <p 
-            id={`insight-${question.id}`}
-            className="text-sm font-medium text-gray-600 bg-white/40 backdrop-blur-sm rounded-xl p-3 border border-white/30"
-          >
-            {scoreResult.insight}
-          </p>
+          <div className="h-16 flex items-center justify-center">
+            <p 
+              id={`insight-${question.id}`}
+              className="text-sm font-medium text-gray-600 bg-white/40 backdrop-blur-sm rounded-xl p-3 border border-white/30"
+            >
+              {scoreResult.insight}
+            </p>
+          </div>
         </div>
       </div>
 
-      {/* Share Button */}
-      <button
-        onClick={handleShare}
-        className="w-full btn-playful flex items-center justify-center gap-3 py-4 px-6 rounded-2xl font-playful font-bold text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-        aria-label={`Share ${question.title} score on X`}
-      >
-        <Share size={18} className="animate-pulse" />
-        Share the Vibes! 🚀
-      </button>
+      {/* Share Button - Fixed at bottom */}
+      <div className="mt-auto flex-shrink-0">
+        <button
+          onClick={handleShare}
+          className="w-full btn-playful flex items-center justify-center gap-3 py-4 px-6 rounded-2xl font-playful font-bold text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+          aria-label={`Share ${question.title} score on X`}
+        >
+          <Share size={18} className="animate-pulse" />
+          Share the Vibes! 🚀
+        </button>
+      </div>
     </div>
   );
 }

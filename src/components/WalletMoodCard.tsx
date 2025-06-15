@@ -148,8 +148,8 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
         </div>
       </div>
 
-      {/* Share Button - Fixed at bottom */}
-      <div className="mt-auto flex-shrink-0">
+      {/* Share Button - Fixed at bottom with padding */}
+      <div className="mt-auto flex-shrink-0 px-2 pb-2">
         <button
           onClick={handleShare}
           className="w-full btn-playful flex items-center justify-center gap-3 py-4 px-6 rounded-2xl font-playful font-bold text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"

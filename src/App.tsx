@@ -27,9 +27,9 @@ function App() {
   );
 
   const getOverallMood = (score: number) => {
-    if (score >= 60) return { emoji: '🎉', mood: 'The economy is looking good!', color: 'from-green-400 to-emerald-500', vibe: 'Yay!' };
+    if (score >= 60) return { emoji: '😀', mood: 'The economy is looking good!', color: 'from-green-400 to-emerald-500', vibe: 'Yay!' };
     if (score >= 40) return { emoji: '😐', mood: 'The economy is so-so...', color: 'from-yellow-400 to-orange-500', vibe: 'Meh' };
-    return { emoji: '😬', mood: 'The economy needs help!', color: 'from-red-400 to-pink-500', vibe: 'Nay' };
+    return { emoji: '😒', mood: 'The economy needs help!', color: 'from-red-400 to-pink-500', vibe: 'Nay' };
   };
 
   const overallMood = getOverallMood(averageScore);

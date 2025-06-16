@@ -111,7 +111,7 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
             {question.title}
           </CardTitle>
           <span className="text-2xl animate-wiggle">
-            {scoreResult.score >= 60 ? '🎉' : scoreResult.score >= 40 ? '😐' : '😬'}
+            {scoreResult.score >= 60 ? '😀' : scoreResult.score >= 40 ? '😐' : '😒'}
           </span>
         </div>
         <div className="h-16 flex items-center justify-center">

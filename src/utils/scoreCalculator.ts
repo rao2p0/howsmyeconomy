@@ -48,7 +48,7 @@ export function calculateScore(
   // Determine emoji, mood, and color based on simplified 3-tier system
   let emoji, mood, color;
   if (adjustedScore >= 60) {
-    emoji = '🎉';
+    emoji = '😀';
     mood = 'Yay!';
     color = '#4CAF50';
   } else if (adjustedScore >= 40) {
@@ -56,7 +56,7 @@ export function calculateScore(
     mood = 'Meh';
     color = '#FF9800';
   } else {
-    emoji = '😬';
+    emoji = '😒';
     mood = 'Nay';
     color = '#F44336';
   }

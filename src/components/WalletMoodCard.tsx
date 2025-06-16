@@ -44,32 +44,43 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
     const ctx = chartRef.current.getContext('2d');
     if (!ctx) return;
 
-    // Create gradient for the chart
-    const gradient = ctx.createLinearGradient(0, 0, 0, 200);
-    gradient.addColorStop(0, scoreResult.color);
-    gradient.addColorStop(1, scoreResult.color + '80');
+    // Prepare data for 180° doughnut chart
+    const data = [scoreResult.goodCount, scoreResult.neutralCount, scoreResult.badCount];
+    const colors = ['#4CAF50', '#FF9800', '#F44336']; // Green, Orange, Red
+    const labels = ['Good', 'Neutral', 'Bad'];
 
     chartInstanceRef.current = new Chart(ctx, {
       type: 'doughnut',
       data: {
+        labels: labels,
         datasets: [
           {
-            data: [scoreResult.score, 100 - scoreResult.score],
-            backgroundColor: [gradient, '#F1F5F9'],
-            borderWidth: 0,
-            cutout: '75%',
+            data: data,
+            backgroundColor: colors,
+            borderWidth: 3,
+            borderColor: '#ffffff',
+            cutout: '70%',
           },
         ],
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        circumference: Math.PI, // 180 degrees
+        rotation: Math.PI, // Start from bottom
         plugins: {
           legend: {
             display: false,
           },
           tooltip: {
-            enabled: false,
+            callbacks: {
+              label: function(context) {
+                const label = context.label || '';
+                const value = context.parsed;
+                const total = scoreResult.goodCount + scoreResult.neutralCount + scoreResult.badCount;
+                return `${label}: ${value}/${total} indicators`;
+              }
+            }
           },
         },
         animation: {
@@ -84,7 +95,7 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
         chartInstanceRef.current.destroy();
       }
     };
-  }, [scoreResult.score, scoreResult.color]);
+  }, [scoreResult.goodCount, scoreResult.neutralCount, scoreResult.badCount]);
 
   const handleShare = () => {
     const tweetText = `The economy's ${scoreResult.emoji} ${scoreResult.mood.toLowerCase()} at ${scoreResult.score}/100 for "${question.question}" Check the full economic mood at HowsMyEconomy.com #EconomyMood #EconomicData`;
@@ -121,33 +132,45 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
         </div>
       </CardHeader>
 
-      {/* Score and Chart - Fixed Height Container */}
+      {/* Chart and Breakdown - Fixed Height Container */}
       <CardContent className="relative flex flex-col items-center h-80 px-6">
-        <div className="relative w-36 h-36 mb-4">
+        <div className="relative w-36 h-24 mb-4">
           <canvas
             ref={chartRef}
             className="w-full h-full drop-shadow-lg"
-            aria-describedby={`insight-${question.id}`}
+            aria-describedby={`breakdown-${question.id}`}
           />
-          <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <div className="text-4xl mb-2 animate-bounce" style={{ animationDuration: '2s' }}>
+          {/* Center text showing overall mood */}
+          <div className="absolute inset-0 flex flex-col items-center justify-end pb-2">
+            <div className="text-3xl mb-1 animate-bounce" style={{ animationDuration: '2s' }}>
               {scoreResult.emoji}
             </div>
-            <div className="text-2xl font-playful font-bold text-gray-800 text-shadow-fun">
-              {scoreResult.score}/100
+            <div className="text-lg font-playful font-bold text-gray-800 text-shadow-fun">
+              {scoreResult.mood}
             </div>
           </div>
         </div>
         
-        <div className="text-center space-y-2">
-          <div className="inline-block bg-white/70 backdrop-blur-sm px-4 py-2 rounded-full border-2 border-white/50">
-            <div className="text-lg font-playful font-semibold text-gray-800">
-              {scoreResult.mood}
+        {/* Indicator Breakdown */}
+        <div className="text-center space-y-3 w-full">
+          <div className="flex justify-center gap-4 text-sm font-medium">
+            <div className="flex items-center gap-1">
+              <div className="w-3 h-3 rounded-full bg-green-500"></div>
+              <span className="text-gray-700">{scoreResult.goodCount} Good</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <div className="w-3 h-3 rounded-full bg-orange-500"></div>
+              <span className="text-gray-700">{scoreResult.neutralCount} Neutral</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <div className="w-3 h-3 rounded-full bg-red-500"></div>
+              <span className="text-gray-700">{scoreResult.badCount} Bad</span>
             </div>
           </div>
+          
           <div className="h-16 flex items-center justify-center">
             <p 
-              id={`insight-${question.id}`}
+              id={`breakdown-${question.id}`}
               className="text-sm font-medium text-gray-600 bg-white/40 backdrop-blur-sm rounded-xl p-3 border border-white/30"
             >
               {scoreResult.insight}
@@ -161,7 +184,7 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
         onClick={handleShare}
         variant="playful"
         className="absolute bottom-6 left-1/2 transform -translate-x-1/2 w-64 font-playful font-bold gap-3 py-4 px-4 rounded-2xl shadow-lg hover:shadow-xl"
-        aria-label={`Share ${question.title} score on X`}
+        aria-label={`Share ${question.title} economic data on X`}
       >
         <Share size={18} className="animate-pulse" />
         Share the Data! 📊

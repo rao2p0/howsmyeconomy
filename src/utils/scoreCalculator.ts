@@ -1,46 +1,68 @@
-import { Demographics, WalletMoodQuestion, ScoreResult, FredData } from '../types';
+import { Demographics, WalletMoodQuestion, ScoreResult, FredData, IndicatorMood } from '../types';
 import { fredData } from '../data/fredData';
+
+// Mapping of FRED series to human-readable names
+const seriesNames: { [key: string]: string } = {
+  'MORTGAGE30US': 'Mortgage Rates',
+  'CSUSHPINSA': 'Home Prices',
+  'CUSR0000SEHA': 'Rent Costs',
+  'CUSR0000SETA01': 'Car Prices',
+  'CUSR0000SETB': 'Gas Prices',
+  'UNRATE': 'Unemployment',
+  'CUSR0000SAF11': 'Food Prices',
+  'CUSR0000SAM': 'Healthcare Costs',
+  'CUSR0000SEEB01': 'Tuition Costs',
+  'PSAVERT': 'Savings Rate',
+  'CUSR0000SEHF01': 'Electricity Costs'
+};
 
 export function calculateScore(
   question: WalletMoodQuestion,
   demographics: Demographics
 ): ScoreResult {
-  // Get the most recent data point for each series
-  const latestValues = question.fredSeries.map(series => {
+  // Get the most recent data point for each series and calculate individual moods
+  const indicatorBreakdown: IndicatorMood[] = question.fredSeries.map(series => {
     const data = fredData[series];
-    if (!data || data.length === 0) return 0;
-    return data[data.length - 1].value;
+    const value = data && data.length > 0 ? data[data.length - 1].value : 0;
+    
+    // Determine mood for this specific indicator
+    let mood: 'good' | 'neutral' | 'bad';
+    const { excellent, good, fair, poor } = question.benchmarks;
+    
+    // For most questions, lower values are better (except for savings rate)
+    const isHigherBetter = question.id === 'nest-egg' || question.id === 'paycheck-power' || question.id === 'rainy-day';
+    
+    if (isHigherBetter) {
+      if (value >= excellent) mood = 'good';
+      else if (value >= good) mood = 'neutral';
+      else mood = 'bad';
+    } else {
+      if (value <= excellent) mood = 'good';
+      else if (value <= good) mood = 'neutral';
+      else mood = 'bad';
+    }
+    
+    return {
+      series,
+      mood,
+      value,
+      name: seriesNames[series] || series
+    };
   });
 
-  // Calculate weighted average
-  let weightedSum = 0;
-  for (let i = 0; i < latestValues.length; i++) {
-    weightedSum += latestValues[i] * question.weights[i];
-  }
+  // Count indicators by mood
+  const goodCount = indicatorBreakdown.filter(ind => ind.mood === 'good').length;
+  const neutralCount = indicatorBreakdown.filter(ind => ind.mood === 'neutral').length;
+  const badCount = indicatorBreakdown.filter(ind => ind.mood === 'bad').length;
 
-  // Normalize to 0-100 scale based on benchmarks
-  let baseScore = 0;
-  const { excellent, good, fair, poor } = question.benchmarks;
-
-  // For most questions, lower values are better (except for savings rate)
-  const isHigherBetter = question.id === 'nest-egg' || question.id === 'paycheck-power' || question.id === 'rainy-day';
+  // Calculate overall score based on indicator distribution
+  const totalIndicators = indicatorBreakdown.length;
+  const goodPercentage = (goodCount / totalIndicators) * 100;
+  const badPercentage = (badCount / totalIndicators) * 100;
   
-  if (isHigherBetter) {
-    if (weightedSum >= excellent) baseScore = 90;
-    else if (weightedSum >= good) baseScore = 75;
-    else if (weightedSum >= fair) baseScore = 55;
-    else if (weightedSum >= poor) baseScore = 25;
-    else baseScore = 10;
-  } else {
-    if (weightedSum <= excellent) baseScore = 90;
-    else if (weightedSum <= good) baseScore = 75;
-    else if (weightedSum <= fair) baseScore = 55;
-    else if (weightedSum <= poor) baseScore = 25;
-    else baseScore = 10;
-  }
-
-  // No demographic adjustments - simplified scoring
-  let adjustedScore = baseScore;
+  // Score calculation: good indicators add points, bad indicators subtract
+  let adjustedScore = (goodCount * 80) + (neutralCount * 50) + (badCount * 20);
+  adjustedScore = adjustedScore / totalIndicators;
 
   // Ensure score stays within 0-100 range
   adjustedScore = Math.max(0, Math.min(100, adjustedScore));
@@ -61,43 +83,40 @@ export function calculateScore(
     color = '#F44336';
   }
 
-  // Generate insight based on the question and latest data
-  const insight = generateInsight(question, latestValues);
+  // Generate insight based on the indicator breakdown
+  const insight = generateInsight(question, indicatorBreakdown, goodCount, neutralCount, badCount);
 
   return {
     score: Math.round(adjustedScore),
     emoji,
     mood,
     insight,
-    color
+    color,
+    indicatorBreakdown,
+    goodCount,
+    neutralCount,
+    badCount
   };
 }
 
-function generateInsight(question: WalletMoodQuestion, values: number[]): string {
-  const mainValue = values[0];
+function generateInsight(
+  question: WalletMoodQuestion, 
+  indicators: IndicatorMood[], 
+  goodCount: number, 
+  neutralCount: number, 
+  badCount: number
+): string {
+  const total = indicators.length;
   
-  switch (question.id) {
-    case 'home-hunt':
-      return `Mortgage rates at ${mainValue.toFixed(2)}%`;
-    case 'car-cost':
-      return `Vehicle prices up ${((mainValue - 150) / 150 * 100).toFixed(1)}%`;
-    case 'job-jolt':
-      return `Unemployment at ${mainValue.toFixed(1)}%`;
-    case 'grocery-gauge':
-      return `Food prices up ${((mainValue - 280) / 280 * 100).toFixed(1)}%`;
-    case 'health-bill':
-      return `Medical costs up ${((mainValue - 450) / 450 * 100).toFixed(1)}%`;
-    case 'tuition-tracker':
-      return `Tuition up ${((mainValue - 700) / 700 * 100).toFixed(1)}%`;
-    case 'nest-egg':
-      return `Saving rate at ${mainValue.toFixed(1)}%`;
-    case 'bills-breakdown':
-      return `Utility costs up ${((mainValue - 350) / 350 * 100).toFixed(1)}%`;
-    case 'paycheck-power':
-      return `Saving rate at ${mainValue.toFixed(1)}%`;
-    case 'rainy-day':
-      return `Emergency fund at ${mainValue.toFixed(1)}%`;
-    default:
-      return 'Economic data updated';
+  if (goodCount === total) {
+    return `All ${total} indicators looking good!`;
+  } else if (badCount === total) {
+    return `All ${total} indicators concerning`;
+  } else if (goodCount > badCount) {
+    return `${goodCount}/${total} indicators positive`;
+  } else if (badCount > goodCount) {
+    return `${badCount}/${total} indicators concerning`;
+  } else {
+    return `Mixed signals across ${total} indicators`;
   }
 }

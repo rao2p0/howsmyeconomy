@@ -28,10 +28,21 @@ export interface WalletMoodQuestion {
   };
 }
 
+export interface IndicatorMood {
+  series: string;
+  mood: 'good' | 'neutral' | 'bad';
+  value: number;
+  name: string;
+}
+
 export interface ScoreResult {
   score: number;
   emoji: string;
   mood: string;
   insight: string;
   color: string;
+  indicatorBreakdown: IndicatorMood[];
+  goodCount: number;
+  neutralCount: number;
+  badCount: number;
 }

@@ -118,14 +118,14 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
       <CardHeader className="text-center pb-4 flex-shrink-0">
         <div className="flex items-center justify-center gap-2 mb-2">
           {getTrendIcon()}
-          <CardTitle className="text-lg font-playful font-semibold text-gray-800 text-shadow-fun">
+          <CardTitle className="text-lg font-playful font-semibold text-gray-900 text-shadow-fun">
             {question.title}
           </CardTitle>
           <span className="text-xl animate-wiggle">
             {scoreResult.score >= 60 ? '😀' : scoreResult.score >= 40 ? '😐' : '😒'}
           </span>
         </div>
-        <CardDescription className="text-sm font-modern text-gray-700 leading-relaxed bg-white/50 backdrop-blur-sm rounded-2xl p-3 border-2 border-white/30">
+        <CardDescription className="text-sm font-modern text-gray-900 leading-relaxed bg-white/80 backdrop-blur-sm rounded-2xl p-3 border-2 border-white/40 font-medium">
           {question.question}
         </CardDescription>
       </CardHeader>
@@ -146,7 +146,7 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
             <div className="text-3xl mb-1 animate-bounce" style={{ animationDuration: '2s' }}>
               {scoreResult.emoji}
             </div>
-            <div className="text-lg font-playful font-bold text-gray-800 text-shadow-fun">
+            <div className="text-lg font-playful font-bold text-gray-900 text-shadow-fun">
               {scoreResult.mood}
             </div>
           </div>
@@ -157,21 +157,21 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
           <div className="flex justify-center gap-3 text-sm font-medium">
             <div className="flex items-center gap-1">
               <div className="w-3 h-3 rounded-full bg-green-500"></div>
-              <span className="text-gray-700">{scoreResult.goodCount} Good</span>
+              <span className="text-gray-800 font-semibold">{scoreResult.goodCount} Good</span>
             </div>
             <div className="flex items-center gap-1">
               <div className="w-3 h-3 rounded-full bg-orange-500"></div>
-              <span className="text-gray-700">{scoreResult.neutralCount} Neutral</span>
+              <span className="text-gray-800 font-semibold">{scoreResult.neutralCount} Neutral</span>
             </div>
             <div className="flex items-center gap-1">
               <div className="w-3 h-3 rounded-full bg-red-500"></div>
-              <span className="text-gray-700">{scoreResult.badCount} Bad</span>
+              <span className="text-gray-800 font-semibold">{scoreResult.badCount} Bad</span>
             </div>
           </div>
           
           <p 
             id={`breakdown-${question.id}`}
-            className="text-sm font-medium text-gray-600 bg-white/40 backdrop-blur-sm rounded-xl p-3 border border-white/30"
+            className="text-sm font-semibold text-gray-900 bg-white/80 backdrop-blur-sm rounded-xl p-3 border border-white/40"
           >
             {scoreResult.insight}
           </p>

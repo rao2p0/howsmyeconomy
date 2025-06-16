@@ -44,6 +44,38 @@ const seriesNames: { [key: string]: string } = {
   'HDTGPDUSQ163': 'Household Debt'
 };
 
+// Get current date (simulated as June 15, 2025)
+function getCurrentDate(): Date {
+  return new Date('2025-06-15');
+}
+
+// Get the most recent data point for a given date
+function getMostRecentDataPoint(data: any[], targetDate: Date) {
+  // Find the data point for the same month/year or the closest previous one
+  const targetYear = targetDate.getFullYear();
+  const targetMonth = targetDate.getMonth() + 1; // getMonth() returns 0-11
+  
+  // Look for exact month match first
+  const exactMatch = data.find(point => {
+    const pointDate = new Date(point.date);
+    return pointDate.getFullYear() === targetYear && pointDate.getMonth() + 1 === targetMonth;
+  });
+  
+  if (exactMatch) return exactMatch;
+  
+  // If no exact match, find the most recent data point before the target date
+  const validPoints = data.filter(point => new Date(point.date) <= targetDate);
+  return validPoints[validPoints.length - 1];
+}
+
+// Get data point from exactly 12 months ago
+function getYearAgoDataPoint(data: any[], currentDate: Date) {
+  const yearAgo = new Date(currentDate);
+  yearAgo.setFullYear(yearAgo.getFullYear() - 1);
+  
+  return getMostRecentDataPoint(data, yearAgo);
+}
+
 // Calculate percentage change between two values
 function calculatePercentageChange(current: number, previous: number): number {
   return ((current - previous) / previous) * 100;
@@ -378,6 +410,8 @@ export function calculateScore(
   question: WalletMoodQuestion,
   demographics: Demographics
 ): ScoreResult {
+  const currentDate = getCurrentDate();
+  
   // Get mood scores for each indicator
   const moodScores: number[] = [];
   const indicatorBreakdown: IndicatorMood[] = question.fredSeries.map(series => {
@@ -392,10 +426,24 @@ export function calculateScore(
       };
     }
     
-    const currentValue = data[data.length - 1].value;
-    const previousYearValue = data[data.length - 13]?.value || data[0].value; // 12 months ago
+    // Get current and year-ago data points based on today's date
+    const currentDataPoint = getMostRecentDataPoint(data, currentDate);
+    const yearAgoDataPoint = getYearAgoDataPoint(data, currentDate);
     
-    const moodScore = getMoodScore(question.id, series, currentValue, previousYearValue);
+    if (!currentDataPoint || !yearAgoDataPoint) {
+      moodScores.push(0);
+      return {
+        series,
+        mood: 'neutral' as const,
+        value: currentDataPoint?.value || 0,
+        name: seriesNames[series] || series
+      };
+    }
+    
+    const currentValue = currentDataPoint.value;
+    const previousValue = yearAgoDataPoint.value;
+    
+    const moodScore = getMoodScore(question.id, series, currentValue, previousValue);
     moodScores.push(moodScore);
     
     return {

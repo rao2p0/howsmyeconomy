@@ -57,9 +57,9 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
           {
             data: data,
             backgroundColor: colors,
-            borderWidth: 2,
+            borderWidth: 3,
             borderColor: '#ffffff',
-            cutout: '65%',
+            cutout: '60%',
           },
         ],
       },
@@ -111,50 +111,50 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
 
   return (
     <Card className={cn(
-      "relative h-[520px] overflow-hidden transition-all duration-500 transform hover:-translate-y-2 hover:scale-105 animate-bounce-in border-4 border-white/50 shadow-xl hover:shadow-2xl",
+      "relative h-[520px] overflow-hidden transition-all duration-500 transform hover:-translate-y-2 hover:scale-105 animate-bounce-in border-4 border-white/50 shadow-xl hover:shadow-2xl flex flex-col",
       `bg-gradient-to-br ${bgGradient}`
     )}>
-      {/* Header - Fixed Height Container */}
-      <CardHeader className="text-center h-32 pb-0">
-        <div className="flex items-center justify-center gap-2 mb-3">
+      {/* Header - Fixed Height */}
+      <CardHeader className="text-center pb-4 flex-shrink-0">
+        <div className="flex items-center justify-center gap-2 mb-2">
           {getTrendIcon()}
-          <CardTitle className="text-xl font-playful font-semibold text-gray-800 text-shadow-fun">
+          <CardTitle className="text-lg font-playful font-semibold text-gray-800 text-shadow-fun">
             {question.title}
           </CardTitle>
-          <span className="text-2xl animate-wiggle">
+          <span className="text-xl animate-wiggle">
             {scoreResult.score >= 60 ? '😀' : scoreResult.score >= 40 ? '😐' : '😒'}
           </span>
         </div>
-        <div className="h-16 flex items-center justify-center">
-          <CardDescription className="text-sm font-modern text-gray-700 leading-relaxed bg-white/50 backdrop-blur-sm rounded-2xl p-3 border-2 border-white/30">
-            {question.question}
-          </CardDescription>
-        </div>
+        <CardDescription className="text-sm font-modern text-gray-700 leading-relaxed bg-white/50 backdrop-blur-sm rounded-2xl p-3 border-2 border-white/30">
+          {question.question}
+        </CardDescription>
       </CardHeader>
 
-      {/* Chart and Breakdown - Fixed Height Container */}
-      <CardContent className="relative flex flex-col items-center h-80 px-6">
-        {/* Chart container with proper dimensions for 180° arc */}
-        <div className="relative w-40 h-20 mb-6">
+      {/* Main Content - Flexible Height */}
+      <CardContent className="flex-1 flex flex-col items-center justify-center px-6 pb-20">
+        {/* Chart Container - Proper size for visibility */}
+        <div className="relative w-48 h-24 mb-4">
           <canvas
             ref={chartRef}
+            width="192"
+            height="96"
             className="w-full h-full drop-shadow-lg"
             aria-describedby={`breakdown-${question.id}`}
           />
-          {/* Center text positioned below the arc */}
-          <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
-            <div className="text-2xl mb-1 animate-bounce" style={{ animationDuration: '2s' }}>
+          {/* Emoji and mood positioned below the arc */}
+          <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+            <div className="text-3xl mb-1 animate-bounce" style={{ animationDuration: '2s' }}>
               {scoreResult.emoji}
             </div>
-            <div className="text-sm font-playful font-bold text-gray-800 text-shadow-fun">
+            <div className="text-lg font-playful font-bold text-gray-800 text-shadow-fun">
               {scoreResult.mood}
             </div>
           </div>
         </div>
         
-        {/* Indicator Breakdown */}
-        <div className="text-center space-y-3 w-full">
-          <div className="flex justify-center gap-4 text-sm font-medium">
+        {/* Indicator Breakdown - Compact */}
+        <div className="text-center space-y-3 w-full mt-8">
+          <div className="flex justify-center gap-3 text-sm font-medium">
             <div className="flex items-center gap-1">
               <div className="w-3 h-3 rounded-full bg-green-500"></div>
               <span className="text-gray-700">{scoreResult.goodCount} Good</span>
@@ -169,27 +169,27 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
             </div>
           </div>
           
-          <div className="h-16 flex items-center justify-center">
-            <p 
-              id={`breakdown-${question.id}`}
-              className="text-sm font-medium text-gray-600 bg-white/40 backdrop-blur-sm rounded-xl p-3 border border-white/30"
-            >
-              {scoreResult.insight}
-            </p>
-          </div>
+          <p 
+            id={`breakdown-${question.id}`}
+            className="text-sm font-medium text-gray-600 bg-white/40 backdrop-blur-sm rounded-xl p-3 border border-white/30"
+          >
+            {scoreResult.insight}
+          </p>
         </div>
       </CardContent>
 
-      {/* CENTERED BUTTON - FIXED POSITION ON ALL CARDS */}
-      <Button
-        onClick={handleShare}
-        variant="playful"
-        className="absolute bottom-6 left-1/2 transform -translate-x-1/2 w-64 font-playful font-bold gap-3 py-4 px-4 rounded-2xl shadow-lg hover:shadow-xl"
-        aria-label={`Share ${question.title} economic data on X`}
-      >
-        <Share size={18} className="animate-pulse" />
-        Share the Data! 📊
-      </Button>
+      {/* Share Button - Fixed Position at Bottom */}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex-shrink-0">
+        <Button
+          onClick={handleShare}
+          variant="playful"
+          className="w-56 font-playful font-bold gap-2 py-3 px-4 rounded-2xl shadow-lg hover:shadow-xl"
+          aria-label={`Share ${question.title} economic data on X`}
+        >
+          <Share size={16} className="animate-pulse" />
+          Share the Data! 📊
+        </Button>
+      </div>
     </Card>
   );
 }

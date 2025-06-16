@@ -44,11 +44,6 @@ const seriesNames: { [key: string]: string } = {
   'HDTGPDUSQ163': 'Household Debt'
 };
 
-// Get current date (simulated as June 15, 2025)
-function getCurrentDate(): Date {
-  return new Date('2025-06-15');
-}
-
 // Get the most recent data point for a given date
 function getMostRecentDataPoint(data: any[], targetDate: Date) {
   // Find the data point for the same month/year or the closest previous one
@@ -410,7 +405,7 @@ export function calculateScore(
   question: WalletMoodQuestion,
   demographics: Demographics
 ): ScoreResult {
-  const currentDate = getCurrentDate();
+  const currentDate = new Date(); // Use actual current date
   
   // Get mood scores for each indicator
   const moodScores: number[] = [];

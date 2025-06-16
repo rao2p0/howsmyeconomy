@@ -3,7 +3,7 @@ import { WalletMoodQuestion } from '../types';
 export const walletMoodQuestions: WalletMoodQuestion[] = [
   {
     id: 'home-hunt',
-    title: 'Healing Budget',
+    title: 'Home Hunt Helper',
     question: 'Can I afford to buy a home or keep up with rent?',
     fredSeries: ['MORTGAGE30US', 'CSUSHPINSA', 'CUSR0000SEHA'],
     weights: [0.4, 0.3, 0.3],
@@ -16,7 +16,7 @@ export const walletMoodQuestions: WalletMoodQuestion[] = [
   },
   {
     id: 'car-cost',
-    title: 'Healing Budget',
+    title: 'Car Cost Calculator',
     question: 'Is buying or maintaining a car affordable?',
     fredSeries: ['CUSR0000SETA01', 'CUSR0000SETB'],
     weights: [0.6, 0.4],
@@ -29,7 +29,7 @@ export const walletMoodQuestions: WalletMoodQuestion[] = [
   },
   {
     id: 'job-jolt',
-    title: 'Healing Budget',
+    title: 'Job Jolt',
     question: 'Will I lose my job or find a better one?',
     fredSeries: ['UNRATE'],
     weights: [1.0],
@@ -42,7 +42,7 @@ export const walletMoodQuestions: WalletMoodQuestion[] = [
   },
   {
     id: 'grocery-gauge',
-    title: 'Healing Budget',
+    title: 'Grocery Gauge',
     question: 'Can I afford groceries, gas, or other daily expenses?',
     fredSeries: ['CUSR0000SAF11', 'CUSR0000SETB'],
     weights: [0.6, 0.4],
@@ -55,7 +55,7 @@ export const walletMoodQuestions: WalletMoodQuestion[] = [
   },
   {
     id: 'health-bill',
-    title: 'Healing Budget',
+    title: 'Health Bill Barometer',
     question: 'Will healthcare or prescription drugs be affordable?',
     fredSeries: ['CUSR0000SAM'],
     weights: [1.0],
@@ -68,7 +68,7 @@ export const walletMoodQuestions: WalletMoodQuestion[] = [
   },
   {
     id: 'tuition-tracker',
-    title: 'Healing Budget',
+    title: 'Tuition Tracker',
     question: 'Is college or trade school affordable for me or my kids?',
     fredSeries: ['CUSR0000SEEB01'],
     weights: [1.0],
@@ -81,7 +81,7 @@ export const walletMoodQuestions: WalletMoodQuestion[] = [
   },
   {
     id: 'nest-egg',
-    title: 'Healing Budget',
+    title: 'Nest Egg Nugget',
     question: 'Will I be able to retire comfortably?',
     fredSeries: ['PSAVERT'],
     weights: [1.0],
@@ -94,7 +94,7 @@ export const walletMoodQuestions: WalletMoodQuestion[] = [
   },
   {
     id: 'bills-breakdown',
-    title: 'Healing Budget',
+    title: 'Bills Breakdown',
     question: 'Can I keep up with utility bills or childcare costs?',
     fredSeries: ['CUSR0000SEHF01'],
     weights: [1.0],
@@ -107,7 +107,7 @@ export const walletMoodQuestions: WalletMoodQuestion[] = [
   },
   {
     id: 'paycheck-power',
-    title: 'Healing Budget',
+    title: 'Paycheck Power',
     question: 'Will my wages or savings keep up with rising prices?',
     fredSeries: ['PSAVERT'],
     weights: [1.0],
@@ -120,7 +120,7 @@ export const walletMoodQuestions: WalletMoodQuestion[] = [
   },
   {
     id: 'rainy-day',
-    title: 'Healing Budget',
+    title: 'Rainy Day Radar',
     question: 'Can I handle unexpected expenses like medical bills or repairs?',
     fredSeries: ['PSAVERT', 'CUSR0000SAM'],
     weights: [0.7, 0.3],

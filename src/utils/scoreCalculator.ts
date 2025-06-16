@@ -28,75 +28,86 @@ function calculatePointChange(current: number, previous: number): number {
   return current - previous;
 }
 
-// Get mood for home affordability question using specific rules
-function getHomeMood(series: string, currentValue: number, previousValue: number): 'good' | 'neutral' | 'bad' {
+// Get mood score for home affordability question using specific rules
+// Returns: +1 for Yay, 0 for Meh, -1 for Nay
+function getHomeMoodScore(series: string, currentValue: number, previousValue: number): number {
   switch (series) {
     case 'MORTGAGE30US':
       // Mortgage rates: ↓ > 0.5pp = Yay, ±0.5pp = Meh, ↑ > 0.5pp = Nay
       const mortgageChange = calculatePointChange(currentValue, previousValue);
-      if (mortgageChange <= -0.5) return 'good';
-      if (mortgageChange >= 0.5) return 'bad';
-      return 'neutral';
+      if (mortgageChange <= -0.5) return 1; // Yay
+      if (mortgageChange >= 0.5) return -1; // Nay
+      return 0; // Meh
       
     case 'CSUSHPINSA':
       // Home prices: ↓ YoY = Yay, ±2% YoY = Meh, ↑ > 2% YoY = Nay
       const homePriceChange = calculatePercentageChange(currentValue, previousValue);
-      if (homePriceChange < 0) return 'good';
-      if (homePriceChange > 2) return 'bad';
-      return 'neutral';
+      if (homePriceChange < 0) return 1; // Yay
+      if (homePriceChange > 2) return -1; // Nay
+      return 0; // Meh
       
     case 'CUSR0000SEHA':
       // Rent: ↓ YoY = Yay, ±2% YoY = Meh, ↑ > 2% YoY = Nay
       const rentChange = calculatePercentageChange(currentValue, previousValue);
-      if (rentChange < 0) return 'good';
-      if (rentChange > 2) return 'bad';
-      return 'neutral';
+      if (rentChange < 0) return 1; // Yay
+      if (rentChange > 2) return -1; // Nay
+      return 0; // Meh
       
     case 'HOUST':
       // Housing starts: ↑ > 5% YoY = Yay, ±5% = Meh, ↓ > 5% YoY = Nay
       const housingStartsChange = calculatePercentageChange(currentValue, previousValue);
-      if (housingStartsChange > 5) return 'good';
-      if (housingStartsChange < -5) return 'bad';
-      return 'neutral';
+      if (housingStartsChange > 5) return 1; // Yay
+      if (housingStartsChange < -5) return -1; // Nay
+      return 0; // Meh
       
     case 'MEHOINUSA672N':
       // Median income: ↑ > 3% YoY = Yay, ±3% = Meh, ↓ > 3% = Nay
       const incomeChange = calculatePercentageChange(currentValue, previousValue);
-      if (incomeChange > 3) return 'good';
-      if (incomeChange < -3) return 'bad';
-      return 'neutral';
+      if (incomeChange > 3) return 1; // Yay
+      if (incomeChange < -3) return -1; // Nay
+      return 0; // Meh
       
     default:
-      return 'neutral';
+      return 0; // Meh
   }
 }
 
-// Generic mood calculation for other questions (keeping existing logic)
-function getGenericMood(question: WalletMoodQuestion, value: number): 'good' | 'neutral' | 'bad' {
+// Generic mood score calculation for other questions (keeping existing logic)
+// Returns: +1 for Yay, 0 for Meh, -1 for Nay
+function getGenericMoodScore(question: WalletMoodQuestion, value: number): number {
   const { excellent, good, fair, poor } = question.benchmarks;
   
   // For savings-related questions, higher is better
   const isHigherBetter = question.id === 'nest-egg' || question.id === 'paycheck-power' || question.id === 'rainy-day';
   
   if (isHigherBetter) {
-    if (value >= excellent) return 'good';
-    else if (value >= good) return 'neutral';
-    else return 'bad';
+    if (value >= excellent) return 1; // Yay
+    else if (value >= good) return 0; // Meh
+    else return -1; // Nay
   } else {
-    if (value <= excellent) return 'good';
-    else if (value <= good) return 'neutral';
-    else return 'bad';
+    if (value <= excellent) return 1; // Yay
+    else if (value <= good) return 0; // Meh
+    else return -1; // Nay
   }
+}
+
+// Convert mood score to mood string
+function moodScoreToMood(score: number): 'good' | 'neutral' | 'bad' {
+  if (score > 0) return 'good';
+  if (score < 0) return 'bad';
+  return 'neutral';
 }
 
 export function calculateScore(
   question: WalletMoodQuestion,
   demographics: Demographics
 ): ScoreResult {
-  // Get the most recent data point and year-over-year comparison for each series
+  // Get mood scores for each indicator
+  const moodScores: number[] = [];
   const indicatorBreakdown: IndicatorMood[] = question.fredSeries.map(series => {
     const data = fredData[series];
     if (!data || data.length < 12) {
+      moodScores.push(0); // Neutral if no data
       return {
         series,
         mood: 'neutral' as const,
@@ -108,58 +119,62 @@ export function calculateScore(
     const currentValue = data[data.length - 1].value;
     const previousYearValue = data[data.length - 13]?.value || data[0].value; // 12 months ago
     
-    let mood: 'good' | 'neutral' | 'bad';
+    let moodScore: number;
     
     // Use specific home affordability logic for the first question
     if (question.id === 'home-hunt') {
-      mood = getHomeMood(series, currentValue, previousYearValue);
+      moodScore = getHomeMoodScore(series, currentValue, previousYearValue);
     } else {
       // Use generic logic for other questions
-      mood = getGenericMood(question, currentValue);
+      moodScore = getGenericMoodScore(question, currentValue);
     }
+    
+    moodScores.push(moodScore);
     
     return {
       series,
-      mood,
+      mood: moodScoreToMood(moodScore),
       value: currentValue,
       name: seriesNames[series] || series
     };
   });
 
-  // Count indicators by mood
-  const goodCount = indicatorBreakdown.filter(ind => ind.mood === 'good').length;
-  const neutralCount = indicatorBreakdown.filter(ind => ind.mood === 'neutral').length;
-  const badCount = indicatorBreakdown.filter(ind => ind.mood === 'bad').length;
+  // Calculate average mood score
+  const averageMoodScore = moodScores.reduce((sum, score) => sum + score, 0) / moodScores.length;
 
-  // Calculate overall score based on indicator distribution
-  const totalIndicators = indicatorBreakdown.length;
-  let adjustedScore = (goodCount * 80) + (neutralCount * 50) + (badCount * 20);
-  adjustedScore = adjustedScore / totalIndicators;
-
-  // Ensure score stays within 0-100 range
-  adjustedScore = Math.max(0, Math.min(100, adjustedScore));
-
-  // Determine emoji, mood, and color based on simplified 3-tier system
-  let emoji, mood, color;
-  if (adjustedScore >= 60) {
+  // Interpret the average score according to your rules:
+  // +0.5 or more → Yay 🟢
+  // -0.5 to +0.5 → Meh 🟡  
+  // Less than -0.5 → Nay 🔴
+  let emoji, mood, color, overallScore;
+  
+  if (averageMoodScore >= 0.5) {
     emoji = '😀';
     mood = 'Yay!';
     color = '#4CAF50';
-  } else if (adjustedScore >= 40) {
+    overallScore = 80; // High score for Yay
+  } else if (averageMoodScore >= -0.5) {
     emoji = '😐';
     mood = 'Meh';
     color = '#FF9800';
+    overallScore = 50; // Medium score for Meh
   } else {
     emoji = '😒';
     mood = 'Nay';
     color = '#F44336';
+    overallScore = 20; // Low score for Nay
   }
 
+  // Count indicators by mood for the doughnut chart
+  const goodCount = indicatorBreakdown.filter(ind => ind.mood === 'good').length;
+  const neutralCount = indicatorBreakdown.filter(ind => ind.mood === 'neutral').length;
+  const badCount = indicatorBreakdown.filter(ind => ind.mood === 'bad').length;
+
   // Generate insight based on the indicator breakdown
-  const insight = generateInsight(question, indicatorBreakdown, goodCount, neutralCount, badCount);
+  const insight = generateInsight(question, indicatorBreakdown, goodCount, neutralCount, badCount, averageMoodScore);
 
   return {
-    score: Math.round(adjustedScore),
+    score: overallScore,
     emoji,
     mood,
     insight,
@@ -176,19 +191,19 @@ function generateInsight(
   indicators: IndicatorMood[], 
   goodCount: number, 
   neutralCount: number, 
-  badCount: number
+  badCount: number,
+  averageScore: number
 ): string {
   const total = indicators.length;
   
-  if (goodCount === total) {
-    return `All ${total} indicators looking good!`;
-  } else if (badCount === total) {
-    return `All ${total} indicators concerning`;
-  } else if (goodCount > badCount) {
-    return `${goodCount}/${total} indicators positive`;
-  } else if (badCount > goodCount) {
-    return `${badCount}/${total} indicators concerning`;
+  // More detailed insights based on the average score
+  if (averageScore >= 0.5) {
+    return `Strong positive signals (${goodCount}/${total} good indicators)`;
+  } else if (averageScore >= 0) {
+    return `Mostly positive trends (${goodCount}/${total} good indicators)`;
+  } else if (averageScore >= -0.5) {
+    return `Mixed economic signals (${badCount}/${total} concerning)`;
   } else {
-    return `Mixed signals across ${total} indicators`;
+    return `Challenging conditions (${badCount}/${total} indicators concerning)`;
   }
 }

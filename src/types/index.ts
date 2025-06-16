@@ -19,13 +19,6 @@ export interface WalletMoodQuestion {
   title: string;
   question: string;
   fredSeries: string[];
-  weights: number[];
-  benchmarks: {
-    excellent: number;
-    good: number;
-    fair: number;
-    poor: number;
-  };
 }
 
 export interface IndicatorMood {

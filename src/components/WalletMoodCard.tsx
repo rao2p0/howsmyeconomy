@@ -118,7 +118,7 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
       <CardHeader className="text-center pb-4 flex-shrink-0">
         <div className="flex items-center justify-center gap-2 mb-2">
           {getTrendIcon()}
-          <CardTitle className="text-lg font-playful font-semibold text-gray-900 text-shadow-fun">
+          <CardTitle className="text-xl font-playful font-medium text-gray-900 text-shadow-fun">
             {question.title}
           </CardTitle>
           <span className="text-xl animate-wiggle">

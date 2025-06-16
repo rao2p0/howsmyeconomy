@@ -1,5 +1,5 @@
 import React from 'react';
-import { Wallet, Sparkles } from 'lucide-react';
+import { TrendingUp, Sparkles } from 'lucide-react';
 
 export function Header() {
   return (
@@ -21,36 +21,36 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4 text-center relative z-10">
         <div className="flex items-center justify-center gap-4 mb-6">
           <div className="animate-wiggle">
-            <Wallet size={48} className="text-yellow-300 drop-shadow-lg" />
+            <TrendingUp size={48} className="text-yellow-300 drop-shadow-lg" />
           </div>
           <h1 className="text-5xl md:text-6xl font-playful font-bold text-shadow-fun animate-bounce-in">
-            HowsMyWallet.com
+            HowsMyEconomy.com
           </h1>
           <div className="animate-wiggle" style={{ animationDelay: '0.3s' }}>
-            <span className="text-5xl">💰</span>
+            <span className="text-5xl">📊</span>
           </div>
         </div>
         
         <div className="space-y-4">
           <p className="text-2xl md:text-3xl font-playful font-medium text-yellow-100 animate-fade-in">
-            🎉 Your Personal Economic Vibe Check! 🎉
+            🎯 The Economy's Real-Time Mood Check! 🎯
           </p>
           <p className="text-lg md:text-xl font-modern text-blue-100 max-w-3xl mx-auto leading-relaxed animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            Discover how the economy affects YOUR wallet with 10 super fun Mood Scores! 
-            Based on real Federal Reserve data, but way more exciting! ✨
+            Get instant insights into how the economy is really doing with 10 key indicators! 
+            Based on Federal Reserve data, but way more fun to understand! ✨
           </p>
           <div className="flex flex-wrap justify-center gap-2 mt-6 animate-fade-in" style={{ animationDelay: '0.4s' }}>
             <span className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">
-              🏠 Housing Vibes
-            </span>
-            <span className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">
-              🚗 Car Costs
-            </span>
-            <span className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">
-              🛒 Grocery Game
+              🏠 Housing Market
             </span>
             <span className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">
               💼 Job Market
+            </span>
+            <span className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">
+              🛒 Cost of Living
+            </span>
+            <span className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">
+              📈 Economic Health
             </span>
           </div>
         </div>

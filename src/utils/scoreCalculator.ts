@@ -39,57 +39,25 @@ export function calculateScore(
     else baseScore = 10;
   }
 
-  // Apply demographic adjustments
+  // No demographic adjustments - simplified scoring
   let adjustedScore = baseScore;
-
-  // Age adjustments
-  if (demographics.ageGroup === '18-24') {
-    if (question.id === 'job-jolt') adjustedScore += 5;
-    if (question.id === 'nest-egg') adjustedScore -= 5;
-  } else if (demographics.ageGroup === '55-64' || demographics.ageGroup === '65+') {
-    if (question.id === 'nest-egg') adjustedScore += 5;
-    if (question.id === 'job-jolt') adjustedScore -= 5;
-  }
-
-  // Income adjustments
-  if (demographics.householdIncome === '$150K+' || demographics.householdIncome === '$100-150K') {
-    adjustedScore += 10;
-  } else if (demographics.householdIncome === '<$30K') {
-    adjustedScore -= 10;
-  }
-
-  // Geography adjustments
-  if (demographics.geography === 'California' && question.id === 'home-hunt') {
-    adjustedScore -= 15;
-  } else if (demographics.geography === 'New York' && question.id === 'home-hunt') {
-    adjustedScore -= 10;
-  }
-
-  // Household size adjustments
-  if (demographics.householdSize > 3 && question.id === 'grocery-gauge') {
-    adjustedScore -= 5;
-  }
 
   // Ensure score stays within 0-100 range
   adjustedScore = Math.max(0, Math.min(100, adjustedScore));
 
-  // Determine emoji, mood, and color based on score
+  // Determine emoji, mood, and color based on simplified 3-tier system
   let emoji, mood, color;
-  if (adjustedScore >= 80) {
-    emoji = '🥳';
-    mood = 'Thriving!';
+  if (adjustedScore >= 60) {
+    emoji = '🎉';
+    mood = 'Yay!';
     color = '#4CAF50';
-  } else if (adjustedScore >= 60) {
-    emoji = '😊';
-    mood = 'Solid!';
-    color = '#2196F3';
   } else if (adjustedScore >= 40) {
-    emoji = '😬';
-    mood = 'Tight!';
+    emoji = '😐';
+    mood = 'Meh';
     color = '#FF9800';
   } else {
-    emoji = '😣';
-    mood = 'Pinched!';
+    emoji = '😬';
+    mood = 'Nay';
     color = '#F44336';
   }
 

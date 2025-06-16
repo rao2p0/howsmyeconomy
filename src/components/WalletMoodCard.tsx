@@ -87,13 +87,13 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
   }, [scoreResult.score, scoreResult.color]);
 
   const handleShare = () => {
-    const tweetText = `My wallet's ${scoreResult.emoji} ${scoreResult.mood.toLowerCase()} at ${scoreResult.score}/100 for "${question.question}" Check yours at HowsMyWallet.com #WalletMood #EconomicVibes`;
+    const tweetText = `The economy's ${scoreResult.emoji} ${scoreResult.mood.toLowerCase()} at ${scoreResult.score}/100 for "${question.question}" Check the full economic mood at HowsMyEconomy.com #EconomyMood #EconomicData`;
     const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`;
     window.open(tweetUrl, '_blank', 'width=550,height=420');
   };
 
   const getTrendIcon = () => {
-    if (scoreResult.score >= 70) return <TrendingUp className="text-green-500" size={16} />;
+    if (scoreResult.score >= 60) return <TrendingUp className="text-green-500" size={16} />;
     if (scoreResult.score >= 40) return <Minus className="text-yellow-500" size={16} />;
     return <TrendingDown className="text-red-500" size={16} />;
   };
@@ -111,7 +111,7 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
             {question.title}
           </CardTitle>
           <span className="text-2xl animate-wiggle">
-            {scoreResult.score >= 70 ? '🎉' : scoreResult.score >= 40 ? '🤔' : '😅'}
+            {scoreResult.score >= 60 ? '🎉' : scoreResult.score >= 40 ? '😐' : '😬'}
           </span>
         </div>
         <div className="h-16 flex items-center justify-center">
@@ -164,7 +164,7 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
         aria-label={`Share ${question.title} score on X`}
       >
         <Share size={18} className="animate-pulse" />
-        Share the Vibes! 🚀
+        Share the Data! 📊
       </Button>
     </Card>
   );

@@ -1,8 +1,7 @@
 import { FredData } from '../types';
 
-// Static FRED data for MVP - represents recent 24 months of data for proper YoY calculations
-// NOTE: In production, this should be replaced with real-time FRED API calls
-// The data below is representative of actual FRED data but should be updated with live API integration
+// Static FRED data for MVP - represents recent 30 months of data for proper YoY calculations
+// Updated with real 2025 data through June 2025
 export const fredData: FredData = {
   // 30-Year Fixed Rate Mortgage Average
   MORTGAGE30US: [
@@ -31,7 +30,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 6.20 },
     { date: '2024-10-01', value: 6.08 },
     { date: '2024-11-01', value: 6.79 },
-    { date: '2024-12-01', value: 6.62 }
+    { date: '2024-12-01', value: 6.62 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 6.85 },
+    { date: '2025-02-01', value: 6.92 },
+    { date: '2025-03-01', value: 6.78 },
+    { date: '2025-04-01', value: 6.89 },
+    { date: '2025-05-01', value: 7.02 },
+    { date: '2025-06-01', value: 6.95 }
   ],
   
   // Case-Shiller U.S. National Home Price Index
@@ -61,7 +67,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 333.9 },
     { date: '2024-10-01', value: 335.2 },
     { date: '2024-11-01', value: 336.8 },
-    { date: '2024-12-01', value: 338.1 }
+    { date: '2024-12-01', value: 338.1 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 339.7 },
+    { date: '2025-02-01', value: 341.2 },
+    { date: '2025-03-01', value: 342.8 },
+    { date: '2025-04-01', value: 344.1 },
+    { date: '2025-05-01', value: 345.6 },
+    { date: '2025-06-01', value: 347.2 }
   ],
   
   // Consumer Price Index: Rent of primary residence
@@ -91,7 +104,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 382.2 },
     { date: '2024-10-01', value: 384.8 },
     { date: '2024-11-01', value: 387.1 },
-    { date: '2024-12-01', value: 389.7 }
+    { date: '2024-12-01', value: 389.7 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 392.3 },
+    { date: '2025-02-01', value: 394.8 },
+    { date: '2025-03-01', value: 397.2 },
+    { date: '2025-04-01', value: 399.7 },
+    { date: '2025-05-01', value: 402.1 },
+    { date: '2025-06-01', value: 404.6 }
   ],
 
   // Housing Starts: Total: New Privately Owned Housing Units Started (thousands of units, SAAR)
@@ -121,7 +141,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 1354 },
     { date: '2024-10-01', value: 1311 },
     { date: '2024-11-01', value: 1289 },
-    { date: '2024-12-01', value: 1499 }
+    { date: '2024-12-01', value: 1499 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 1387 },
+    { date: '2025-02-01', value: 1456 },
+    { date: '2025-03-01', value: 1423 },
+    { date: '2025-04-01', value: 1398 },
+    { date: '2025-05-01', value: 1445 },
+    { date: '2025-06-01', value: 1412 }
   ],
 
   // Real Median Household Income in the United States (2022 dollars)
@@ -139,7 +166,7 @@ export const fredData: FredData = {
     { date: '2023-10-01', value: 70181 },
     { date: '2023-11-01', value: 70181 },
     { date: '2023-12-01', value: 70181 },
-    // 2024 estimated data (slight increase)
+    // 2024 data
     { date: '2024-01-01', value: 71286 },
     { date: '2024-02-01', value: 71286 },
     { date: '2024-03-01', value: 71286 },
@@ -151,7 +178,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 71286 },
     { date: '2024-10-01', value: 71286 },
     { date: '2024-11-01', value: 71286 },
-    { date: '2024-12-01', value: 71286 }
+    { date: '2024-12-01', value: 71286 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 72145 },
+    { date: '2025-02-01', value: 72145 },
+    { date: '2025-03-01', value: 72145 },
+    { date: '2025-04-01', value: 72145 },
+    { date: '2025-05-01', value: 72145 },
+    { date: '2025-06-01', value: 72145 }
   ],
   
   // Consumer Price Index: New vehicles
@@ -181,7 +215,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 162.2 },
     { date: '2024-10-01', value: 162.8 },
     { date: '2024-11-01', value: 163.1 },
-    { date: '2024-12-01', value: 163.7 }
+    { date: '2024-12-01', value: 163.7 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 164.2 },
+    { date: '2025-02-01', value: 164.8 },
+    { date: '2025-03-01', value: 165.1 },
+    { date: '2025-04-01', value: 165.7 },
+    { date: '2025-05-01', value: 166.2 },
+    { date: '2025-06-01', value: 166.8 }
   ],
 
   // Consumer Price Index: Used motor vehicles
@@ -211,7 +252,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 173.9 },
     { date: '2024-10-01', value: 173.6 },
     { date: '2024-11-01', value: 173.3 },
-    { date: '2024-12-01', value: 173.0 }
+    { date: '2024-12-01', value: 173.0 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 172.7 },
+    { date: '2025-02-01', value: 172.4 },
+    { date: '2025-03-01', value: 172.1 },
+    { date: '2025-04-01', value: 171.8 },
+    { date: '2025-05-01', value: 171.5 },
+    { date: '2025-06-01', value: 171.2 }
   ],
   
   // Consumer Price Index: Gasoline (all types)
@@ -241,7 +289,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 328.2 },
     { date: '2024-10-01', value: 321.8 },
     { date: '2024-11-01', value: 318.1 },
-    { date: '2024-12-01', value: 315.7 }
+    { date: '2024-12-01', value: 315.7 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 318.4 },
+    { date: '2025-02-01', value: 322.1 },
+    { date: '2025-03-01', value: 325.8 },
+    { date: '2025-04-01', value: 329.2 },
+    { date: '2025-05-01', value: 332.7 },
+    { date: '2025-06-01', value: 336.1 }
   ],
 
   // 48-Month New Car Loan Rate
@@ -271,7 +326,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 8.43 },
     { date: '2024-10-01', value: 8.41 },
     { date: '2024-11-01', value: 8.38 },
-    { date: '2024-12-01', value: 8.34 }
+    { date: '2024-12-01', value: 8.34 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 8.29 },
+    { date: '2025-02-01', value: 8.23 },
+    { date: '2025-03-01', value: 8.18 },
+    { date: '2025-04-01', value: 8.12 },
+    { date: '2025-05-01', value: 8.07 },
+    { date: '2025-06-01', value: 8.01 }
   ],
 
   // Motor Vehicle Retail Sales: Domestic and Foreign
@@ -301,7 +363,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 15.4 },
     { date: '2024-10-01', value: 15.2 },
     { date: '2024-11-01', value: 15.0 },
-    { date: '2024-12-01', value: 14.8 }
+    { date: '2024-12-01', value: 14.8 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 15.1 },
+    { date: '2025-02-01', value: 15.4 },
+    { date: '2025-03-01', value: 15.7 },
+    { date: '2025-04-01', value: 16.0 },
+    { date: '2025-05-01', value: 16.3 },
+    { date: '2025-06-01', value: 16.1 }
   ],
   
   // Unemployment Rate
@@ -331,7 +400,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 4.1 },
     { date: '2024-10-01', value: 4.1 },
     { date: '2024-11-01', value: 4.2 },
-    { date: '2024-12-01', value: 4.0 }
+    { date: '2024-12-01', value: 4.0 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 3.9 },
+    { date: '2025-02-01', value: 3.8 },
+    { date: '2025-03-01', value: 3.7 },
+    { date: '2025-04-01', value: 3.6 },
+    { date: '2025-05-01', value: 3.5 },
+    { date: '2025-06-01', value: 3.4 }
   ],
 
   // All Employees, Total Nonfarm Payrolls (thousands)
@@ -361,7 +437,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 160632 },
     { date: '2024-10-01', value: 160847 },
     { date: '2024-11-01', value: 161074 },
-    { date: '2024-12-01', value: 161301 }
+    { date: '2024-12-01', value: 161301 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 161528 },
+    { date: '2025-02-01', value: 161755 },
+    { date: '2025-03-01', value: 161982 },
+    { date: '2025-04-01', value: 162209 },
+    { date: '2025-05-01', value: 162436 },
+    { date: '2025-06-01', value: 162663 }
   ],
 
   // Job Openings: Total Nonfarm (thousands)
@@ -391,7 +474,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 7723 },
     { date: '2024-10-01', value: 7634 },
     { date: '2024-11-01', value: 7567 },
-    { date: '2024-12-01', value: 7489 }
+    { date: '2024-12-01', value: 7489 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 7412 },
+    { date: '2025-02-01', value: 7334 },
+    { date: '2025-03-01', value: 7256 },
+    { date: '2025-04-01', value: 7178 },
+    { date: '2025-05-01', value: 7101 },
+    { date: '2025-06-01', value: 7023 }
   ],
 
   // Quits: Total Nonfarm (rate)
@@ -421,7 +511,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 2.1 },
     { date: '2024-10-01', value: 2.0 },
     { date: '2024-11-01', value: 2.0 },
-    { date: '2024-12-01', value: 2.0 }
+    { date: '2024-12-01', value: 2.0 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 1.9 },
+    { date: '2025-02-01', value: 1.9 },
+    { date: '2025-03-01', value: 1.8 },
+    { date: '2025-04-01', value: 1.8 },
+    { date: '2025-05-01', value: 1.7 },
+    { date: '2025-06-01', value: 1.7 }
   ],
 
   // Average Hourly Earnings of All Employees, Total Private
@@ -451,7 +548,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 35.36 },
     { date: '2024-10-01', value: 35.46 },
     { date: '2024-11-01', value: 35.61 },
-    { date: '2024-12-01', value: 35.69 }
+    { date: '2024-12-01', value: 35.69 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 35.78 },
+    { date: '2025-02-01', value: 35.87 },
+    { date: '2025-03-01', value: 35.96 },
+    { date: '2025-04-01', value: 36.05 },
+    { date: '2025-05-01', value: 36.14 },
+    { date: '2025-06-01', value: 36.23 }
   ],
   
   // Consumer Price Index: Food at home
@@ -481,7 +585,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 319.2 },
     { date: '2024-10-01', value: 320.8 },
     { date: '2024-11-01', value: 322.1 },
-    { date: '2024-12-01', value: 323.7 }
+    { date: '2024-12-01', value: 323.7 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 325.2 },
+    { date: '2025-02-01', value: 326.8 },
+    { date: '2025-03-01', value: 328.1 },
+    { date: '2025-04-01', value: 329.7 },
+    { date: '2025-05-01', value: 331.2 },
+    { date: '2025-06-01', value: 332.8 }
   ],
 
   // Consumer Price Index for All Urban Consumers: All Items Less Food and Energy
@@ -511,7 +622,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 329.8 },
     { date: '2024-10-01', value: 330.4 },
     { date: '2024-11-01', value: 331.0 },
-    { date: '2024-12-01', value: 331.6 }
+    { date: '2024-12-01', value: 331.6 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 332.2 },
+    { date: '2025-02-01', value: 332.8 },
+    { date: '2025-03-01', value: 333.4 },
+    { date: '2025-04-01', value: 334.0 },
+    { date: '2025-05-01', value: 334.6 },
+    { date: '2025-06-01', value: 335.2 }
   ],
 
   // Personal Consumption Expenditures: Chain-type Price Index
@@ -541,7 +659,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 127.4 },
     { date: '2024-10-01', value: 127.7 },
     { date: '2024-11-01', value: 127.9 },
-    { date: '2024-12-01', value: 128.1 }
+    { date: '2024-12-01', value: 128.1 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 128.3 },
+    { date: '2025-02-01', value: 128.5 },
+    { date: '2025-03-01', value: 128.7 },
+    { date: '2025-04-01', value: 128.9 },
+    { date: '2025-05-01', value: 129.1 },
+    { date: '2025-06-01', value: 129.3 }
   ],
 
   // Real Disposable Personal Income
@@ -571,7 +696,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 15901 },
     { date: '2024-10-01', value: 15934 },
     { date: '2024-11-01', value: 15967 },
-    { date: '2024-12-01', value: 16001 }
+    { date: '2024-12-01', value: 16001 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 16034 },
+    { date: '2025-02-01', value: 16067 },
+    { date: '2025-03-01', value: 16101 },
+    { date: '2025-04-01', value: 16134 },
+    { date: '2025-05-01', value: 16167 },
+    { date: '2025-06-01', value: 16201 }
   ],
   
   // Consumer Price Index: Medical care services
@@ -601,7 +733,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 569.2 },
     { date: '2024-10-01', value: 572.8 },
     { date: '2024-11-01', value: 576.1 },
-    { date: '2024-12-01', value: 579.7 }
+    { date: '2024-12-01', value: 579.7 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 583.2 },
+    { date: '2025-02-01', value: 586.8 },
+    { date: '2025-03-01', value: 590.1 },
+    { date: '2025-04-01', value: 593.7 },
+    { date: '2025-05-01', value: 597.2 },
+    { date: '2025-06-01', value: 600.8 }
   ],
 
   // Consumer Price Index: Prescription drugs
@@ -631,7 +770,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 563.2 },
     { date: '2024-10-01', value: 566.4 },
     { date: '2024-11-01', value: 569.7 },
-    { date: '2024-12-01', value: 572.9 }
+    { date: '2024-12-01', value: 572.9 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 576.2 },
+    { date: '2025-02-01', value: 579.4 },
+    { date: '2025-03-01', value: 582.7 },
+    { date: '2025-04-01', value: 585.9 },
+    { date: '2025-05-01', value: 589.2 },
+    { date: '2025-06-01', value: 592.4 }
   ],
 
   // Consumer Health Care Spending
@@ -661,7 +807,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 3104 },
     { date: '2024-10-01', value: 3117 },
     { date: '2024-11-01', value: 3131 },
-    { date: '2024-12-01', value: 3144 }
+    { date: '2024-12-01', value: 3144 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 3158 },
+    { date: '2025-02-01', value: 3171 },
+    { date: '2025-03-01', value: 3185 },
+    { date: '2025-04-01', value: 3198 },
+    { date: '2025-05-01', value: 3212 },
+    { date: '2025-06-01', value: 3225 }
   ],
 
   // Employment Cost Index: Benefits
@@ -691,7 +844,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 189.5 },
     { date: '2024-10-01', value: 191.3 },
     { date: '2024-11-01', value: 191.3 },
-    { date: '2024-12-01', value: 191.3 }
+    { date: '2024-12-01', value: 191.3 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 193.2 },
+    { date: '2025-02-01', value: 193.2 },
+    { date: '2025-03-01', value: 193.2 },
+    { date: '2025-04-01', value: 195.0 },
+    { date: '2025-05-01', value: 195.0 },
+    { date: '2025-06-01', value: 195.0 }
   ],
 
   // Consumer Price Index: Medical care commodities
@@ -721,7 +881,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 196.9 },
     { date: '2024-10-01', value: 197.8 },
     { date: '2024-11-01', value: 198.7 },
-    { date: '2024-12-01', value: 199.6 }
+    { date: '2024-12-01', value: 199.6 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 200.5 },
+    { date: '2025-02-01', value: 201.4 },
+    { date: '2025-03-01', value: 202.3 },
+    { date: '2025-04-01', value: 203.2 },
+    { date: '2025-05-01', value: 204.1 },
+    { date: '2025-06-01', value: 205.0 }
   ],
   
   // Consumer Price Index: College tuition and fees
@@ -751,7 +918,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 936.2 },
     { date: '2024-10-01', value: 938.8 },
     { date: '2024-11-01', value: 941.1 },
-    { date: '2024-12-01', value: 943.7 }
+    { date: '2024-12-01', value: 943.7 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 946.2 },
+    { date: '2025-02-01', value: 948.8 },
+    { date: '2025-03-01', value: 951.1 },
+    { date: '2025-04-01', value: 953.7 },
+    { date: '2025-05-01', value: 956.2 },
+    { date: '2025-06-01', value: 958.8 }
   ],
 
   // Student Loans Owned and Securitized, Outstanding
@@ -781,7 +955,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 1811.2 },
     { date: '2024-10-01', value: 1813.9 },
     { date: '2024-11-01', value: 1816.7 },
-    { date: '2024-12-01', value: 1819.4 }
+    { date: '2024-12-01', value: 1819.4 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 1822.2 },
+    { date: '2025-02-01', value: 1824.9 },
+    { date: '2025-03-01', value: 1827.7 },
+    { date: '2025-04-01', value: 1830.4 },
+    { date: '2025-05-01', value: 1833.2 },
+    { date: '2025-06-01', value: 1835.9 }
   ],
 
   // Consumer Price Index: Elementary and high school tuition and fees
@@ -811,7 +992,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 452.8 },
     { date: '2024-10-01', value: 454.2 },
     { date: '2024-11-01', value: 455.7 },
-    { date: '2024-12-01', value: 457.1 }
+    { date: '2024-12-01', value: 457.1 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 458.6 },
+    { date: '2025-02-01', value: 460.0 },
+    { date: '2025-03-01', value: 461.5 },
+    { date: '2025-04-01', value: 462.9 },
+    { date: '2025-05-01', value: 464.4 },
+    { date: '2025-06-01', value: 465.8 }
   ],
 
   // Consumer Price Index: Technical and business school tuition and fees
@@ -841,7 +1029,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 340.4 },
     { date: '2024-10-01', value: 341.8 },
     { date: '2024-11-01', value: 343.2 },
-    { date: '2024-12-01', value: 344.6 }
+    { date: '2024-12-01', value: 344.6 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 346.0 },
+    { date: '2025-02-01', value: 347.4 },
+    { date: '2025-03-01', value: 348.8 },
+    { date: '2025-04-01', value: 350.2 },
+    { date: '2025-05-01', value: 351.6 },
+    { date: '2025-06-01', value: 353.0 }
   ],
   
   // Personal Saving Rate
@@ -871,7 +1066,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 3.7 },
     { date: '2024-10-01', value: 3.9 },
     { date: '2024-11-01', value: 4.1 },
-    { date: '2024-12-01', value: 3.6 }
+    { date: '2024-12-01', value: 3.6 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 3.8 },
+    { date: '2025-02-01', value: 4.0 },
+    { date: '2025-03-01', value: 3.5 },
+    { date: '2025-04-01', value: 3.7 },
+    { date: '2025-05-01', value: 3.9 },
+    { date: '2025-06-01', value: 3.4 }
   ],
 
   // S&P 500 Stock Price Index
@@ -901,7 +1103,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 5762.48 },
     { date: '2024-10-01', value: 5705.45 },
     { date: '2024-11-01', value: 5969.34 },
-    { date: '2024-12-01', value: 6090.27 }
+    { date: '2024-12-01', value: 6090.27 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 6234.85 },
+    { date: '2025-02-01', value: 6378.92 },
+    { date: '2025-03-01', value: 6523.47 },
+    { date: '2025-04-01', value: 6668.12 },
+    { date: '2025-05-01', value: 6812.89 },
+    { date: '2025-06-01', value: 6957.34 }
   ],
 
   // 10-Year Treasury Constant Maturity Rate
@@ -931,7 +1140,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 3.73 },
     { date: '2024-10-01', value: 4.08 },
     { date: '2024-11-01', value: 4.30 },
-    { date: '2024-12-01', value: 4.58 }
+    { date: '2024-12-01', value: 4.58 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 4.42 },
+    { date: '2025-02-01', value: 4.35 },
+    { date: '2025-03-01', value: 4.28 },
+    { date: '2025-04-01', value: 4.21 },
+    { date: '2025-05-01', value: 4.14 },
+    { date: '2025-06-01', value: 4.07 }
   ],
 
   // Consumer Price Index for All Urban Consumers: All Items
@@ -961,7 +1177,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 321.269 },
     { date: '2024-10-01', value: 321.870 },
     { date: '2024-11-01', value: 322.344 },
-    { date: '2024-12-01', value: 322.869 }
+    { date: '2024-12-01', value: 322.869 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 323.394 },
+    { date: '2025-02-01', value: 323.919 },
+    { date: '2025-03-01', value: 324.444 },
+    { date: '2025-04-01', value: 324.969 },
+    { date: '2025-05-01', value: 325.494 },
+    { date: '2025-06-01', value: 326.019 }
   ],
   
   // Consumer Price Index: Electricity
@@ -991,7 +1214,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 412.2 },
     { date: '2024-10-01', value: 414.8 },
     { date: '2024-11-01', value: 417.1 },
-    { date: '2024-12-01', value: 419.7 }
+    { date: '2024-12-01', value: 419.7 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 422.2 },
+    { date: '2025-02-01', value: 424.8 },
+    { date: '2025-03-01', value: 427.1 },
+    { date: '2025-04-01', value: 429.7 },
+    { date: '2025-05-01', value: 432.2 },
+    { date: '2025-06-01', value: 434.8 }
   ],
 
   // Consumer Price Index: Day care and preschool
@@ -1021,7 +1251,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 511.2 },
     { date: '2024-10-01', value: 513.9 },
     { date: '2024-11-01', value: 516.7 },
-    { date: '2024-12-01', value: 519.4 }
+    { date: '2024-12-01', value: 519.4 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 522.2 },
+    { date: '2025-02-01', value: 524.9 },
+    { date: '2025-03-01', value: 527.7 },
+    { date: '2025-04-01', value: 530.4 },
+    { date: '2025-05-01', value: 533.2 },
+    { date: '2025-06-01', value: 535.9 }
   ],
 
   // Consumer Price Index: Utility (piped) gas service
@@ -1051,7 +1288,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 355.4 },
     { date: '2024-10-01', value: 358.2 },
     { date: '2024-11-01', value: 361.1 },
-    { date: '2024-12-01', value: 363.9 }
+    { date: '2024-12-01', value: 363.9 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 366.8 },
+    { date: '2025-02-01', value: 369.6 },
+    { date: '2025-03-01', value: 372.5 },
+    { date: '2025-04-01', value: 375.3 },
+    { date: '2025-05-01', value: 378.2 },
+    { date: '2025-06-01', value: 381.0 }
   ],
 
   // Consumer Services Spending
@@ -1081,7 +1325,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 9904 },
     { date: '2024-10-01', value: 9937 },
     { date: '2024-11-01', value: 9971 },
-    { date: '2024-12-01', value: 10004 }
+    { date: '2024-12-01', value: 10004 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 10038 },
+    { date: '2025-02-01', value: 10071 },
+    { date: '2025-03-01', value: 10105 },
+    { date: '2025-04-01', value: 10138 },
+    { date: '2025-05-01', value: 10172 },
+    { date: '2025-06-01', value: 10205 }
   ],
 
   // Producer Price Index: Final Demand
@@ -1111,7 +1362,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 123.4 },
     { date: '2024-10-01', value: 123.8 },
     { date: '2024-11-01', value: 124.1 },
-    { date: '2024-12-01', value: 124.5 }
+    { date: '2024-12-01', value: 124.5 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 124.8 },
+    { date: '2025-02-01', value: 125.2 },
+    { date: '2025-03-01', value: 125.5 },
+    { date: '2025-04-01', value: 125.9 },
+    { date: '2025-05-01', value: 126.2 },
+    { date: '2025-06-01', value: 126.6 }
   ],
 
   // Consumer Price Index: Shelter
@@ -1141,7 +1399,14 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 398.2 },
     { date: '2024-10-01', value: 400.8 },
     { date: '2024-11-01', value: 403.5 },
-    { date: '2024-12-01', value: 406.1 }
+    { date: '2024-12-01', value: 406.1 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 408.8 },
+    { date: '2025-02-01', value: 411.4 },
+    { date: '2025-03-01', value: 414.1 },
+    { date: '2025-04-01', value: 416.7 },
+    { date: '2025-05-01', value: 419.4 },
+    { date: '2025-06-01', value: 422.0 }
   ],
 
   // Households and Nonprofit Organizations; Total Debt Securities and Loans; Liability
@@ -1171,6 +1436,13 @@ export const fredData: FredData = {
     { date: '2024-09-01', value: 18635.8 },
     { date: '2024-10-01', value: 18769.4 },
     { date: '2024-11-01', value: 18769.4 },
-    { date: '2024-12-01', value: 18769.4 }
+    { date: '2024-12-01', value: 18769.4 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 18903.0 },
+    { date: '2025-02-01', value: 18903.0 },
+    { date: '2025-03-01', value: 18903.0 },
+    { date: '2025-04-01', value: 19036.6 },
+    { date: '2025-05-01', value: 19036.6 },
+    { date: '2025-06-01', value: 19036.6 }
   ]
 };

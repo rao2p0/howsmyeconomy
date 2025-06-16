@@ -57,9 +57,9 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
           {
             data: data,
             backgroundColor: colors,
-            borderWidth: 3,
+            borderWidth: 2,
             borderColor: '#ffffff',
-            cutout: '70%',
+            cutout: '65%',
           },
         ],
       },
@@ -134,18 +134,19 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
 
       {/* Chart and Breakdown - Fixed Height Container */}
       <CardContent className="relative flex flex-col items-center h-80 px-6">
-        <div className="relative w-36 h-24 mb-4">
+        {/* Chart container with proper dimensions for 180° arc */}
+        <div className="relative w-40 h-20 mb-6">
           <canvas
             ref={chartRef}
             className="w-full h-full drop-shadow-lg"
             aria-describedby={`breakdown-${question.id}`}
           />
-          {/* Center text showing overall mood */}
-          <div className="absolute inset-0 flex flex-col items-center justify-end pb-2">
-            <div className="text-3xl mb-1 animate-bounce" style={{ animationDuration: '2s' }}>
+          {/* Center text positioned below the arc */}
+          <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+            <div className="text-2xl mb-1 animate-bounce" style={{ animationDuration: '2s' }}>
               {scoreResult.emoji}
             </div>
-            <div className="text-lg font-playful font-bold text-gray-800 text-shadow-fun">
+            <div className="text-sm font-playful font-bold text-gray-800 text-shadow-fun">
               {scoreResult.mood}
             </div>
           </div>

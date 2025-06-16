@@ -8,14 +8,40 @@ const seriesNames: { [key: string]: string } = {
   'CUSR0000SEHA': 'Rent Costs',
   'HOUST': 'Housing Starts',
   'MEHOINUSA672N': 'Median Income',
-  'CUSR0000SETA01': 'Car Prices',
+  'CUSR0000SETA01': 'New Car Prices',
+  'CUSR0000SETA02': 'Used Car Prices',
   'CUSR0000SETB': 'Gas Prices',
+  'TERMCBAUTO48NS': 'Auto Loan Rates',
+  'DMOTRC1': 'Car Sales',
   'UNRATE': 'Unemployment',
+  'PAYEMS': 'Job Growth',
+  'JTSJOL': 'Job Openings',
+  'JTSQUR': 'Quit Rate',
+  'CES0500000003': 'Wages',
   'CUSR0000SAF11': 'Food Prices',
+  'CPILFESL': 'Core Inflation',
+  'PCEPI': 'PCE Inflation',
+  'DSPIC96': 'Real Income',
   'CUSR0000SAM': 'Healthcare Costs',
-  'CUSR0000SEEB01': 'Tuition Costs',
+  'CUSR0000SEMF': 'Drug Prices',
+  'DHLCRC1': 'Health Spending',
+  'ECI_BENEFITS': 'Health Benefits',
+  'CUSR0000SEMD': 'Medical Goods',
+  'CUSR0000SEEB01': 'College Tuition',
+  'SLOAS': 'Student Loans',
+  'CUSR0000SEEB03': 'K-12 Tuition',
+  'CUSR0000SEEB04': 'Trade School',
   'PSAVERT': 'Savings Rate',
-  'CUSR0000SEHF01': 'Electricity Costs'
+  'SP500': 'Stock Market',
+  'DGS10': '10-Year Treasury',
+  'CPIAUCSL': 'Inflation',
+  'CUSR0000SEHF01': 'Electricity',
+  'CUSR0000SEEB02': 'Childcare',
+  'CUSR0000SEHF02': 'Gas Utilities',
+  'DSERRG3': 'Service Spending',
+  'PPIFD': 'Producer Prices',
+  'CUSR0000SETD': 'Shelter Costs',
+  'HDTGPDUSQ163': 'Household Debt'
 };
 
 // Calculate percentage change between two values
@@ -28,65 +54,317 @@ function calculatePointChange(current: number, previous: number): number {
   return current - previous;
 }
 
-// Get mood score for each indicator based on question-specific rules
+// Get mood score for each indicator based on comprehensive rules from the document
 // Returns: +1 for Yay, 0 for Meh, -1 for Nay
 function getMoodScore(questionId: string, series: string, currentValue: number, previousValue: number): number {
-  // Home affordability question - specific YoY and point change rules
-  if (questionId === 'home-hunt') {
-    switch (series) {
-      case 'MORTGAGE30US':
-        // Mortgage rates: ↓ > 0.5pp = Yay, ±0.5pp = Meh, ↑ > 0.5pp = Nay
-        const mortgageChange = calculatePointChange(currentValue, previousValue);
-        if (mortgageChange <= -0.5) return 1; // Yay
-        if (mortgageChange >= 0.5) return -1; // Nay
-        return 0; // Meh
-        
-      case 'CSUSHPINSA':
-        // Home prices: ↓ YoY = Yay, ±2% YoY = Meh, ↑ > 2% YoY = Nay
-        const homePriceChange = calculatePercentageChange(currentValue, previousValue);
-        if (homePriceChange < 0) return 1; // Yay
-        if (homePriceChange > 2) return -1; // Nay
-        return 0; // Meh
-        
-      case 'CUSR0000SEHA':
-        // Rent: ↓ YoY = Yay, ±2% YoY = Meh, ↑ > 2% YoY = Nay
-        const rentChange = calculatePercentageChange(currentValue, previousValue);
-        if (rentChange < 0) return 1; // Yay
-        if (rentChange > 2) return -1; // Nay
-        return 0; // Meh
-        
-      case 'HOUST':
-        // Housing starts: ↑ > 5% YoY = Yay, ±5% = Meh, ↓ > 5% YoY = Nay
-        const housingStartsChange = calculatePercentageChange(currentValue, previousValue);
-        if (housingStartsChange > 5) return 1; // Yay
-        if (housingStartsChange < -5) return -1; // Nay
-        return 0; // Meh
-        
-      case 'MEHOINUSA672N':
-        // Median income: ↑ > 3% YoY = Yay, ±3% = Meh, ↓ > 3% = Nay
-        const incomeChange = calculatePercentageChange(currentValue, previousValue);
-        if (incomeChange > 3) return 1; // Yay
-        if (incomeChange < -3) return -1; // Nay
-        return 0; // Meh
-    }
+  const yoyChange = calculatePercentageChange(currentValue, previousValue);
+  const pointChange = calculatePointChange(currentValue, previousValue);
+
+  switch (questionId) {
+    case 'home-hunt':
+      switch (series) {
+        case 'MORTGAGE30US':
+          // ↓ > 0.5pp = Yay, ±0.5pp = Meh, ↑ > 0.5pp = Nay
+          if (pointChange <= -0.5) return 1;
+          if (pointChange >= 0.5) return -1;
+          return 0;
+        case 'CSUSHPINSA':
+          // ↓ YoY = Yay, ±2% YoY = Meh, ↑ > 2% YoY = Nay
+          if (yoyChange < 0) return 1;
+          if (yoyChange > 2) return -1;
+          return 0;
+        case 'CUSR0000SEHA':
+          // ↓ YoY = Yay, ±2% YoY = Meh, ↑ > 2% YoY = Nay
+          if (yoyChange < 0) return 1;
+          if (yoyChange > 2) return -1;
+          return 0;
+        case 'HOUST':
+          // ↑ > 5% YoY = Yay, ±5% = Meh, ↓ > 5% YoY = Nay
+          if (yoyChange > 5) return 1;
+          if (yoyChange < -5) return -1;
+          return 0;
+        case 'MEHOINUSA672N':
+          // ↑ > 3% YoY = Yay, ±3% = Meh, ↓ > 3% = Nay
+          if (yoyChange > 3) return 1;
+          if (yoyChange < -3) return -1;
+          return 0;
+      }
+      break;
+
+    case 'car-cost':
+      switch (series) {
+        case 'CUSR0000SETA01':
+          // ↓ YoY = Yay, ±2% = Meh, ↑ > 2% YoY = Nay
+          if (yoyChange < 0) return 1;
+          if (yoyChange > 2) return -1;
+          return 0;
+        case 'CUSR0000SETA02':
+          // ↓ YoY = Yay, ±3% = Meh, ↑ > 3% = Nay
+          if (yoyChange < 0) return 1;
+          if (yoyChange > 3) return -1;
+          return 0;
+        case 'CUSR0000SETB':
+          // ↓ > 5% YoY = Yay, ±5% = Meh, ↑ > 5% = Nay
+          if (yoyChange < -5) return 1;
+          if (yoyChange > 5) return -1;
+          return 0;
+        case 'TERMCBAUTO48NS':
+          // ↓ > 0.5pp = Yay, ±0.5pp = Meh, ↑ > 0.5pp = Nay
+          if (pointChange <= -0.5) return 1;
+          if (pointChange >= 0.5) return -1;
+          return 0;
+        case 'DMOTRC1':
+          // ↓ YoY = Yay, Flat = Meh, ↑ YoY = Nay
+          if (yoyChange < 0) return 1;
+          if (yoyChange > 0) return -1;
+          return 0;
+      }
+      break;
+
+    case 'job-jolt':
+      switch (series) {
+        case 'UNRATE':
+          // ↓ > 0.3pp = Yay, ±0.3pp = Meh, ↑ > 0.3pp = Nay
+          if (pointChange <= -0.3) return 1;
+          if (pointChange >= 0.3) return -1;
+          return 0;
+        case 'PAYEMS':
+          // ↑ > 200k/month = Yay, ±100k = Meh, < 100k = Nay
+          const monthlyChange = pointChange; // Already in thousands
+          if (monthlyChange > 200) return 1;
+          if (monthlyChange < 100) return -1;
+          return 0;
+        case 'JTSJOL':
+          // ↑ > 5% YoY = Yay, Flat = Meh, ↓ > 5% = Nay
+          if (yoyChange > 5) return 1;
+          if (yoyChange < -5) return -1;
+          return 0;
+        case 'JTSQUR':
+          // ↑ > 2.5% = Yay, 2%–2.5% = Meh, < 2% = Nay
+          if (currentValue > 2.5) return 1;
+          if (currentValue < 2.0) return -1;
+          return 0;
+        case 'CES0500000003':
+          // ↑ > 3.5% YoY = Yay, ±1% = Meh, ↓ YoY = Nay
+          if (yoyChange > 3.5) return 1;
+          if (yoyChange < 0) return -1;
+          return 0;
+      }
+      break;
+
+    case 'grocery-gauge':
+      switch (series) {
+        case 'CUSR0000SAF11':
+          // ↓ YoY = Yay, ±2% = Meh, ↑ > 2% = Nay
+          if (yoyChange < 0) return 1;
+          if (yoyChange > 2) return -1;
+          return 0;
+        case 'CUSR0000SETB':
+          // ↓ > 5% = Yay, Flat = Meh, ↑ > 5% = Nay
+          if (yoyChange < -5) return 1;
+          if (yoyChange > 5) return -1;
+          return 0;
+        case 'CPILFESL':
+          // < 2% = Yay, 2–3% = Meh, > 3% = Nay
+          if (yoyChange < 2) return 1;
+          if (yoyChange > 3) return -1;
+          return 0;
+        case 'PCEPI':
+          // < 2% = Yay, 2–3% = Meh, > 3% = Nay
+          if (yoyChange < 2) return 1;
+          if (yoyChange > 3) return -1;
+          return 0;
+        case 'DSPIC96':
+          // ↑ > 3% YoY = Yay, Flat = Meh, ↓ YoY = Nay
+          if (yoyChange > 3) return 1;
+          if (yoyChange < 0) return -1;
+          return 0;
+      }
+      break;
+
+    case 'health-bill':
+      switch (series) {
+        case 'CUSR0000SAM':
+          // ↓ YoY = Yay, ±2% = Meh, ↑ > 2% = Nay
+          if (yoyChange < 0) return 1;
+          if (yoyChange > 2) return -1;
+          return 0;
+        case 'CUSR0000SEMF':
+          // ↓ YoY = Yay, ±2% = Meh, ↑ > 2% = Nay
+          if (yoyChange < 0) return 1;
+          if (yoyChange > 2) return -1;
+          return 0;
+        case 'DHLCRC1':
+          // ↓ YoY = Yay, Flat = Meh, ↑ YoY = Nay
+          if (yoyChange < 0) return 1;
+          if (yoyChange > 0) return -1;
+          return 0;
+        case 'ECI_BENEFITS':
+          // ↑ > 3% YoY = Yay, ±2% = Meh, ↓ YoY = Nay
+          if (yoyChange > 3) return 1;
+          if (yoyChange < 0) return -1;
+          return 0;
+        case 'CUSR0000SEMD':
+          // ↓ YoY = Yay, ±3% = Meh, ↑ > 3% = Nay
+          if (yoyChange < 0) return 1;
+          if (yoyChange > 3) return -1;
+          return 0;
+      }
+      break;
+
+    case 'tuition-tracker':
+      switch (series) {
+        case 'CUSR0000SEEB01':
+          // ↓ YoY = Yay, Flat = Meh, ↑ > 2% YoY = Nay
+          if (yoyChange < 0) return 1;
+          if (yoyChange > 2) return -1;
+          return 0;
+        case 'SLOAS':
+          // ↓ YoY = Yay, Flat = Meh, ↑ YoY = Nay
+          if (yoyChange < 0) return 1;
+          if (yoyChange > 0) return -1;
+          return 0;
+        case 'CUSR0000SEEB03':
+          // ↓ YoY = Yay, ±2% = Meh, ↑ > 2% = Nay
+          if (yoyChange < 0) return 1;
+          if (yoyChange > 2) return -1;
+          return 0;
+        case 'CUSR0000SEEB04':
+          // ↓ YoY = Yay, ±2% = Meh, ↑ > 2% = Nay
+          if (yoyChange < 0) return 1;
+          if (yoyChange > 2) return -1;
+          return 0;
+        case 'PSAVERT':
+          // > 6% = Yay, 4–6% = Meh, < 4% = Nay
+          if (currentValue > 6) return 1;
+          if (currentValue < 4) return -1;
+          return 0;
+      }
+      break;
+
+    case 'nest-egg':
+      switch (series) {
+        case 'PSAVERT':
+          // > 6% = Yay, 4–6% = Meh, < 4% = Nay
+          if (currentValue > 6) return 1;
+          if (currentValue < 4) return -1;
+          return 0;
+        case 'SP500':
+          // ↑ > 5% YoY = Yay, Flat = Meh, ↓ YoY = Nay
+          if (yoyChange > 5) return 1;
+          if (yoyChange < 0) return -1;
+          return 0;
+        case 'DGS10':
+          // 3–4% = Yay, 2–3% = Meh, <2% or >4% = Nay
+          if (currentValue >= 3 && currentValue <= 4) return 1;
+          if (currentValue < 2 || currentValue > 4) return -1;
+          return 0;
+        case 'CPIAUCSL':
+          // < 2% = Yay, 2–3% = Meh, > 3% = Nay
+          if (yoyChange < 2) return 1;
+          if (yoyChange > 3) return -1;
+          return 0;
+        case 'DSPIC96':
+          // ↑ > 3% = Yay, ±1% = Meh, ↓ YoY = Nay
+          if (yoyChange > 3) return 1;
+          if (yoyChange < 0) return -1;
+          return 0;
+      }
+      break;
+
+    case 'bills-breakdown':
+      switch (series) {
+        case 'CUSR0000SEHF01':
+          // ↓ YoY = Yay, ±2% = Meh, ↑ > 2% = Nay
+          if (yoyChange < 0) return 1;
+          if (yoyChange > 2) return -1;
+          return 0;
+        case 'CUSR0000SEEB02':
+          // ↓ YoY = Yay, ±2% = Meh, ↑ > 2% = Nay
+          if (yoyChange < 0) return 1;
+          if (yoyChange > 2) return -1;
+          return 0;
+        case 'CUSR0000SEHF02':
+          // ↓ YoY = Yay, ±2% = Meh, ↑ > 2% = Nay
+          if (yoyChange < 0) return 1;
+          if (yoyChange > 2) return -1;
+          return 0;
+        case 'DSERRG3':
+          // ↓ YoY = Yay, Flat = Meh, ↑ YoY = Nay
+          if (yoyChange < 0) return 1;
+          if (yoyChange > 0) return -1;
+          return 0;
+        case 'DSPIC96':
+          // ↑ > 3% = Yay, Flat = Meh, ↓ YoY = Nay
+          if (yoyChange > 3) return 1;
+          if (yoyChange < 0) return -1;
+          return 0;
+      }
+      break;
+
+    case 'paycheck-power':
+      switch (series) {
+        case 'CES0500000003':
+          // ↑ > 3.5% = Yay, ±1% = Meh, ↓ YoY = Nay
+          if (yoyChange > 3.5) return 1;
+          if (yoyChange < 0) return -1;
+          return 0;
+        case 'CPIAUCSL':
+          // < 2% = Yay, 2–3% = Meh, > 3% = Nay
+          if (yoyChange < 2) return 1;
+          if (yoyChange > 3) return -1;
+          return 0;
+        case 'PSAVERT':
+          // > 6% = Yay, 4–6% = Meh, < 4% = Nay
+          if (currentValue > 6) return 1;
+          if (currentValue < 4) return -1;
+          return 0;
+        case 'PPIFD':
+          // ↓ YoY = Yay, Flat = Meh, ↑ YoY = Nay
+          if (yoyChange < 0) return 1;
+          if (yoyChange > 0) return -1;
+          return 0;
+        case 'DSPIC96':
+          // ↑ > 3% = Yay, ±1% = Meh, ↓ YoY = Nay
+          if (yoyChange > 3) return 1;
+          if (yoyChange < 0) return -1;
+          return 0;
+      }
+      break;
+
+    case 'rainy-day':
+      switch (series) {
+        case 'PSAVERT':
+          // > 6% = Yay, 4–6% = Meh, < 4% = Nay
+          if (currentValue > 6) return 1;
+          if (currentValue < 4) return -1;
+          return 0;
+        case 'CUSR0000SAM':
+          // ↓ YoY = Yay, ±2% = Meh, ↑ > 2% = Nay
+          if (yoyChange < 0) return 1;
+          if (yoyChange > 2) return -1;
+          return 0;
+        case 'CUSR0000SETD':
+          // ↓ YoY = Yay, ±2% = Meh, ↑ > 2% = Nay
+          if (yoyChange < 0) return 1;
+          if (yoyChange > 2) return -1;
+          return 0;
+        case 'HDTGPDUSQ163':
+          // ↓ YoY = Yay, Flat = Meh, ↑ YoY = Nay
+          if (yoyChange < 0) return 1;
+          if (yoyChange > 0) return -1;
+          return 0;
+        case 'DSPIC96':
+          // ↑ > 3% = Yay, Flat = Meh, ↓ YoY = Nay
+          if (yoyChange > 3) return 1;
+          if (yoyChange < 0) return -1;
+          return 0;
+      }
+      break;
   }
-  
-  // Generic rules for other questions based on simple thresholds
-  // For most economic indicators, lower values are better (except savings rate)
-  const isHigherBetter = series === 'PSAVERT' || series === 'HOUST' || series === 'MEHOINUSA672N';
-  
-  if (isHigherBetter) {
-    // For savings rate, housing starts, income - higher is better
-    if (currentValue >= 6.0) return 1; // Yay
-    if (currentValue >= 4.0) return 0; // Meh
-    return -1; // Nay
-  } else {
-    // For prices, rates, unemployment - lower is better
-    const changePercent = calculatePercentageChange(currentValue, previousValue);
-    if (changePercent < -2) return 1; // Yay - significant decrease
-    if (changePercent > 2) return -1; // Nay - significant increase
-    return 0; // Meh - stable
-  }
+
+  // Default fallback (should not reach here with proper implementation)
+  return 0;
 }
 
 // Convert mood score to mood string

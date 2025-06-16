@@ -11,54 +11,54 @@ export const walletMoodQuestions: WalletMoodQuestion[] = [
     id: 'car-cost',
     title: 'Car Cost Calculator',
     question: 'Is buying or maintaining a car affordable?',
-    fredSeries: ['CUSR0000SETA01', 'CUSR0000SETB']
+    fredSeries: ['CUSR0000SETA01', 'CUSR0000SETA02', 'CUSR0000SETB', 'TERMCBAUTO48NS', 'DMOTRC1']
   },
   {
     id: 'job-jolt',
     title: 'Job Jolt',
     question: 'Will I lose my job or find a better one?',
-    fredSeries: ['UNRATE']
+    fredSeries: ['UNRATE', 'PAYEMS', 'JTSJOL', 'JTSQUR', 'CES0500000003']
   },
   {
     id: 'grocery-gauge',
     title: 'Grocery Gauge',
     question: 'Can I afford groceries, gas, or other daily expenses?',
-    fredSeries: ['CUSR0000SAF11', 'CUSR0000SETB']
+    fredSeries: ['CUSR0000SAF11', 'CUSR0000SETB', 'CPILFESL', 'PCEPI', 'DSPIC96']
   },
   {
     id: 'health-bill',
     title: 'Health Bill Barometer',
     question: 'Will healthcare or prescription drugs be affordable?',
-    fredSeries: ['CUSR0000SAM']
+    fredSeries: ['CUSR0000SAM', 'CUSR0000SEMF', 'DHLCRC1', 'ECI_BENEFITS', 'CUSR0000SEMD']
   },
   {
     id: 'tuition-tracker',
     title: 'Tuition Tracker',
-    question: 'Is college or trade school affordable for me or my kids?',
-    fredSeries: ['CUSR0000SEEB01']
+    question: 'Is college or trade school affordable?',
+    fredSeries: ['CUSR0000SEEB01', 'SLOAS', 'CUSR0000SEEB03', 'CUSR0000SEEB04', 'PSAVERT']
   },
   {
     id: 'nest-egg',
     title: 'Nest Egg Nugget',
     question: 'Will I be able to retire comfortably?',
-    fredSeries: ['PSAVERT']
+    fredSeries: ['PSAVERT', 'SP500', 'DGS10', 'CPIAUCSL', 'DSPIC96']
   },
   {
     id: 'bills-breakdown',
     title: 'Bills Breakdown',
     question: 'Can I keep up with utility bills or childcare costs?',
-    fredSeries: ['CUSR0000SEHF01']
+    fredSeries: ['CUSR0000SEHF01', 'CUSR0000SEEB02', 'CUSR0000SEHF02', 'DSERRG3', 'DSPIC96']
   },
   {
     id: 'paycheck-power',
     title: 'Paycheck Power',
     question: 'Will my wages or savings keep up with rising prices?',
-    fredSeries: ['PSAVERT']
+    fredSeries: ['CES0500000003', 'CPIAUCSL', 'PSAVERT', 'PPIFD', 'DSPIC96']
   },
   {
     id: 'rainy-day',
     title: 'Rainy Day Radar',
     question: 'Can I handle unexpected expenses like medical bills or repairs?',
-    fredSeries: ['PSAVERT', 'CUSR0000SAM']
+    fredSeries: ['PSAVERT', 'CUSR0000SAM', 'CUSR0000SETD', 'HDTGPDUSQ163', 'DSPIC96']
   }
 ];

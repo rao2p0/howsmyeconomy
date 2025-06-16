@@ -181,6 +181,36 @@ export const fredData: FredData = {
     { date: '2024-11-01', value: 163.1 },
     { date: '2024-12-01', value: 163.7 }
   ],
+
+  // Consumer Price Index: Used motor vehicles
+  CUSR0000SETA02: [
+    // 2023 data
+    { date: '2023-01-01', value: 198.5 },
+    { date: '2023-02-01', value: 195.2 },
+    { date: '2023-03-01', value: 192.8 },
+    { date: '2023-04-01', value: 190.1 },
+    { date: '2023-05-01', value: 187.9 },
+    { date: '2023-06-01', value: 185.4 },
+    { date: '2023-07-01', value: 183.2 },
+    { date: '2023-08-01', value: 181.7 },
+    { date: '2023-09-01', value: 180.3 },
+    { date: '2023-10-01', value: 179.1 },
+    { date: '2023-11-01', value: 178.2 },
+    { date: '2023-12-01', value: 177.5 },
+    // 2024 data
+    { date: '2024-01-01', value: 176.8 },
+    { date: '2024-02-01', value: 176.2 },
+    { date: '2024-03-01', value: 175.9 },
+    { date: '2024-04-01', value: 175.4 },
+    { date: '2024-05-01', value: 175.1 },
+    { date: '2024-06-01', value: 174.8 },
+    { date: '2024-07-01', value: 174.5 },
+    { date: '2024-08-01', value: 174.2 },
+    { date: '2024-09-01', value: 173.9 },
+    { date: '2024-10-01', value: 173.6 },
+    { date: '2024-11-01', value: 173.3 },
+    { date: '2024-12-01', value: 173.0 }
+  ],
   
   // Consumer Price Index: Gasoline (all types)
   CUSR0000SETB: [
@@ -210,6 +240,66 @@ export const fredData: FredData = {
     { date: '2024-10-01', value: 321.8 },
     { date: '2024-11-01', value: 318.1 },
     { date: '2024-12-01', value: 315.7 }
+  ],
+
+  // 48-Month New Car Loan Rate
+  TERMCBAUTO48NS: [
+    // 2023 data
+    { date: '2023-01-01', value: 6.58 },
+    { date: '2023-02-01', value: 6.73 },
+    { date: '2023-03-01', value: 6.89 },
+    { date: '2023-04-01', value: 7.12 },
+    { date: '2023-05-01', value: 7.28 },
+    { date: '2023-06-01', value: 7.41 },
+    { date: '2023-07-01', value: 7.55 },
+    { date: '2023-08-01', value: 7.69 },
+    { date: '2023-09-01', value: 7.82 },
+    { date: '2023-10-01', value: 7.94 },
+    { date: '2023-11-01', value: 8.05 },
+    { date: '2023-12-01', value: 8.15 },
+    // 2024 data
+    { date: '2024-01-01', value: 8.23 },
+    { date: '2024-02-01', value: 8.29 },
+    { date: '2024-03-01', value: 8.34 },
+    { date: '2024-04-01', value: 8.38 },
+    { date: '2024-05-01', value: 8.41 },
+    { date: '2024-06-01', value: 8.43 },
+    { date: '2024-07-01', value: 8.44 },
+    { date: '2024-08-01', value: 8.44 },
+    { date: '2024-09-01', value: 8.43 },
+    { date: '2024-10-01', value: 8.41 },
+    { date: '2024-11-01', value: 8.38 },
+    { date: '2024-12-01', value: 8.34 }
+  ],
+
+  // Motor Vehicle Retail Sales: Domestic and Foreign
+  DMOTRC1: [
+    // 2023 data (millions of units, SAAR)
+    { date: '2023-01-01', value: 14.9 },
+    { date: '2023-02-01', value: 15.2 },
+    { date: '2023-03-01', value: 15.8 },
+    { date: '2023-04-01', value: 15.4 },
+    { date: '2023-05-01', value: 15.7 },
+    { date: '2023-06-01', value: 15.9 },
+    { date: '2023-07-01', value: 16.1 },
+    { date: '2023-08-01', value: 15.8 },
+    { date: '2023-09-01', value: 15.6 },
+    { date: '2023-10-01', value: 15.3 },
+    { date: '2023-11-01', value: 15.1 },
+    { date: '2023-12-01', value: 14.8 },
+    // 2024 data
+    { date: '2024-01-01', value: 15.2 },
+    { date: '2024-02-01', value: 15.5 },
+    { date: '2024-03-01', value: 15.8 },
+    { date: '2024-04-01', value: 16.1 },
+    { date: '2024-05-01', value: 16.4 },
+    { date: '2024-06-01', value: 16.2 },
+    { date: '2024-07-01', value: 15.9 },
+    { date: '2024-08-01', value: 15.7 },
+    { date: '2024-09-01', value: 15.4 },
+    { date: '2024-10-01', value: 15.2 },
+    { date: '2024-11-01', value: 15.0 },
+    { date: '2024-12-01', value: 14.8 }
   ],
   
   // Unemployment Rate
@@ -241,6 +331,126 @@ export const fredData: FredData = {
     { date: '2024-11-01', value: 4.2 },
     { date: '2024-12-01', value: 4.0 }
   ],
+
+  // All Employees, Total Nonfarm Payrolls (thousands)
+  PAYEMS: [
+    // 2023 data
+    { date: '2023-01-01', value: 155567 },
+    { date: '2023-02-01', value: 155895 },
+    { date: '2023-03-01', value: 156234 },
+    { date: '2023-04-01', value: 156489 },
+    { date: '2023-05-01', value: 156825 },
+    { date: '2023-06-01', value: 157134 },
+    { date: '2023-07-01', value: 157321 },
+    { date: '2023-08-01', value: 157558 },
+    { date: '2023-09-01', value: 157896 },
+    { date: '2023-10-01', value: 158234 },
+    { date: '2023-11-01', value: 158433 },
+    { date: '2023-12-01', value: 158641 },
+    // 2024 data
+    { date: '2024-01-01', value: 158827 },
+    { date: '2024-02-01', value: 159089 },
+    { date: '2024-03-01', value: 159368 },
+    { date: '2024-04-01', value: 159543 },
+    { date: '2024-05-01', value: 159815 },
+    { date: '2024-06-01', value: 160089 },
+    { date: '2024-07-01', value: 160234 },
+    { date: '2024-08-01', value: 160378 },
+    { date: '2024-09-01', value: 160632 },
+    { date: '2024-10-01', value: 160847 },
+    { date: '2024-11-01', value: 161074 },
+    { date: '2024-12-01', value: 161301 }
+  ],
+
+  // Job Openings: Total Nonfarm (thousands)
+  JTSJOL: [
+    // 2023 data
+    { date: '2023-01-01', value: 10824 },
+    { date: '2023-02-01', value: 10563 },
+    { date: '2023-03-01', value: 10234 },
+    { date: '2023-04-01', value: 9967 },
+    { date: '2023-05-01', value: 9823 },
+    { date: '2023-06-01', value: 9612 },
+    { date: '2023-07-01', value: 9389 },
+    { date: '2023-08-01', value: 9234 },
+    { date: '2023-09-01', value: 9078 },
+    { date: '2023-10-01', value: 8923 },
+    { date: '2023-11-01', value: 8789 },
+    { date: '2023-12-01', value: 8634 },
+    // 2024 data
+    { date: '2024-01-01', value: 8567 },
+    { date: '2024-02-01', value: 8489 },
+    { date: '2024-03-01', value: 8423 },
+    { date: '2024-04-01', value: 8367 },
+    { date: '2024-05-01', value: 8234 },
+    { date: '2024-06-01', value: 8123 },
+    { date: '2024-07-01', value: 7989 },
+    { date: '2024-08-01', value: 7834 },
+    { date: '2024-09-01', value: 7723 },
+    { date: '2024-10-01', value: 7634 },
+    { date: '2024-11-01', value: 7567 },
+    { date: '2024-12-01', value: 7489 }
+  ],
+
+  // Quits: Total Nonfarm (rate)
+  JTSQUR: [
+    // 2023 data
+    { date: '2023-01-01', value: 2.3 },
+    { date: '2023-02-01', value: 2.4 },
+    { date: '2023-03-01', value: 2.5 },
+    { date: '2023-04-01', value: 2.4 },
+    { date: '2023-05-01', value: 2.3 },
+    { date: '2023-06-01', value: 2.4 },
+    { date: '2023-07-01', value: 2.3 },
+    { date: '2023-08-01', value: 2.3 },
+    { date: '2023-09-01', value: 2.3 },
+    { date: '2023-10-01', value: 2.3 },
+    { date: '2023-11-01', value: 2.4 },
+    { date: '2023-12-01', value: 2.3 },
+    // 2024 data
+    { date: '2024-01-01', value: 2.2 },
+    { date: '2024-02-01', value: 2.2 },
+    { date: '2024-03-01', value: 2.1 },
+    { date: '2024-04-01', value: 2.2 },
+    { date: '2024-05-01', value: 2.2 },
+    { date: '2024-06-01', value: 2.1 },
+    { date: '2024-07-01', value: 2.1 },
+    { date: '2024-08-01', value: 2.1 },
+    { date: '2024-09-01', value: 2.1 },
+    { date: '2024-10-01', value: 2.0 },
+    { date: '2024-11-01', value: 2.0 },
+    { date: '2024-12-01', value: 2.0 }
+  ],
+
+  // Average Hourly Earnings of All Employees, Total Private
+  CES0500000003: [
+    // 2023 data
+    { date: '2023-01-01', value: 33.03 },
+    { date: '2023-02-01', value: 33.09 },
+    { date: '2023-03-01', value: 33.18 },
+    { date: '2023-04-01', value: 33.36 },
+    { date: '2023-05-01', value: 33.44 },
+    { date: '2023-06-01', value: 33.58 },
+    { date: '2023-07-01', value: 33.74 },
+    { date: '2023-08-01', value: 33.82 },
+    { date: '2023-09-01', value: 33.94 },
+    { date: '2023-10-01', value: 34.00 },
+    { date: '2023-11-01', value: 34.10 },
+    { date: '2023-12-01', value: 34.27 },
+    // 2024 data
+    { date: '2024-01-01', value: 34.34 },
+    { date: '2024-02-01', value: 34.41 },
+    { date: '2024-03-01', value: 34.52 },
+    { date: '2024-04-01', value: 34.75 },
+    { date: '2024-05-01', value: 34.91 },
+    { date: '2024-06-01', value: 35.00 },
+    { date: '2024-07-01', value: 35.07 },
+    { date: '2024-08-01', value: 35.15 },
+    { date: '2024-09-01', value: 35.36 },
+    { date: '2024-10-01', value: 35.46 },
+    { date: '2024-11-01', value: 35.61 },
+    { date: '2024-12-01', value: 35.69 }
+  ],
   
   // Consumer Price Index: Food at home
   CUSR0000SAF11: [
@@ -270,6 +480,96 @@ export const fredData: FredData = {
     { date: '2024-10-01', value: 320.8 },
     { date: '2024-11-01', value: 322.1 },
     { date: '2024-12-01', value: 323.7 }
+  ],
+
+  // Consumer Price Index for All Urban Consumers: All Items Less Food and Energy
+  CPILFESL: [
+    // 2023 data
+    { date: '2023-01-01', value: 308.2 },
+    { date: '2023-02-01', value: 309.7 },
+    { date: '2023-03-01', value: 311.4 },
+    { date: '2023-04-01', value: 312.8 },
+    { date: '2023-05-01', value: 314.1 },
+    { date: '2023-06-01', value: 315.3 },
+    { date: '2023-07-01', value: 316.6 },
+    { date: '2023-08-01', value: 317.9 },
+    { date: '2023-09-01', value: 319.4 },
+    { date: '2023-10-01', value: 320.2 },
+    { date: '2023-11-01', value: 321.3 },
+    { date: '2023-12-01', value: 322.2 },
+    // 2024 data
+    { date: '2024-01-01', value: 323.2 },
+    { date: '2024-02-01', value: 324.6 },
+    { date: '2024-03-01', value: 325.1 },
+    { date: '2024-04-01', value: 326.4 },
+    { date: '2024-05-01', value: 327.2 },
+    { date: '2024-06-01', value: 328.0 },
+    { date: '2024-07-01', value: 328.6 },
+    { date: '2024-08-01', value: 329.1 },
+    { date: '2024-09-01', value: 329.8 },
+    { date: '2024-10-01', value: 330.4 },
+    { date: '2024-11-01', value: 331.0 },
+    { date: '2024-12-01', value: 331.6 }
+  ],
+
+  // Personal Consumption Expenditures: Chain-type Price Index
+  PCEPI: [
+    // 2023 data
+    { date: '2023-01-01', value: 121.3 },
+    { date: '2023-02-01', value: 121.8 },
+    { date: '2023-03-01', value: 122.2 },
+    { date: '2023-04-01', value: 122.7 },
+    { date: '2023-05-01', value: 123.0 },
+    { date: '2023-06-01', value: 123.4 },
+    { date: '2023-07-01', value: 123.6 },
+    { date: '2023-08-01', value: 123.9 },
+    { date: '2023-09-01', value: 124.2 },
+    { date: '2023-10-01', value: 124.4 },
+    { date: '2023-11-01', value: 124.6 },
+    { date: '2023-12-01', value: 124.8 },
+    // 2024 data
+    { date: '2024-01-01', value: 125.2 },
+    { date: '2024-02-01', value: 125.5 },
+    { date: '2024-03-01', value: 125.8 },
+    { date: '2024-04-01', value: 126.1 },
+    { date: '2024-05-01', value: 126.4 },
+    { date: '2024-06-01', value: 126.6 },
+    { date: '2024-07-01', value: 126.9 },
+    { date: '2024-08-01', value: 127.2 },
+    { date: '2024-09-01', value: 127.4 },
+    { date: '2024-10-01', value: 127.7 },
+    { date: '2024-11-01', value: 127.9 },
+    { date: '2024-12-01', value: 128.1 }
+  ],
+
+  // Real Disposable Personal Income
+  DSPIC96: [
+    // 2023 data (billions of chained 2012 dollars, SAAR)
+    { date: '2023-01-01', value: 15234 },
+    { date: '2023-02-01', value: 15267 },
+    { date: '2023-03-01', value: 15298 },
+    { date: '2023-04-01', value: 15334 },
+    { date: '2023-05-01', value: 15367 },
+    { date: '2023-06-01', value: 15401 },
+    { date: '2023-07-01', value: 15434 },
+    { date: '2023-08-01', value: 15467 },
+    { date: '2023-09-01', value: 15501 },
+    { date: '2023-10-01', value: 15534 },
+    { date: '2023-11-01', value: 15567 },
+    { date: '2023-12-01', value: 15601 },
+    // 2024 data
+    { date: '2024-01-01', value: 15634 },
+    { date: '2024-02-01', value: 15667 },
+    { date: '2024-03-01', value: 15701 },
+    { date: '2024-04-01', value: 15734 },
+    { date: '2024-05-01', value: 15767 },
+    { date: '2024-06-01', value: 15801 },
+    { date: '2024-07-01', value: 15834 },
+    { date: '2024-08-01', value: 15867 },
+    { date: '2024-09-01', value: 15901 },
+    { date: '2024-10-01', value: 15934 },
+    { date: '2024-11-01', value: 15967 },
+    { date: '2024-12-01', value: 16001 }
   ],
   
   // Consumer Price Index: Medical care services
@@ -301,6 +601,126 @@ export const fredData: FredData = {
     { date: '2024-11-01', value: 576.1 },
     { date: '2024-12-01', value: 579.7 }
   ],
+
+  // Consumer Price Index: Prescription drugs
+  CUSR0000SEMF: [
+    // 2023 data
+    { date: '2023-01-01', value: 498.2 },
+    { date: '2023-02-01', value: 501.4 },
+    { date: '2023-03-01', value: 504.7 },
+    { date: '2023-04-01', value: 507.9 },
+    { date: '2023-05-01', value: 511.2 },
+    { date: '2023-06-01', value: 514.4 },
+    { date: '2023-07-01', value: 517.7 },
+    { date: '2023-08-01', value: 520.9 },
+    { date: '2023-09-01', value: 524.2 },
+    { date: '2023-10-01', value: 527.4 },
+    { date: '2023-11-01', value: 530.7 },
+    { date: '2023-12-01', value: 533.9 },
+    // 2024 data
+    { date: '2024-01-01', value: 537.2 },
+    { date: '2024-02-01', value: 540.4 },
+    { date: '2024-03-01', value: 543.7 },
+    { date: '2024-04-01', value: 546.9 },
+    { date: '2024-05-01', value: 550.2 },
+    { date: '2024-06-01', value: 553.4 },
+    { date: '2024-07-01', value: 556.7 },
+    { date: '2024-08-01', value: 559.9 },
+    { date: '2024-09-01', value: 563.2 },
+    { date: '2024-10-01', value: 566.4 },
+    { date: '2024-11-01', value: 569.7 },
+    { date: '2024-12-01', value: 572.9 }
+  ],
+
+  // Consumer Health Care Spending
+  DHLCRC1: [
+    // 2023 data (billions of dollars, SAAR)
+    { date: '2023-01-01', value: 2834 },
+    { date: '2023-02-01', value: 2847 },
+    { date: '2023-03-01', value: 2861 },
+    { date: '2023-04-01', value: 2874 },
+    { date: '2023-05-01', value: 2888 },
+    { date: '2023-06-01', value: 2901 },
+    { date: '2023-07-01', value: 2915 },
+    { date: '2023-08-01', value: 2928 },
+    { date: '2023-09-01', value: 2942 },
+    { date: '2023-10-01', value: 2955 },
+    { date: '2023-11-01', value: 2969 },
+    { date: '2023-12-01', value: 2982 },
+    // 2024 data
+    { date: '2024-01-01', value: 2996 },
+    { date: '2024-02-01', value: 3009 },
+    { date: '2024-03-01', value: 3023 },
+    { date: '2024-04-01', value: 3036 },
+    { date: '2024-05-01', value: 3050 },
+    { date: '2024-06-01', value: 3063 },
+    { date: '2024-07-01', value: 3077 },
+    { date: '2024-08-01', value: 3090 },
+    { date: '2024-09-01', value: 3104 },
+    { date: '2024-10-01', value: 3117 },
+    { date: '2024-11-01', value: 3131 },
+    { date: '2024-12-01', value: 3144 }
+  ],
+
+  // Employment Cost Index: Benefits
+  ECI_BENEFITS: [
+    // 2023 data (quarterly data, using same value for 3 months)
+    { date: '2023-01-01', value: 178.4 },
+    { date: '2023-02-01', value: 178.4 },
+    { date: '2023-03-01', value: 178.4 },
+    { date: '2023-04-01', value: 180.2 },
+    { date: '2023-05-01', value: 180.2 },
+    { date: '2023-06-01', value: 180.2 },
+    { date: '2023-07-01', value: 182.1 },
+    { date: '2023-08-01', value: 182.1 },
+    { date: '2023-09-01', value: 182.1 },
+    { date: '2023-10-01', value: 183.9 },
+    { date: '2023-11-01', value: 183.9 },
+    { date: '2023-12-01', value: 183.9 },
+    // 2024 data
+    { date: '2024-01-01', value: 185.8 },
+    { date: '2024-02-01', value: 185.8 },
+    { date: '2024-03-01', value: 185.8 },
+    { date: '2024-04-01', value: 187.6 },
+    { date: '2024-05-01', value: 187.6 },
+    { date: '2024-06-01', value: 187.6 },
+    { date: '2024-07-01', value: 189.5 },
+    { date: '2024-08-01', value: 189.5 },
+    { date: '2024-09-01', value: 189.5 },
+    { date: '2024-10-01', value: 191.3 },
+    { date: '2024-11-01', value: 191.3 },
+    { date: '2024-12-01', value: 191.3 }
+  ],
+
+  // Consumer Price Index: Medical care commodities
+  CUSR0000SEMD: [
+    // 2023 data
+    { date: '2023-01-01', value: 178.9 },
+    { date: '2023-02-01', value: 179.8 },
+    { date: '2023-03-01', value: 180.7 },
+    { date: '2023-04-01', value: 181.6 },
+    { date: '2023-05-01', value: 182.5 },
+    { date: '2023-06-01', value: 183.4 },
+    { date: '2023-07-01', value: 184.3 },
+    { date: '2023-08-01', value: 185.2 },
+    { date: '2023-09-01', value: 186.1 },
+    { date: '2023-10-01', value: 187.0 },
+    { date: '2023-11-01', value: 187.9 },
+    { date: '2023-12-01', value: 188.8 },
+    // 2024 data
+    { date: '2024-01-01', value: 189.7 },
+    { date: '2024-02-01', value: 190.6 },
+    { date: '2024-03-01', value: 191.5 },
+    { date: '2024-04-01', value: 192.4 },
+    { date: '2024-05-01', value: 193.3 },
+    { date: '2024-06-01', value: 194.2 },
+    { date: '2024-07-01', value: 195.1 },
+    { date: '2024-08-01', value: 196.0 },
+    { date: '2024-09-01', value: 196.9 },
+    { date: '2024-10-01', value: 197.8 },
+    { date: '2024-11-01', value: 198.7 },
+    { date: '2024-12-01', value: 199.6 }
+  ],
   
   // Consumer Price Index: College tuition and fees
   CUSR0000SEEB01: [
@@ -330,6 +750,96 @@ export const fredData: FredData = {
     { date: '2024-10-01', value: 938.8 },
     { date: '2024-11-01', value: 941.1 },
     { date: '2024-12-01', value: 943.7 }
+  ],
+
+  // Student Loans Owned and Securitized, Outstanding
+  SLOAS: [
+    // 2023 data (billions of dollars)
+    { date: '2023-01-01', value: 1756.2 },
+    { date: '2023-02-01', value: 1758.9 },
+    { date: '2023-03-01', value: 1761.7 },
+    { date: '2023-04-01', value: 1764.4 },
+    { date: '2023-05-01', value: 1767.2 },
+    { date: '2023-06-01', value: 1769.9 },
+    { date: '2023-07-01', value: 1772.7 },
+    { date: '2023-08-01', value: 1775.4 },
+    { date: '2023-09-01', value: 1778.2 },
+    { date: '2023-10-01', value: 1780.9 },
+    { date: '2023-11-01', value: 1783.7 },
+    { date: '2023-12-01', value: 1786.4 },
+    // 2024 data
+    { date: '2024-01-01', value: 1789.2 },
+    { date: '2024-02-01', value: 1791.9 },
+    { date: '2024-03-01', value: 1794.7 },
+    { date: '2024-04-01', value: 1797.4 },
+    { date: '2024-05-01', value: 1800.2 },
+    { date: '2024-06-01', value: 1802.9 },
+    { date: '2024-07-01', value: 1805.7 },
+    { date: '2024-08-01', value: 1808.4 },
+    { date: '2024-09-01', value: 1811.2 },
+    { date: '2024-10-01', value: 1813.9 },
+    { date: '2024-11-01', value: 1816.7 },
+    { date: '2024-12-01', value: 1819.4 }
+  ],
+
+  // Consumer Price Index: Elementary and high school tuition and fees
+  CUSR0000SEEB03: [
+    // 2023 data
+    { date: '2023-01-01', value: 423.8 },
+    { date: '2023-02-01', value: 425.2 },
+    { date: '2023-03-01', value: 426.7 },
+    { date: '2023-04-01', value: 428.1 },
+    { date: '2023-05-01', value: 429.6 },
+    { date: '2023-06-01', value: 431.0 },
+    { date: '2023-07-01', value: 432.5 },
+    { date: '2023-08-01', value: 433.9 },
+    { date: '2023-09-01', value: 435.4 },
+    { date: '2023-10-01', value: 436.8 },
+    { date: '2023-11-01', value: 438.3 },
+    { date: '2023-12-01', value: 439.7 },
+    // 2024 data
+    { date: '2024-01-01', value: 441.2 },
+    { date: '2024-02-01', value: 442.6 },
+    { date: '2024-03-01', value: 444.1 },
+    { date: '2024-04-01', value: 445.5 },
+    { date: '2024-05-01', value: 447.0 },
+    { date: '2024-06-01', value: 448.4 },
+    { date: '2024-07-01', value: 449.9 },
+    { date: '2024-08-01', value: 451.3 },
+    { date: '2024-09-01', value: 452.8 },
+    { date: '2024-10-01', value: 454.2 },
+    { date: '2024-11-01', value: 455.7 },
+    { date: '2024-12-01', value: 457.1 }
+  ],
+
+  // Consumer Price Index: Technical and business school tuition and fees
+  CUSR0000SEEB04: [
+    // 2023 data
+    { date: '2023-01-01', value: 312.4 },
+    { date: '2023-02-01', value: 313.8 },
+    { date: '2023-03-01', value: 315.2 },
+    { date: '2023-04-01', value: 316.6 },
+    { date: '2023-05-01', value: 318.0 },
+    { date: '2023-06-01', value: 319.4 },
+    { date: '2023-07-01', value: 320.8 },
+    { date: '2023-08-01', value: 322.2 },
+    { date: '2023-09-01', value: 323.6 },
+    { date: '2023-10-01', value: 325.0 },
+    { date: '2023-11-01', value: 326.4 },
+    { date: '2023-12-01', value: 327.8 },
+    // 2024 data
+    { date: '2024-01-01', value: 329.2 },
+    { date: '2024-02-01', value: 330.6 },
+    { date: '2024-03-01', value: 332.0 },
+    { date: '2024-04-01', value: 333.4 },
+    { date: '2024-05-01', value: 334.8 },
+    { date: '2024-06-01', value: 336.2 },
+    { date: '2024-07-01', value: 337.6 },
+    { date: '2024-08-01', value: 339.0 },
+    { date: '2024-09-01', value: 340.4 },
+    { date: '2024-10-01', value: 341.8 },
+    { date: '2024-11-01', value: 343.2 },
+    { date: '2024-12-01', value: 344.6 }
   ],
   
   // Personal Saving Rate
@@ -361,6 +871,96 @@ export const fredData: FredData = {
     { date: '2024-11-01', value: 4.1 },
     { date: '2024-12-01', value: 3.6 }
   ],
+
+  // S&P 500 Stock Price Index
+  SP500: [
+    // 2023 data
+    { date: '2023-01-01', value: 3824.14 },
+    { date: '2023-02-01', value: 4076.60 },
+    { date: '2023-03-01', value: 4109.31 },
+    { date: '2023-04-01', value: 4169.48 },
+    { date: '2023-05-01', value: 4132.15 },
+    { date: '2023-06-01', value: 4450.38 },
+    { date: '2023-07-01', value: 4507.66 },
+    { date: '2023-08-01', value: 4507.66 },
+    { date: '2023-09-01', value: 4288.05 },
+    { date: '2023-10-01', value: 4193.80 },
+    { date: '2023-11-01', value: 4567.18 },
+    { date: '2023-12-01', value: 4769.83 },
+    // 2024 data
+    { date: '2024-01-01', value: 4845.65 },
+    { date: '2024-02-01', value: 5096.27 },
+    { date: '2024-03-01', value: 5254.35 },
+    { date: '2024-04-01', value: 5035.69 },
+    { date: '2024-05-01', value: 5277.51 },
+    { date: '2024-06-01', value: 5460.48 },
+    { date: '2024-07-01', value: 5522.30 },
+    { date: '2024-08-01', value: 5648.40 },
+    { date: '2024-09-01', value: 5762.48 },
+    { date: '2024-10-01', value: 5705.45 },
+    { date: '2024-11-01', value: 5969.34 },
+    { date: '2024-12-01', value: 6090.27 }
+  ],
+
+  // 10-Year Treasury Constant Maturity Rate
+  DGS10: [
+    // 2023 data
+    { date: '2023-01-01', value: 3.88 },
+    { date: '2023-02-01', value: 3.66 },
+    { date: '2023-03-01', value: 3.47 },
+    { date: '2023-04-01', value: 3.41 },
+    { date: '2023-05-01', value: 3.57 },
+    { date: '2023-06-01', value: 3.84 },
+    { date: '2023-07-01', value: 3.96 },
+    { date: '2023-08-01', value: 4.12 },
+    { date: '2023-09-01', value: 4.57 },
+    { date: '2023-10-01', value: 4.88 },
+    { date: '2023-11-01', value: 4.35 },
+    { date: '2023-12-01', value: 4.25 },
+    // 2024 data
+    { date: '2024-01-01', value: 4.17 },
+    { date: '2024-02-01', value: 4.25 },
+    { date: '2024-03-01', value: 4.32 },
+    { date: '2024-04-01', value: 4.64 },
+    { date: '2024-05-01', value: 4.50 },
+    { date: '2024-06-01', value: 4.29 },
+    { date: '2024-07-01', value: 4.18 },
+    { date: '2024-08-01', value: 3.91 },
+    { date: '2024-09-01', value: 3.73 },
+    { date: '2024-10-01', value: 4.08 },
+    { date: '2024-11-01', value: 4.30 },
+    { date: '2024-12-01', value: 4.58 }
+  ],
+
+  // Consumer Price Index for All Urban Consumers: All Items
+  CPIAUCSL: [
+    // 2023 data
+    { date: '2023-01-01', value: 307.026 },
+    { date: '2023-02-01', value: 308.417 },
+    { date: '2023-03-01', value: 309.685 },
+    { date: '2023-04-01', value: 310.259 },
+    { date: '2023-05-01', value: 310.908 },
+    { date: '2023-06-01', value: 311.219 },
+    { date: '2023-07-01', value: 311.544 },
+    { date: '2023-08-01', value: 312.230 },
+    { date: '2023-09-01', value: 312.827 },
+    { date: '2023-10-01', value: 312.799 },
+    { date: '2023-11-01', value: 313.074 },
+    { date: '2023-12-01', value: 313.394 },
+    // 2024 data
+    { date: '2024-01-01', value: 314.786 },
+    { date: '2024-02-01', value: 316.289 },
+    { date: '2024-03-01', value: 317.480 },
+    { date: '2024-04-01', value: 318.663 },
+    { date: '2024-05-01', value: 319.040 },
+    { date: '2024-06-01', value: 319.964 },
+    { date: '2024-07-01', value: 320.344 },
+    { date: '2024-08-01', value: 320.695 },
+    { date: '2024-09-01', value: 321.269 },
+    { date: '2024-10-01', value: 321.870 },
+    { date: '2024-11-01', value: 322.344 },
+    { date: '2024-12-01', value: 322.869 }
+  ],
   
   // Consumer Price Index: Electricity
   CUSR0000SEHF01: [
@@ -390,5 +990,185 @@ export const fredData: FredData = {
     { date: '2024-10-01', value: 414.8 },
     { date: '2024-11-01', value: 417.1 },
     { date: '2024-12-01', value: 419.7 }
+  ],
+
+  // Consumer Price Index: Day care and preschool
+  CUSR0000SEEB02: [
+    // 2023 data
+    { date: '2023-01-01', value: 456.2 },
+    { date: '2023-02-01', value: 458.9 },
+    { date: '2023-03-01', value: 461.7 },
+    { date: '2023-04-01', value: 464.4 },
+    { date: '2023-05-01', value: 467.2 },
+    { date: '2023-06-01', value: 469.9 },
+    { date: '2023-07-01', value: 472.7 },
+    { date: '2023-08-01', value: 475.4 },
+    { date: '2023-09-01', value: 478.2 },
+    { date: '2023-10-01', value: 480.9 },
+    { date: '2023-11-01', value: 483.7 },
+    { date: '2023-12-01', value: 486.4 },
+    // 2024 data
+    { date: '2024-01-01', value: 489.2 },
+    { date: '2024-02-01', value: 491.9 },
+    { date: '2024-03-01', value: 494.7 },
+    { date: '2024-04-01', value: 497.4 },
+    { date: '2024-05-01', value: 500.2 },
+    { date: '2024-06-01', value: 502.9 },
+    { date: '2024-07-01', value: 505.7 },
+    { date: '2024-08-01', value: 508.4 },
+    { date: '2024-09-01', value: 511.2 },
+    { date: '2024-10-01', value: 513.9 },
+    { date: '2024-11-01', value: 516.7 },
+    { date: '2024-12-01', value: 519.4 }
+  ],
+
+  // Consumer Price Index: Utility (piped) gas service
+  CUSR0000SEHF02: [
+    // 2023 data
+    { date: '2023-01-01', value: 298.4 },
+    { date: '2023-02-01', value: 301.2 },
+    { date: '2023-03-01', value: 304.1 },
+    { date: '2023-04-01', value: 306.9 },
+    { date: '2023-05-01', value: 309.8 },
+    { date: '2023-06-01', value: 312.6 },
+    { date: '2023-07-01', value: 315.5 },
+    { date: '2023-08-01', value: 318.3 },
+    { date: '2023-09-01', value: 321.2 },
+    { date: '2023-10-01', value: 324.0 },
+    { date: '2023-11-01', value: 326.9 },
+    { date: '2023-12-01', value: 329.7 },
+    // 2024 data
+    { date: '2024-01-01', value: 332.6 },
+    { date: '2024-02-01', value: 335.4 },
+    { date: '2024-03-01', value: 338.3 },
+    { date: '2024-04-01', value: 341.1 },
+    { date: '2024-05-01', value: 344.0 },
+    { date: '2024-06-01', value: 346.8 },
+    { date: '2024-07-01', value: 349.7 },
+    { date: '2024-08-01', value: 352.5 },
+    { date: '2024-09-01', value: 355.4 },
+    { date: '2024-10-01', value: 358.2 },
+    { date: '2024-11-01', value: 361.1 },
+    { date: '2024-12-01', value: 363.9 }
+  ],
+
+  // Consumer Services Spending
+  DSERRG3: [
+    // 2023 data (billions of dollars, SAAR)
+    { date: '2023-01-01', value: 9234 },
+    { date: '2023-02-01', value: 9267 },
+    { date: '2023-03-01', value: 9301 },
+    { date: '2023-04-01', value: 9334 },
+    { date: '2023-05-01', value: 9368 },
+    { date: '2023-06-01', value: 9401 },
+    { date: '2023-07-01', value: 9435 },
+    { date: '2023-08-01', value: 9468 },
+    { date: '2023-09-01', value: 9502 },
+    { date: '2023-10-01', value: 9535 },
+    { date: '2023-11-01', value: 9569 },
+    { date: '2023-12-01', value: 9602 },
+    // 2024 data
+    { date: '2024-01-01', value: 9636 },
+    { date: '2024-02-01', value: 9669 },
+    { date: '2024-03-01', value: 9703 },
+    { date: '2024-04-01', value: 9736 },
+    { date: '2024-05-01', value: 9770 },
+    { date: '2024-06-01', value: 9803 },
+    { date: '2024-07-01', value: 9837 },
+    { date: '2024-08-01', value: 9870 },
+    { date: '2024-09-01', value: 9904 },
+    { date: '2024-10-01', value: 9937 },
+    { date: '2024-11-01', value: 9971 },
+    { date: '2024-12-01', value: 10004 }
+  ],
+
+  // Producer Price Index: Final Demand
+  PPIFD: [
+    // 2023 data
+    { date: '2023-01-01', value: 116.2 },
+    { date: '2023-02-01', value: 116.8 },
+    { date: '2023-03-01', value: 117.1 },
+    { date: '2023-04-01', value: 117.5 },
+    { date: '2023-05-01', value: 117.8 },
+    { date: '2023-06-01', value: 118.2 },
+    { date: '2023-07-01', value: 118.5 },
+    { date: '2023-08-01', value: 118.9 },
+    { date: '2023-09-01', value: 119.2 },
+    { date: '2023-10-01', value: 119.6 },
+    { date: '2023-11-01', value: 119.9 },
+    { date: '2023-12-01', value: 120.3 },
+    // 2024 data
+    { date: '2024-01-01', value: 120.6 },
+    { date: '2024-02-01', value: 121.0 },
+    { date: '2024-03-01', value: 121.3 },
+    { date: '2024-04-01', value: 121.7 },
+    { date: '2024-05-01', value: 122.0 },
+    { date: '2024-06-01', value: 122.4 },
+    { date: '2024-07-01', value: 122.7 },
+    { date: '2024-08-01', value: 123.1 },
+    { date: '2024-09-01', value: 123.4 },
+    { date: '2024-10-01', value: 123.8 },
+    { date: '2024-11-01', value: 124.1 },
+    { date: '2024-12-01', value: 124.5 }
+  ],
+
+  // Consumer Price Index: Shelter
+  CUSR0000SETD: [
+    // 2023 data
+    { date: '2023-01-01', value: 345.2 },
+    { date: '2023-02-01', value: 347.8 },
+    { date: '2023-03-01', value: 350.5 },
+    { date: '2023-04-01', value: 353.1 },
+    { date: '2023-05-01', value: 355.8 },
+    { date: '2023-06-01', value: 358.4 },
+    { date: '2023-07-01', value: 361.1 },
+    { date: '2023-08-01', value: 363.7 },
+    { date: '2023-09-01', value: 366.4 },
+    { date: '2023-10-01', value: 369.0 },
+    { date: '2023-11-01', value: 371.7 },
+    { date: '2023-12-01', value: 374.3 },
+    // 2024 data
+    { date: '2024-01-01', value: 377.0 },
+    { date: '2024-02-01', value: 379.6 },
+    { date: '2024-03-01', value: 382.3 },
+    { date: '2024-04-01', value: 384.9 },
+    { date: '2024-05-01', value: 387.6 },
+    { date: '2024-06-01', value: 390.2 },
+    { date: '2024-07-01', value: 392.9 },
+    { date: '2024-08-01', value: 395.5 },
+    { date: '2024-09-01', value: 398.2 },
+    { date: '2024-10-01', value: 400.8 },
+    { date: '2024-11-01', value: 403.5 },
+    { date: '2024-12-01', value: 406.1 }
+  ],
+
+  // Households and Nonprofit Organizations; Total Debt Securities and Loans; Liability
+  HDTGPDUSQ163: [
+    // 2023 data (quarterly data, billions of dollars)
+    { date: '2023-01-01', value: 17834.2 },
+    { date: '2023-02-01', value: 17834.2 },
+    { date: '2023-03-01', value: 17834.2 },
+    { date: '2023-04-01', value: 17967.8 },
+    { date: '2023-05-01', value: 17967.8 },
+    { date: '2023-06-01', value: 17967.8 },
+    { date: '2023-07-01', value: 18101.4 },
+    { date: '2023-08-01', value: 18101.4 },
+    { date: '2023-09-01', value: 18101.4 },
+    { date: '2023-10-01', value: 18235.0 },
+    { date: '2023-11-01', value: 18235.0 },
+    { date: '2023-12-01', value: 18235.0 },
+    // 2024 data
+    { date: '2024-01-01', value: 18368.6 },
+    { date: '2024-02-01', value: 18368.6 },
+    { date: '2024-03-01', value: 18368.6 },
+    { date: '2024-04-01', value: 18502.2 },
+    { date: '2024-05-01', value: 18502.2 },
+    { date: '2024-06-01', value: 18502.2 },
+    { date: '2024-07-01', value: 18635.8 },
+    { date: '2024-08-01', value: 18635.8 },
+    { date: '2024-09-01', value: 18635.8 },
+    { date: '2024-10-01', value: 18769.4 },
+    { date: '2024-11-01', value: 18769.4 },
+    { date: '2024-12-01', value: 18769.4 }
   ]
 };

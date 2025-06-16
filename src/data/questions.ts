@@ -5,13 +5,13 @@ export const walletMoodQuestions: WalletMoodQuestion[] = [
     id: 'home-hunt',
     title: 'Home Hunt Helper',
     question: 'Can I afford to buy a home or keep up with rent?',
-    fredSeries: ['MORTGAGE30US', 'CSUSHPINSA', 'CUSR0000SEHA'],
-    weights: [0.4, 0.3, 0.3],
+    fredSeries: ['MORTGAGE30US', 'CSUSHPINSA', 'CUSR0000SEHA', 'HOUST', 'MEHOINUSA672N'],
+    weights: [0.25, 0.25, 0.25, 0.125, 0.125], // Equal weight for main 3, smaller for housing starts and income
     benchmarks: {
-      excellent: 4.0,   // Mortgage rate < 4%
-      good: 6.0,        // Mortgage rate < 6%
-      fair: 8.0,        // Mortgage rate < 8%
-      poor: 10.0        // Mortgage rate >= 8%
+      excellent: 4.0,   // Not used in new system
+      good: 6.0,        // Not used in new system
+      fair: 8.0,        // Not used in new system
+      poor: 10.0        // Not used in new system
     }
   },
   {

@@ -29,7 +29,7 @@ export const walletMoodQuestions: WalletMoodQuestion[] = [
     id: 'health-bill',
     title: 'Health Bill Barometer',
     question: 'Will healthcare or prescription drugs be affordable?',
-    fredSeries: ['CPIMEDSL', 'CUSR0000SEMF', 'DHLCRC1Q027SBEA', 'ECI_BENEFITS', 'CUSR0000SEMD']
+    fredSeries: ['CPIMEDSL', 'PCU4461104461101', 'DHLCRC1Q027SBEA', 'ECI_BENEFITS', 'CUSR0000SEMD']
   },
   {
     id: 'tuition-tracker',

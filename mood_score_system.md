@@ -67,7 +67,7 @@ This document defines how to assign a simple mood score to economic metrics trac
 | Metric | Yay | Meh | Nay |
 |--------|-----|-----|-----|
 | CPIMEDSL | ↓ YoY | ±2% | ↑ > 2% |
-| CUSR0000SEMF | ↓ YoY | ±2% | ↑ > 2% |
+| PCU4461104461101 | ↓ YoY | ±3% | ↑ > 3% |
 | DHLCRC1Q027SBEA | ↑ < 4% YoY | 4-6% YoY | ↑ > 6% YoY |
 | ECI_BENEFITS | ↑ > 3% YoY | ±2% | ↓ YoY |
 | CUSR0000SEMD | ↓ YoY | ±3% | ↑ > 3% |

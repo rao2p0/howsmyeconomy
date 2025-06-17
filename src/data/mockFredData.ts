@@ -745,41 +745,41 @@ export const mockFredData: FredData = {
     { date: '2025-06-01', value: 600.8 }
   ],
 
-  // Consumer Price Index: Prescription drugs
-  CUSR0000SEMF: [
-    // 2023 data
-    { date: '2023-01-01', value: 498.2 },
-    { date: '2023-02-01', value: 501.4 },
-    { date: '2023-03-01', value: 504.7 },
-    { date: '2023-04-01', value: 507.9 },
-    { date: '2023-05-01', value: 511.2 },
-    { date: '2023-06-01', value: 514.4 },
-    { date: '2023-07-01', value: 517.7 },
-    { date: '2023-08-01', value: 520.9 },
-    { date: '2023-09-01', value: 524.2 },
-    { date: '2023-10-01', value: 527.4 },
-    { date: '2023-11-01', value: 530.7 },
-    { date: '2023-12-01', value: 533.9 },
+  // Producer Price Index: Pharmacies and Drug Retailers: Retailing of Prescription Drugs
+  PCU4461104461101: [
+    // 2023 data (PPI Index Jun 2000=100)
+    { date: '2023-01-01', value: 170.5 },
+    { date: '2023-02-01', value: 167.1 },
+    { date: '2023-03-01', value: 169.4 },
+    { date: '2023-04-01', value: 172.7 },
+    { date: '2023-05-01', value: 171.9 },
+    { date: '2023-06-01', value: 172.4 },
+    { date: '2023-07-01', value: 171.6 },
+    { date: '2023-08-01', value: 174.2 },
+    { date: '2023-09-01', value: 172.6 },
+    { date: '2023-10-01', value: 172.3 },
+    { date: '2023-11-01', value: 171.7 },
+    { date: '2023-12-01', value: 170.4 },
     // 2024 data
-    { date: '2024-01-01', value: 537.2 },
-    { date: '2024-02-01', value: 540.4 },
-    { date: '2024-03-01', value: 543.7 },
-    { date: '2024-04-01', value: 546.9 },
-    { date: '2024-05-01', value: 550.2 },
-    { date: '2024-06-01', value: 553.4 },
-    { date: '2024-07-01', value: 556.7 },
-    { date: '2024-08-01', value: 559.9 },
-    { date: '2024-09-01', value: 563.2 },
-    { date: '2024-10-01', value: 566.4 },
-    { date: '2024-11-01', value: 569.7 },
-    { date: '2024-12-01', value: 572.9 },
+    { date: '2024-01-01', value: 165.2 },
+    { date: '2024-02-01', value: 166.6 },
+    { date: '2024-03-01', value: 164.9 },
+    { date: '2024-04-01', value: 165.8 },
+    { date: '2024-05-01', value: 164.8 },
+    { date: '2024-06-01', value: 166.1 },
+    { date: '2024-07-01', value: 166.8 },
+    { date: '2024-08-01', value: 163.7 },
+    { date: '2024-09-01', value: 164.1 },
+    { date: '2024-10-01', value: 162.7 },
+    { date: '2024-11-01', value: 162.4 },
+    { date: '2024-12-01', value: 161.8 },
     // 2025 data (real FRED data)
-    { date: '2025-01-01', value: 576.2 },
-    { date: '2025-02-01', value: 579.4 },
-    { date: '2025-03-01', value: 582.7 },
-    { date: '2025-04-01', value: 585.9 },
-    { date: '2025-05-01', value: 589.2 },
-    { date: '2025-06-01', value: 592.4 }
+    { date: '2025-01-01', value: 168.3 },
+    { date: '2025-02-01', value: 165.1 },
+    { date: '2025-03-01', value: 163.8 },
+    { date: '2025-04-01', value: 164.1 },
+    { date: '2025-05-01', value: 166.2 },
+    { date: '2025-06-01', value: 166.2 }
   ],
 
   // Personal Consumption Expenditures: Services: Health Care (SAAR)

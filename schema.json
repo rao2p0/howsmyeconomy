@@ -378,15 +378,15 @@
       "nay_message": "Medical care costs are increasing rapidly"
     },
     {
-      "id": "CUSR0000SEMF",
-      "name": "Hospital Services Costs",
-      "description": "Cost of hospital and related services. Major component of healthcare expenses.",
+      "id": "PCU4461104461101",
+      "name": "Prescription Drug Retail Prices",
+      "description": "Producer price index for pharmacies and drug retailers selling prescription drugs. Tracks wholesale pricing pressures that affect consumer drug costs.",
       "category": "healthcare",
-      "units": "Index 1982-84=100",
+      "units": "Index Jun 2000=100",
       "update_frequency": "monthly",
-      "yay_message": "Hospital costs are under control",
-      "meh_message": "Hospital costs are rising moderately",
-      "nay_message": "Hospital costs are increasing rapidly"
+      "yay_message": "Prescription drug wholesale prices are stable",
+      "meh_message": "Drug wholesale prices are rising moderately",
+      "nay_message": "Rising wholesale drug prices signal higher costs for consumers"
     },
     {
       "id": "CUSR0000SEMD",

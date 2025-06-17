@@ -353,12 +353,20 @@ function MetricCard({ indicator }: MetricCardProps) {
               <div className="text-lg font-semibold text-blue-700 bg-blue-50 px-3 py-1 rounded-full border border-blue-200 min-w-[60px]">
                 {unitInfo.symbol || 'N/A'}
               </div>
-              <div 
-                className="text-xs text-gray-600 cursor-help border-b border-dotted border-gray-400" 
-                title={`Full units: ${indicator.units || 'No units specified'}`}
-              >
-                {unitInfo.explanation || 'No unit information'}
-              </div>
+              {/* Only show explanation if it's different from symbol and not redundant */}
+              {unitInfo.explanation && 
+               unitInfo.explanation !== unitInfo.symbol && 
+               unitInfo.explanation !== 'Percentage' && 
+               unitInfo.explanation !== 'Ratio comparison' && 
+               unitInfo.explanation !== 'No unit information' && 
+               !unitInfo.explanation.toLowerCase().includes('no units') && (
+                <div 
+                  className="text-xs text-gray-600 cursor-help border-b border-dotted border-gray-400" 
+                  title={`Full units: ${indicator.units || 'No units specified'}`}
+                >
+                  {unitInfo.explanation}
+                </div>
+              )}
             </div>
           </div>
         </div>

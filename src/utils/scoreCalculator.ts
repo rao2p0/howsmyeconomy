@@ -46,7 +46,70 @@ const seriesNames: { [key: string]: string } = {
   'HDTGPDUSQ163N': 'Household Debt'
 };
 
-// Get the most recent data point for a given date
+// Get data point for annual series (look for same year or previous year)
+function getAnnualDataPoint(data: any[], targetDate: Date): any {
+  const targetYear = targetDate.getFullYear();
+  
+  // Look for current year first
+  const currentYearPoint = data.find(point => {
+    const pointDate = new Date(point.date);
+    return pointDate.getFullYear() === targetYear;
+  });
+  
+  if (currentYearPoint) return currentYearPoint;
+  
+  // If no current year, get most recent available
+  const sortedData = data.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  return sortedData[0];
+}
+
+// Get data point for quarterly series
+function getQuarterlyDataPoint(data: any[], targetDate: Date): any {
+  const targetYear = targetDate.getFullYear();
+  const targetQuarter = Math.floor(targetDate.getMonth() / 3) + 1;
+  
+  // Look for same quarter of current year
+  const currentQuarterPoint = data.find(point => {
+    const pointDate = new Date(point.date);
+    const pointYear = pointDate.getFullYear();
+    const pointQuarter = Math.floor(pointDate.getMonth() / 3) + 1;
+    return pointYear === targetYear && pointQuarter === targetQuarter;
+  });
+  
+  if (currentQuarterPoint) return currentQuarterPoint;
+  
+  // If no current quarter, get most recent available
+  const validPoints = data.filter(point => new Date(point.date) <= targetDate);
+  return validPoints[validPoints.length - 1];
+}
+
+// Get year-ago data point for annual series
+function getAnnualYearAgoDataPoint(data: any[], currentDate: Date): any {
+  const currentYear = currentDate.getFullYear();
+  const yearAgo = currentYear - 1;
+  
+  // Look for previous year's data
+  const yearAgoPoint = data.find(point => {
+    const pointDate = new Date(point.date);
+    return pointDate.getFullYear() === yearAgo;
+  });
+  
+  if (yearAgoPoint) return yearAgoPoint;
+  
+  // If no exact year, get closest available
+  const sortedData = data.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  return sortedData[Math.max(0, sortedData.length - 2)]; // Second to last data point
+}
+
+// Get year-ago data point for quarterly series
+function getQuarterlyYearAgoDataPoint(data: any[], currentDate: Date): any {
+  const yearAgo = new Date(currentDate);
+  yearAgo.setFullYear(yearAgo.getFullYear() - 1);
+  
+  return getQuarterlyDataPoint(data, yearAgo);
+}
+
+// Get most recent data point for a given date
 function getMostRecentDataPoint(data: any[], targetDate: Date) {
   // Find the data point for the same month/year or the closest previous one
   const targetYear = targetDate.getFullYear();
@@ -63,14 +126,6 @@ function getMostRecentDataPoint(data: any[], targetDate: Date) {
   // If no exact match, find the most recent data point before the target date
   const validPoints = data.filter(point => new Date(point.date) <= targetDate);
   return validPoints[validPoints.length - 1];
-}
-
-// Get data point from exactly 12 months ago
-function getYearAgoDataPoint(data: any[], currentDate: Date) {
-  const yearAgo = new Date(currentDate);
-  yearAgo.setFullYear(yearAgo.getFullYear() - 1);
-  
-  return getMostRecentDataPoint(data, yearAgo);
 }
 
 // Calculate percentage change between two values
@@ -411,9 +466,14 @@ export async function calculateScore(
   const moodScores: number[] = [];
   const indicatorBreakdown: IndicatorMood[] = question.fredSeries.map(series => {
     const data = fredData[series];
-    if (!data || data.length < 12) {
+    const metadata = schemaMetadata[series];
+    const frequency = metadata?.update_frequency || 'monthly';
+    
+    // Minimum data requirements based on frequency
+    const minDataPoints = frequency === 'annually' ? 2 : frequency === 'quarterly' ? 4 : 12;
+    
+    if (!data || data.length < minDataPoints) {
       moodScores.push(0); // Neutral if no data
-      const metadata = schemaMetadata[series];
       return {
         series,
         mood: 'neutral' as const,
@@ -425,13 +485,25 @@ export async function calculateScore(
       };
     }
     
-    // Get current and year-ago data points based on today's date
-    const currentDataPoint = getMostRecentDataPoint(data, currentDate);
-    const yearAgoDataPoint = getYearAgoDataPoint(data, currentDate);
+    // Get current and year-ago data points based on frequency
+    let currentDataPoint, yearAgoDataPoint;
+    
+    if (frequency === 'annually') {
+      currentDataPoint = getAnnualDataPoint(data, currentDate);
+      yearAgoDataPoint = getAnnualYearAgoDataPoint(data, currentDate);
+    } else if (frequency === 'quarterly') {
+      currentDataPoint = getQuarterlyDataPoint(data, currentDate);
+      yearAgoDataPoint = getQuarterlyYearAgoDataPoint(data, currentDate);
+    } else {
+      // Monthly, weekly, daily
+      currentDataPoint = getMostRecentDataPoint(data, currentDate);
+      const yearAgo = new Date(currentDate);
+      yearAgo.setFullYear(yearAgo.getFullYear() - 1);
+      yearAgoDataPoint = getMostRecentDataPoint(data, yearAgo);
+    }
     
     if (!currentDataPoint || !yearAgoDataPoint) {
       moodScores.push(0);
-      const metadata = schemaMetadata[series];
       return {
         series,
         mood: 'neutral' as const,
@@ -449,7 +521,6 @@ export async function calculateScore(
     const moodScore = getMoodScore(question.id, series, currentValue, previousValue);
     moodScores.push(moodScore);
     
-    const metadata = schemaMetadata[series];
     return {
       series,
       mood: moodScoreToMood(moodScore),

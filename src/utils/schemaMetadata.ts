@@ -87,6 +87,7 @@ export function formatUnitsForDisplay(units: string): string {
     'Billions of Dollars': '$B',
     'Billions of Dollars, Seasonally Adjusted Annual Rate': '$B',
     'Chained 2012 Dollars, SAAR': '2012$',
+    'Chained 2017 Dollars, SAAR': '2017$',
     '2022 CPI-U-RS Adjusted Dollars': '2022$',
     'Ratio': 'ratio'
   };

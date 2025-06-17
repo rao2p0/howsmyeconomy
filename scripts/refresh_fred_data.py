@@ -10,10 +10,17 @@ This script manages the local database of FRED economic metrics by:
 - Saving to CSV format
 
 Usage:
+    cd scripts
     python refresh_fred_data.py [--force] [--metrics METRIC1,METRIC2]
     
 Example:
+    cd scripts
     python refresh_fred_data.py --force --metrics MORTGAGE30US,UNRATE
+    
+Note: 
+    - Script should be run from the scripts/ directory
+    - FRED_API_KEY should be in .env file in project root
+    - Schema file (schema.json) should be in project root
 """
 
 import os
@@ -323,7 +330,7 @@ def load_api_key() -> str:
     if api_key:
         return api_key
     
-    # Try .env file
+    # Try .env file in current directory first
     env_file = Path('.env')
     if env_file.exists():
         with open(env_file, 'r') as f:
@@ -332,7 +339,16 @@ def load_api_key() -> str:
                 if line.startswith('FRED_API_KEY='):
                     return line.split('=', 1)[1].strip().strip('"\'')
     
-    raise ValueError("FRED_API_KEY not found in environment or .env file")
+    # Try .env file in parent directory (project root)
+    parent_env_file = Path('../.env')
+    if parent_env_file.exists():
+        with open(parent_env_file, 'r') as f:
+            for line in f:
+                line = line.strip()
+                if line.startswith('FRED_API_KEY='):
+                    return line.split('=', 1)[1].strip().strip('"\'')
+    
+    raise ValueError("FRED_API_KEY not found in environment or .env file (checked current directory and parent directory)")
 
 def main():
     """Main function"""
@@ -341,9 +357,9 @@ def main():
                        help='Force update all data (ignore last update dates)')
     parser.add_argument('--metrics', type=str,
                        help='Comma-separated list of specific metrics to update')
-    parser.add_argument('--csv-file', type=str, default='data/fred_data.csv',
+    parser.add_argument('--csv-file', type=str, default='../data/fred_data.csv',
                        help='Path to CSV file for storing data')
-    parser.add_argument('--schema-file', type=str, default='schema.json',
+    parser.add_argument('--schema-file', type=str, default='../schema.json',
                        help='Path to schema file')
     
     args = parser.parse_args()

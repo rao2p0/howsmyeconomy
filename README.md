@@ -68,6 +68,12 @@ We've built a comprehensive FRED data management system that:
 
 ### Usage Examples
 
+**Prerequisites**: Create `.env` file in project root with your FRED API key:
+```bash
+echo "FRED_API_KEY=your_fred_api_key_here" > .env
+```
+
+**Run from project root**:
 ```bash
 # Update all metrics (incremental)
 python3 scripts/refresh_fred_data.py
@@ -83,6 +89,12 @@ python3 scripts/check_data_status.py
 
 # Validate schema
 python3 scripts/validate_schema.py
+```
+
+**Alternative (run from scripts directory)**:
+```bash
+cd scripts
+python3 refresh_fred_data.py
 ```
 
 📖 **[Full Data Management Documentation](DATA_MANAGEMENT.md)**

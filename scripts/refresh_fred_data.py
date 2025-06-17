@@ -82,7 +82,7 @@ class FredApiClient:
             time.sleep(self.min_request_interval - elapsed)
         self.last_request_time = time.time()
     
-    def get_series_observations(self, series_id: str, start_date: str = "2024-01-01", limit: Optional[int] = None) -> List[FredDataPoint]:
+    def get_series_observations(self, series_id: str, start_date: str = "2023-01-01", limit: Optional[int] = None) -> List[FredDataPoint]:
         """
         Fetch observations for a FRED series
         
@@ -329,14 +329,22 @@ class FredDataManager:
                 data_points = fred_client.get_series_observations(series_id, limit=5)
             else:
                 # For non-annual metrics, use date-based approach
-                start_date = "2024-01-01"
+                # Start from 2023 to ensure we have enough historical data for YoY calculations
+                start_date = "2023-01-01"
+                
                 if not force_update:
                     last_date = self.get_last_update_date(series_id, existing_data)
                     if last_date:
-                        # Start from day after last update
-                        last_datetime = datetime.strptime(last_date, '%Y-%m-%d')
-                        start_datetime = last_datetime + timedelta(days=1)
-                        start_date = start_datetime.strftime('%Y-%m-%d')
+                        # For quarterly metrics, always ensure we have at least 2 years of data for YoY calculations
+                        if metric_info.update_frequency.lower() == 'quarterly':
+                            # Always fetch from 2023 to ensure we have enough data for YoY comparisons
+                            start_date = "2023-01-01"
+                            logger.info(f"Using extended date range for quarterly metric {series_id} to enable YoY calculations")
+                        else:
+                            # For monthly/daily metrics, start from day after last update
+                            last_datetime = datetime.strptime(last_date, '%Y-%m-%d')
+                            start_datetime = last_datetime + timedelta(days=1)
+                            start_date = start_datetime.strftime('%Y-%m-%d')
                 
                 data_points = fred_client.get_series_observations(series_id, start_date)
             

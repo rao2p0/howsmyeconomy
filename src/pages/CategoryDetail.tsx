@@ -258,6 +258,10 @@ function MetricCard({ indicator }: MetricCardProps) {
 
   // Helper function to format and explain units in a user-friendly way
   const getFormattedUnits = (units: string) => {
+    if (!units) {
+      return { symbol: 'Value', explanation: 'No units specified' };
+    }
+    
     const lowerUnits = units.toLowerCase();
     
     // Handle percentages
@@ -346,14 +350,14 @@ function MetricCard({ indicator }: MetricCardProps) {
             </div>
             {/* More prominent units display */}
             <div className="flex flex-col items-center gap-1">
-              <div className="text-lg font-semibold text-blue-700 bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
-                {unitInfo.symbol}
+              <div className="text-lg font-semibold text-blue-700 bg-blue-50 px-3 py-1 rounded-full border border-blue-200 min-w-[60px]">
+                {unitInfo.symbol || 'N/A'}
               </div>
               <div 
                 className="text-xs text-gray-600 cursor-help border-b border-dotted border-gray-400" 
-                title={`Full units: ${indicator.units}`}
+                title={`Full units: ${indicator.units || 'No units specified'}`}
               >
-                {unitInfo.explanation}
+                {unitInfo.explanation || 'No unit information'}
               </div>
             </div>
           </div>

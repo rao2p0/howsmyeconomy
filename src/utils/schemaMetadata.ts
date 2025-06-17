@@ -32,8 +32,8 @@ export async function loadSchemaMetadata(): Promise<{ [seriesId: string]: Series
     const metadata: { [seriesId: string]: SeriesMetadata } = {};
     
     // Extract metadata for each series
-    if (schema.indicators && Array.isArray(schema.indicators)) {
-      schema.indicators.forEach((indicator: any) => {
+    if (schema.metrics_to_track && Array.isArray(schema.metrics_to_track)) {
+      schema.metrics_to_track.forEach((indicator: any) => {
         if (indicator.id) {
           metadata[indicator.id] = {
             name: indicator.name || indicator.id,

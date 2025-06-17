@@ -433,17 +433,6 @@
       "nay_message": "Education and childcare are becoming unaffordable"
     },
     {
-      "id": "CUSR0000SEEB03",
-              "name": "Childcare Costs",
-        "description": "Consumer price index for day care and preschool. Major expense for working families.",
-      "category": "education",
-      "units": "Index 1982-84=100",
-      "update_frequency": "monthly",
-      "yay_message": "Childcare costs are manageable",
-      "meh_message": "Childcare costs are rising moderately",
-      "nay_message": "Childcare is becoming unaffordable"
-    },
-    {
       "id": "CUSR0000SEEA",
       "name": "Educational Books and Supplies",
       "description": "Consumer price index for educational books and supplies. Essential school and learning materials costs.",

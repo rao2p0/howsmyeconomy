@@ -1,5 +1,6 @@
 import { Demographics, WalletMoodQuestion, ScoreResult, IndicatorMood } from '../types';
-import { fredData } from '../data/fredData';
+// ⚠️ WARNING: Using MOCK data - not real FRED economic data ⚠️
+import { mockFredData } from '../data/mockFredData';
 
 // Mapping of FRED series to human-readable names
 const seriesNames: { [key: string]: string } = {
@@ -405,12 +406,14 @@ export function calculateScore(
   question: WalletMoodQuestion,
   demographics: Demographics
 ): ScoreResult {
+  // ⚠️ WARNING: This function is using MOCK DATA, not real FRED economic data ⚠️
+  // Results should NOT be used for actual economic analysis or financial decisions
   const currentDate = new Date(); // Use actual current date
   
   // Get mood scores for each indicator
   const moodScores: number[] = [];
   const indicatorBreakdown: IndicatorMood[] = question.fredSeries.map(series => {
-    const data = fredData[series];
+    const data = mockFredData[series]; // ⚠️ MOCK DATA - Replace with real FRED data
     if (!data || data.length < 12) {
       moodScores.push(0); // Neutral if no data
       return {

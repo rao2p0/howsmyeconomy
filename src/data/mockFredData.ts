@@ -1,8 +1,10 @@
 import { FredData } from '../types';
 
-// Static FRED data for MVP - represents recent 30 months of data for proper YoY calculations
-// Updated with real 2025 data through June 2025
-export const fredData: FredData = {
+// ⚠️ WARNING: THIS IS MOCK DATA - NOT REAL FRED DATA ⚠️
+// This file contains simulated/fake economic data for development and testing purposes
+// DO NOT USE FOR ACTUAL ECONOMIC ANALYSIS OR DECISIONS
+// To get real data, use the Python refresh script with a real FRED API key
+export const mockFredData: FredData = {
   // 30-Year Fixed Rate Mortgage Average
   MORTGAGE30US: [
     // 2023 data

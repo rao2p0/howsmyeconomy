@@ -38,8 +38,21 @@ export function Dashboard() {
       <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
         <Header />
         
+        {/* Mock Data Warning Banner */}
+        <div className="max-w-7xl mx-auto px-4 pt-4">
+          <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-lg shadow-md mb-4">
+            <div className="flex items-center">
+              <span className="text-2xl mr-3">⚠️</span>
+              <div>
+                <p className="font-bold">WARNING: This is MOCK data for development</p>
+                <p className="text-sm">Not real economic data. Do not use for financial decisions.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Overall Score Banner */}
-        <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="max-w-7xl mx-auto px-4 py-4">
           <div className={`bg-gradient-to-r ${overallMood.color} text-white p-6 rounded-3xl shadow-2xl text-center mb-8 border-4 border-white/30 animate-pulse-glow`}>
             <div className="flex items-center justify-center gap-4 mb-2">
               <span className="text-4xl animate-bounce">{overallMood.emoji}</span>

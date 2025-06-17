@@ -1,5 +1,5 @@
 Original Metric,Explanation/Fix
-CUSR0000SEEB02,Child care CPI not available under this code. Likely not in public FRED feed. Consider using BLS directly or aggregate services CPI as proxy.
+CUSR0000SEEB03,"Updated to use correct FRED series for day care and preschool CPI."
 CUSR0000SEMF,"Try CUUR0000SEMF01 (Prescription Drugs, U.S. city average, not seasonally adjusted)."
 MEHOINUSA672N,Discontinued. Use MEPAINUSA672N (Median Personal Income) or A229RX0 (Real Disposable Income per Capita) as proxy.
 PPIFD,Try PPIACO (All Commodities) or PPIFID (Final Demand).

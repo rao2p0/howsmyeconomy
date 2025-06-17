@@ -433,9 +433,9 @@
       "nay_message": "College is becoming unaffordable"
     },
     {
-      "id": "CUSR0000SEEB02",
-      "name": "Childcare Costs",
-      "description": "Consumer price index for childcare and nursery school. Major expense for working families.",
+      "id": "CUSR0000SEEB03",
+              "name": "Childcare Costs",
+        "description": "Consumer price index for day care and preschool. Major expense for working families.",
       "category": "education",
       "units": "Index 1982-84=100",
       "update_frequency": "monthly",

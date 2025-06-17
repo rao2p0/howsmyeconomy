@@ -967,7 +967,7 @@ export const mockFredData: FredData = {
     { date: '2025-06-01', value: 1835.9 }
   ],
 
-  // Consumer Price Index: Elementary and high school tuition and fees
+  // Consumer Price Index: Day care and preschool
   CUSR0000SEEB03: [
     // 2023 data
     { date: '2023-01-01', value: 423.8 },
@@ -1226,42 +1226,7 @@ export const mockFredData: FredData = {
     { date: '2025-06-01', value: 434.8 }
   ],
 
-  // Consumer Price Index: Day care and preschool
-  CUSR0000SEEB02: [
-    // 2023 data
-    { date: '2023-01-01', value: 456.2 },
-    { date: '2023-02-01', value: 458.9 },
-    { date: '2023-03-01', value: 461.7 },
-    { date: '2023-04-01', value: 464.4 },
-    { date: '2023-05-01', value: 467.2 },
-    { date: '2023-06-01', value: 469.9 },
-    { date: '2023-07-01', value: 472.7 },
-    { date: '2023-08-01', value: 475.4 },
-    { date: '2023-09-01', value: 478.2 },
-    { date: '2023-10-01', value: 480.9 },
-    { date: '2023-11-01', value: 483.7 },
-    { date: '2023-12-01', value: 486.4 },
-    // 2024 data
-    { date: '2024-01-01', value: 489.2 },
-    { date: '2024-02-01', value: 491.9 },
-    { date: '2024-03-01', value: 494.7 },
-    { date: '2024-04-01', value: 497.4 },
-    { date: '2024-05-01', value: 500.2 },
-    { date: '2024-06-01', value: 502.9 },
-    { date: '2024-07-01', value: 505.7 },
-    { date: '2024-08-01', value: 508.4 },
-    { date: '2024-09-01', value: 511.2 },
-    { date: '2024-10-01', value: 513.9 },
-    { date: '2024-11-01', value: 516.7 },
-    { date: '2024-12-01', value: 519.4 },
-    // 2025 data (real FRED data)
-    { date: '2025-01-01', value: 522.2 },
-    { date: '2025-02-01', value: 524.9 },
-    { date: '2025-03-01', value: 527.7 },
-    { date: '2025-04-01', value: 530.4 },
-    { date: '2025-05-01', value: 533.2 },
-    { date: '2025-06-01', value: 535.9 }
-  ],
+
 
   // Consumer Price Index: Utility (piped) gas service
   CUSR0000SEHF02: [

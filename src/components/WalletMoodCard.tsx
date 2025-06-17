@@ -104,9 +104,10 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
     window.open(tweetUrl, '_blank', 'width=550,height=420');
   };
 
+  // Use mood_score_system.md rules: +0.5+ = Yay, -0.5 to +0.5 = Meh, <-0.5 = Nay
   const getTrendIcon = () => {
-    if (scoreResult.score >= 60) return <TrendingUp className="text-green-500" size={16} />;
-    if (scoreResult.score >= 40) return <Minus className="text-yellow-500" size={16} />;
+    if (scoreResult.score >= 0.5) return <TrendingUp className="text-green-500" size={16} />;
+    if (scoreResult.score >= -0.5) return <Minus className="text-yellow-500" size={16} />;
     return <TrendingDown className="text-red-500" size={16} />;
   };
 
@@ -127,7 +128,7 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
               {question.title}
             </CardTitle>
             <span className="text-xl animate-wiggle">
-              {scoreResult.score >= 60 ? '😀' : scoreResult.score >= 40 ? '😐' : '😒'}
+              {scoreResult.score >= 0.5 ? '😀' : scoreResult.score >= -0.5 ? '😐' : '😒'}
             </span>
           </div>
           <CardDescription className="text-sm font-modern text-gray-900 leading-relaxed bg-white/80 backdrop-blur-sm rounded-2xl p-3 border-2 border-white/40 font-medium">

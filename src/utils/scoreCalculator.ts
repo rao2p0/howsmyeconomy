@@ -452,27 +452,24 @@ export function calculateScore(
   // Calculate average mood score
   const averageMoodScore = moodScores.reduce((sum, score) => sum + score, 0) / moodScores.length;
 
-  // Interpret the average score:
+  // Interpret the average score using mood_score_system.md rules:
   // +0.5 or more → Yay 🟢
   // -0.5 to +0.5 → Meh 🟡  
   // Less than -0.5 → Nay 🔴
-  let emoji, mood, color, overallScore;
+  let emoji, mood, color;
   
   if (averageMoodScore >= 0.5) {
     emoji = '😀';
     mood = 'Yay!';
     color = '#4CAF50';
-    overallScore = 80;
   } else if (averageMoodScore >= -0.5) {
     emoji = '😐';
     mood = 'Meh';
     color = '#FF9800';
-    overallScore = 50;
   } else {
     emoji = '😒';
     mood = 'Nay';
     color = '#F44336';
-    overallScore = 20;
   }
 
   // Count indicators by mood for the doughnut chart
@@ -484,7 +481,7 @@ export function calculateScore(
   const insight = generateInsight(goodCount, neutralCount, badCount, averageMoodScore);
 
   return {
-    score: overallScore,
+    score: averageMoodScore, // Return actual averaged mood score (-1 to +1)
     emoji,
     mood,
     insight,

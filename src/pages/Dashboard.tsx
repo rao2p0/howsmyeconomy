@@ -22,13 +22,12 @@ export function Dashboard() {
     }));
   }, []);
 
-  const averageScore = Math.round(
-    scoreResults.reduce((sum, { scoreResult }) => sum + scoreResult.score, 0) / scoreResults.length
-  );
+  const averageScore = scoreResults.reduce((sum, { scoreResult }) => sum + scoreResult.score, 0) / scoreResults.length;
 
+  // Use mood_score_system.md rules: +0.5+ = Yay, -0.5 to +0.5 = Meh, <-0.5 = Nay
   const getOverallMood = (score: number) => {
-    if (score >= 60) return { emoji: '😀', mood: 'The economy is looking good!', color: 'from-green-400 to-emerald-500', vibe: 'Yay!' };
-    if (score >= 40) return { emoji: '😐', mood: 'The economy is so-so...', color: 'from-yellow-400 to-orange-500', vibe: 'Meh' };
+    if (score >= 0.5) return { emoji: '😀', mood: 'The economy is looking good!', color: 'from-green-400 to-emerald-500', vibe: 'Yay!' };
+    if (score >= -0.5) return { emoji: '😐', mood: 'The economy is so-so...', color: 'from-yellow-400 to-orange-500', vibe: 'Meh' };
     return { emoji: '😒', mood: 'The economy needs help!', color: 'from-red-400 to-pink-500', vibe: 'Nay' };
   };
 
@@ -45,7 +44,7 @@ export function Dashboard() {
             <div className="flex items-center justify-center gap-4 mb-2">
               <span className="text-4xl animate-bounce">{overallMood.emoji}</span>
               <h2 className="text-2xl md:text-3xl font-playful font-bold text-shadow-fun">
-                Economy Mood: {overallMood.vibe} ({averageScore}/100)
+                Economy Mood: {overallMood.vibe} ({averageScore.toFixed(2)})
               </h2>
               <span className="text-4xl animate-bounce" style={{ animationDelay: '0.5s' }}>{overallMood.emoji}</span>
             </div>

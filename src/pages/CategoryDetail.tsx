@@ -44,16 +44,17 @@ export function CategoryDetail() {
     );
   }
 
+  // Use mood_score_system.md rules: +0.5+ = Yay, -0.5 to +0.5 = Meh, <-0.5 = Nay
   const getOverallTrendIcon = (score: number) => {
-    if (score >= 60) return <TrendingUp className="text-green-500" size={24} />;
-    if (score >= 40) return <Minus className="text-yellow-500" size={24} />;
+    if (score >= 0.5) return <TrendingUp className="text-green-500" size={24} />;
+    if (score >= -0.5) return <Minus className="text-yellow-500" size={24} />;
     return <TrendingDown className="text-red-500" size={24} />;
   };
 
   const getOverallMood = (score: number) => {
-    if (score >= 60) return { emoji: '😀', mood: 'Looking Good!', color: 'from-green-400 to-emerald-500' };
-    if (score >= 40) return { emoji: '😐', mood: 'Mixed Signals', color: 'from-yellow-400 to-orange-500' };
-    return { emoji: '😒', mood: 'Needs Attention', color: 'from-red-400 to-pink-500' };
+    if (score >= 0.5) return { emoji: '😀', mood: 'Yay!', color: 'from-green-400 to-emerald-500' };
+    if (score >= -0.5) return { emoji: '😐', mood: 'Meh', color: 'from-yellow-400 to-orange-500' };
+    return { emoji: '😒', mood: 'Nay', color: 'from-red-400 to-pink-500' };
   };
 
   const overallMood = getOverallMood(scoreResult.score);

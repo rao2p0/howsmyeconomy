@@ -330,8 +330,8 @@ function MetricCard({ indicator, index }: MetricCardProps) {
         </div>
 
         {/* Quick Interpretation */}
-        <div className="bg-white/80 backdrop-blur-sm p-3 rounded-lg border border-white/40">
-          <p className="text-sm font-medium text-gray-700 text-center">
+        <div className="bg-white/80 backdrop-blur-sm p-4 rounded-lg border border-white/40">
+          <p className="text-sm font-normal text-gray-700 text-center font-inter leading-relaxed">
             {getMetricMoodMessage(indicator.series, indicator.mood)}
           </p>
         </div>

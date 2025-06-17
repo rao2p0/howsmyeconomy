@@ -709,7 +709,7 @@ export const mockFredData: FredData = {
   ],
   
   // Consumer Price Index: Medical care services
-  CUSR0000SAM: [
+  CPIMEDSL: [
     // 2023 data
     { date: '2023-01-01', value: 519.8 },
     { date: '2023-02-01', value: 522.4 },

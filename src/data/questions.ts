@@ -29,7 +29,7 @@ export const walletMoodQuestions: WalletMoodQuestion[] = [
     id: 'health-bill',
     title: 'Health Bill Barometer',
     question: 'Will healthcare or prescription drugs be affordable?',
-    fredSeries: ['CUSR0000SAM', 'CUSR0000SEMF', 'DHLCRC1', 'ECI_BENEFITS', 'CUSR0000SEMD']
+    fredSeries: ['CPIMEDSL', 'CUSR0000SEMF', 'DHLCRC1', 'ECI_BENEFITS', 'CUSR0000SEMD']
   },
   {
     id: 'tuition-tracker',
@@ -59,6 +59,6 @@ export const walletMoodQuestions: WalletMoodQuestion[] = [
     id: 'rainy-day',
     title: 'Rainy Day Radar',
     question: 'Can I handle unexpected expenses like medical bills or repairs?',
-    fredSeries: ['PSAVERT', 'CUSR0000SAM', 'CUSR0000SETD', 'HDTGPDUSQ163N', 'DSPIC96']
+    fredSeries: ['PSAVERT', 'CPIMEDSL', 'CUSR0000SETD', 'HDTGPDUSQ163N', 'DSPIC96']
   }
 ];

@@ -8,7 +8,7 @@ ECI_BENEFITS,Not available. Use ECIWAG (Wages) or access BLS API for benefits co
 CUSR0000SEEB01,"Try CUUR0000SEEB01 (College Tuition and Fees, not seasonally adjusted)."
 DSERRG3,Likely typo. Try DPCERX (Real PCE: Services) or related PCE categories.
 DHLCRC1,Use DHCSRC1Q027SBEA (Real PCE: Health Care).
-CUSR0000SAM,"Try CUUR0000SAM (Medical Care Services, not seasonally adjusted)."
+CPIMEDSL,"Updated to Consumer Price Index for Medical Care Services (seasonally adjusted)."
 DMOTRC1,Not available. Try DPCERC or DMOTRA (PCE: Motor Vehicles).
 CUSR0000SEEB04,Not found in FRED. Likely private college tuition data only available via NCES.
 HDTGPDUSQ163N,"Updated to correct quarterly series code (non-seasonally adjusted)."

@@ -367,9 +367,9 @@
       "nay_message": "Low saving rates indicate financial stress"
     },
     {
-      "id": "CUSR0000SAM",
+      "id": "CPIMEDSL",
       "name": "Medical Care Costs",
-      "description": "Consumer price index for medical care services. Tracks healthcare affordability for families.",
+      "description": "Consumer price index for medical care in cities. Tracks healthcare affordability for families.",
       "category": "healthcare",
       "units": "Index 1982-84=100",
       "update_frequency": "monthly",

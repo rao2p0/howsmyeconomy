@@ -23,7 +23,7 @@ const seriesNames: { [key: string]: string } = {
   'CPILFESL': 'Core Inflation',
   'PCEPI': 'PCE Inflation',
   'DSPIC96': 'Real Income',
-  'CUSR0000SAM': 'Healthcare Costs',
+  'CPIMEDSL': 'Healthcare Costs',
   'CUSR0000SEMF': 'Drug Prices',
   'DHLCRC1': 'Health Spending',
   'ECI_BENEFITS': 'Health Benefits',
@@ -212,7 +212,7 @@ function getMoodScore(questionId: string, series: string, currentValue: number, 
 
     case 'health-bill':
       switch (series) {
-        case 'CUSR0000SAM':
+        case 'CPIMEDSL':
           // ↓ YoY = Yay, ±2% = Meh, ↑ > 2% = Nay
           if (yoyChange < 0) return 1;
           if (yoyChange > 2) return -1;
@@ -367,7 +367,7 @@ function getMoodScore(questionId: string, series: string, currentValue: number, 
           if (currentValue > 6) return 1;
           if (currentValue < 4) return -1;
           return 0;
-        case 'CUSR0000SAM':
+        case 'CPIMEDSL':
           // ↓ YoY = Yay, ±2% = Meh, ↑ > 2% = Nay
           if (yoyChange < 0) return 1;
           if (yoyChange > 2) return -1;

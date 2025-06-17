@@ -444,15 +444,15 @@
       "nay_message": "Childcare is becoming unaffordable"
     },
     {
-      "id": "CUSR0000SEEB03",
-      "name": "Elementary School Costs",
-      "description": "Consumer price index for elementary and high school costs. Includes private school tuition.",
+      "id": "CUSR0000SEEA",
+      "name": "Educational Books and Supplies",
+      "description": "Consumer price index for educational books and supplies. Essential school and learning materials costs.",
       "category": "education",
       "units": "Index 1982-84=100",
       "update_frequency": "monthly",
-      "yay_message": "School costs are affordable",
-      "meh_message": "School costs are rising moderately",
-      "nay_message": "School costs are straining family budgets"
+      "yay_message": "Educational materials are affordable",
+      "meh_message": "Educational materials costs are rising moderately",
+      "nay_message": "High costs for books and supplies strain education budgets"
     },
     {
       "id": "CUSR0000SEEB04",

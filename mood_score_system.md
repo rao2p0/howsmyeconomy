@@ -80,7 +80,7 @@ This document defines how to assign a simple mood score to economic metrics trac
 |--------|-----|-----|-----|
 | CUSR0000SEEB01 | ↓ YoY | Flat | ↑ > 2% YoY |
 | SLOAS | ↓ YoY | Flat | ↑ YoY |
-| CUSR0000SEEB03 | ↓ YoY | ±2% | ↑ > 2% |
+| CUSR0000SEEA | ↓ YoY | ±2% | ↑ > 2% |
 | CUSR0000SEEB04 | ↓ YoY | ±2% | ↑ > 2% |
 | PSAVERT | > 6% | 4–6% | < 4% |
 

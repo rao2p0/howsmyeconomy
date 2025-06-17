@@ -30,6 +30,7 @@ const seriesNames: { [key: string]: string } = {
   'CUSR0000SEMD': 'Medical Goods',
   'CUSR0000SEEB01': 'College Tuition',
   'SLOAS': 'Student Loans',
+  'CUSR0000SEEA': 'Educational Books',
   'CUSR0000SEEB03': 'Childcare',
   'CUSR0000SEEB04': 'Trade School',
   'PSAVERT': 'Savings Rate',
@@ -251,6 +252,11 @@ function getMoodScore(questionId: string, series: string, currentValue: number, 
           // ↓ YoY = Yay, Flat = Meh, ↑ YoY = Nay
           if (yoyChange < 0) return 1;
           if (yoyChange > 0) return -1;
+          return 0;
+        case 'CUSR0000SEEA':
+          // ↓ YoY = Yay, ±2% = Meh, ↑ > 2% = Nay
+          if (yoyChange < 0) return 1;
+          if (yoyChange > 2) return -1;
           return 0;
         case 'CUSR0000SEEB04':
           // ↓ YoY = Yay, ±2% = Meh, ↑ > 2% = Nay

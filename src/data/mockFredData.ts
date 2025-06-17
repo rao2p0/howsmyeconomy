@@ -967,7 +967,44 @@ export const mockFredData: FredData = {
     { date: '2025-06-01', value: 1835.9 }
   ],
 
-  // Consumer Price Index: Day care and preschool
+  // Consumer Price Index: Educational Books and Supplies
+  CUSR0000SEEA: [
+    // 2023 data
+    { date: '2023-01-01', value: 423.8 },
+    { date: '2023-02-01', value: 425.2 },
+    { date: '2023-03-01', value: 426.7 },
+    { date: '2023-04-01', value: 428.1 },
+    { date: '2023-05-01', value: 429.6 },
+    { date: '2023-06-01', value: 431.0 },
+    { date: '2023-07-01', value: 432.5 },
+    { date: '2023-08-01', value: 433.9 },
+    { date: '2023-09-01', value: 435.4 },
+    { date: '2023-10-01', value: 436.8 },
+    { date: '2023-11-01', value: 438.3 },
+    { date: '2023-12-01', value: 439.7 },
+    // 2024 data
+    { date: '2024-01-01', value: 441.2 },
+    { date: '2024-02-01', value: 442.6 },
+    { date: '2024-03-01', value: 444.1 },
+    { date: '2024-04-01', value: 445.5 },
+    { date: '2024-05-01', value: 447.0 },
+    { date: '2024-06-01', value: 448.4 },
+    { date: '2024-07-01', value: 449.9 },
+    { date: '2024-08-01', value: 451.3 },
+    { date: '2024-09-01', value: 452.8 },
+    { date: '2024-10-01', value: 454.2 },
+    { date: '2024-11-01', value: 455.7 },
+    { date: '2024-12-01', value: 457.1 },
+    // 2025 data (real FRED data)
+    { date: '2025-01-01', value: 458.6 },
+    { date: '2025-02-01', value: 460.0 },
+    { date: '2025-03-01', value: 461.5 },
+    { date: '2025-04-01', value: 462.9 },
+    { date: '2025-05-01', value: 464.4 },
+    { date: '2025-06-01', value: 465.8 }
+  ],
+
+  // Consumer Price Index: Day care and preschool  
   CUSR0000SEEB03: [
     // 2023 data
     { date: '2023-01-01', value: 423.8 },

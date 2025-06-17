@@ -22,7 +22,7 @@ const seriesNames: { [key: string]: string } = {
   'CUSR0000SAF11': 'Food Prices',
   'CPILFESL': 'Core Inflation',
   'PCEPI': 'PCE Inflation',
-  'DSPIC96': 'Real Income',
+  'DSPIC96': 'Real Disposable Income',
   'CPIMEDSL': 'Healthcare Costs',
   'PCU4461104461101': 'Drug Wholesale Prices',
   'DHLCRC1Q027SBEA': 'Health Care Spending',

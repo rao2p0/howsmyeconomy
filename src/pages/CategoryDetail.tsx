@@ -312,10 +312,15 @@ function MetricCard({ indicator, index }: MetricCardProps) {
           <div className="text-sm text-gray-500 flex items-center justify-center gap-1">
             <Calendar size={12} />
             {indicator.timestamp !== 'No data' 
-              ? new Date(indicator.timestamp).toLocaleDateString('en-US', { 
-                  year: 'numeric', 
-                  month: 'short' 
-                })
+              ? (() => {
+                  // Parse date string as local date to avoid timezone issues
+                  const [year, month, day] = indicator.timestamp.split('-').map(Number);
+                  const date = new Date(year, month - 1, day); // month is 0-indexed
+                  return date.toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'short' 
+                  });
+                })()
               : 'No data'
             }
           </div>

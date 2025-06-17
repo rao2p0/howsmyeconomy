@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, TrendingUp, TrendingDown, Minus } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
@@ -6,6 +6,8 @@ import { Button } from '../components/ui/button';
 import { walletMoodQuestions } from '../data/questions';
 import { calculateScore } from '../utils/scoreCalculator';
 import { getMetricMoodMessage } from '../utils/schemaLoader';
+import { getCurrentDataSourceInfo } from '../data/fredDataProvider';
+import type { ScoreResult } from '../types';
 
 // Default demographics for consistent scoring
 const defaultDemographics = {
@@ -17,16 +19,88 @@ const defaultDemographics = {
 
 export function CategoryDetail() {
   const { categoryId } = useParams<{ categoryId: string }>();
+  const [scoreResult, setScoreResult] = useState<ScoreResult | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [dataSourceInfo, setDataSourceInfo] = useState<{ source: 'mock' | 'real' | null }>({ source: null });
   
-  const question = useMemo(() => {
-    return walletMoodQuestions.find(q => q.id === categoryId);
-  }, [categoryId]);
+  const question = walletMoodQuestions.find(q => q.id === categoryId);
 
-  const scoreResult = useMemo(() => {
-    if (!question) return null;
-    return calculateScore(question, defaultDemographics);
+  useEffect(() => {
+    async function loadScore() {
+      if (!question) {
+        setLoading(false);
+        return;
+      }
+      
+      try {
+        setLoading(true);
+        setError(null);
+        
+        // Get data source info for display
+        const sourceInfo = getCurrentDataSourceInfo();
+        setDataSourceInfo(sourceInfo);
+        
+        const result = await calculateScore(question, defaultDemographics);
+        setScoreResult(result);
+      } catch (err) {
+        console.error('Failed to load score:', err);
+        setError(err instanceof Error ? err.message : 'Failed to load economic data');
+      } finally {
+        setLoading(false);
+      }
+    }
+    
+    loadScore();
   }, [question]);
 
+  // Loading state
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 flex items-center justify-center">
+        <Card className="p-8 text-center">
+          <CardHeader>
+            <CardTitle className="text-2xl text-gray-700">Loading Category Data...</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            <p className="text-gray-600">
+              {dataSourceInfo.source === 'real' ? 'Loading real FRED data' : 'Loading data'}
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 flex items-center justify-center">
+        <Card className="p-8 text-center">
+          <CardHeader>
+            <CardTitle className="text-2xl text-red-600">Failed to Load Data 😞</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="mb-4 text-gray-600">{error}</p>
+            <div className="space-x-4">
+              <button 
+                onClick={() => window.location.reload()} 
+                className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700"
+              >
+                Try Again
+              </button>
+              <Link to="/">
+                <Button variant="outline">Return to Dashboard</Button>
+              </Link>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  // Category not found
   if (!question || !scoreResult) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 flex items-center justify-center">
@@ -94,14 +168,30 @@ export function CategoryDetail() {
         </div>
       </div>
 
-      {/* Mock Data Warning */}
+      {/* Data Source Info */}
       <div className="max-w-6xl mx-auto px-4 pt-8">
-        <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-lg shadow-md mb-6">
+        <div className={`border-l-4 p-4 rounded-lg shadow-md mb-6 ${
+          dataSourceInfo.source === 'real' 
+            ? 'bg-green-100 border-green-500 text-green-700'
+            : 'bg-yellow-100 border-yellow-500 text-yellow-700'
+        }`}>
           <div className="flex items-center">
-            <span className="text-2xl mr-3">⚠️</span>
+            <span className="text-2xl mr-3">
+              {dataSourceInfo.source === 'real' ? '✅' : '⚠️'}
+            </span>
             <div>
-              <p className="font-bold">WARNING: This shows MOCK data for development</p>
-              <p className="text-sm">Not real economic data. Do not use for financial decisions.</p>
+              <p className="font-bold">
+                {dataSourceInfo.source === 'real' 
+                  ? 'Using REAL FRED economic data' 
+                  : 'WARNING: Using MOCK data for development'
+                }
+              </p>
+              <p className="text-sm">
+                {dataSourceInfo.source === 'real'
+                  ? 'Data from Federal Reserve Economic Data (FRED)'
+                  : 'Not real economic data. Do not use for financial decisions.'
+                }
+              </p>
             </div>
           </div>
         </div>

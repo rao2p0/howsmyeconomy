@@ -1,6 +1,5 @@
 import { Demographics, WalletMoodQuestion, ScoreResult, IndicatorMood } from '../types';
-// ⚠️ WARNING: Using MOCK data - not real FRED economic data ⚠️
-import { mockFredData } from '../data/mockFredData';
+import { getFredData } from '../data/fredDataProvider';
 
 // Mapping of FRED series to human-readable names
 const seriesNames: { [key: string]: string } = {
@@ -395,18 +394,19 @@ function moodScoreToMood(score: number): 'good' | 'neutral' | 'bad' {
   return 'neutral';
 }
 
-export function calculateScore(
+export async function calculateScore(
   question: WalletMoodQuestion,
   demographics: Demographics
-): ScoreResult {
-  // ⚠️ WARNING: This function is using MOCK DATA, not real FRED economic data ⚠️
-  // Results should NOT be used for actual economic analysis or financial decisions
+): Promise<ScoreResult> {
   const currentDate = new Date(); // Use actual current date
+  
+  // Load FRED data (mock or real based on configuration)
+  const fredData = await getFredData();
   
   // Get mood scores for each indicator
   const moodScores: number[] = [];
   const indicatorBreakdown: IndicatorMood[] = question.fredSeries.map(series => {
-    const data = mockFredData[series]; // ⚠️ MOCK DATA - Replace with real FRED data
+    const data = fredData[series];
     if (!data || data.length < 12) {
       moodScores.push(0); // Neutral if no data
       return {

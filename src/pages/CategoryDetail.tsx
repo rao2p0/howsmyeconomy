@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
 import { Button } from '../components/ui/button';
 import { walletMoodQuestions } from '../data/questions';
 import { calculateScore } from '../utils/scoreCalculator';
+import { getMetricMoodMessage } from '../utils/schemaLoader';
 
 // Default demographics for consistent scoring
 const defaultDemographics = {
@@ -207,7 +208,7 @@ function MetricCard({ indicator, index }: MetricCardProps) {
         {/* Quick Interpretation */}
         <div className="bg-white/80 backdrop-blur-sm p-3 rounded-lg border border-white/40">
           <p className="text-sm font-medium text-gray-700 text-center">
-            {getMetricInterpretation(indicator.series, indicator.mood, indicator.value)}
+            {getMetricMoodMessage(indicator.series, indicator.mood)}
           </p>
         </div>
       </CardContent>
@@ -215,50 +216,4 @@ function MetricCard({ indicator, index }: MetricCardProps) {
   );
 }
 
-// Helper function to provide quick interpretations
-function getMetricInterpretation(series: string, mood: string, value: number): string {
-  const interpretations: { [key: string]: { [key: string]: string } } = {
-    'MORTGAGE30US': {
-      good: 'Mortgage rates are favorable for home buyers',
-      neutral: 'Mortgage rates are stable but not ideal',
-      bad: 'High mortgage rates are hurting affordability'
-    },
-    'CSUSHPINSA': {
-      good: 'Home price growth is moderate and sustainable',
-      neutral: 'Home prices are rising at a moderate pace',
-      bad: 'Rapid home price increases are reducing affordability'
-    },
-    'CUSR0000SEHA': {
-      good: 'Rent costs are stable or declining',
-      neutral: 'Rent costs are rising moderately',
-      bad: 'Rent costs are increasing rapidly'
-    },
-    'HOUST': {
-      good: 'Strong housing construction is helping supply',
-      neutral: 'Housing construction is steady',
-      bad: 'Low housing construction is limiting supply'
-    },
-    'UNRATE': {
-      good: 'Low unemployment means more job opportunities',
-      neutral: 'Unemployment is at moderate levels',
-      bad: 'High unemployment limits job prospects'
-    },
-    'PAYEMS': {
-      good: 'Strong job growth indicates a healthy economy',
-      neutral: 'Job growth is moderate',
-      bad: 'Weak job growth signals economic concerns'
-    },
-    'CUSR0000SAF11': {
-      good: 'Food prices are stable or declining',
-      neutral: 'Food prices are rising moderately',
-      bad: 'Food prices are increasing rapidly'
-    },
-    'CES0500000003': {
-      good: 'Wages are growing faster than inflation',
-      neutral: 'Wage growth is keeping pace with costs',
-      bad: 'Wages are not keeping up with rising costs'
-    }
-  };
-
-  return interpretations[series]?.[mood] || `This ${mood} indicator reflects current economic conditions`;
-} 
+ 

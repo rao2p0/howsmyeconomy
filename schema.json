@@ -536,7 +536,7 @@
       "name": "Household Debt to GDP",
       "description": "Total household debt as percentage of economic output. Indicates overall debt burden sustainability.",
       "category": "emergency",
-      "units": "Percent",
+      "units": "Ratio",
       "update_frequency": "quarterly",
       "yay_message": "Household debt levels are sustainable",
       "meh_message": "Household debt is at moderate levels",

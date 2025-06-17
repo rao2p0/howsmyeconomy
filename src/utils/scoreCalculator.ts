@@ -42,7 +42,7 @@ const seriesNames: { [key: string]: string } = {
   'DSERRG3': 'Service Spending',
   'PPIFD': 'Producer Prices',
   'CUSR0000SETD': 'Shelter Costs',
-  'HDTGPDUSQ163': 'Household Debt'
+  'HDTGPDUSQ163N': 'Household Debt'
 };
 
 // Get the most recent data point for a given date
@@ -377,7 +377,7 @@ function getMoodScore(questionId: string, series: string, currentValue: number, 
           if (yoyChange < 0) return 1;
           if (yoyChange > 2) return -1;
           return 0;
-        case 'HDTGPDUSQ163':
+        case 'HDTGPDUSQ163N':
           // ↓ YoY = Yay, Flat = Meh, ↑ YoY = Nay
           if (yoyChange < 0) return 1;
           if (yoyChange > 0) return -1;

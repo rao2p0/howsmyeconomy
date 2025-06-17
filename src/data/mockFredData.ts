@@ -1412,7 +1412,7 @@ export const mockFredData: FredData = {
   ],
 
   // Households and Nonprofit Organizations; Total Debt Securities and Loans; Liability
-  HDTGPDUSQ163: [
+  HDTGPDUSQ163N: [
     // 2023 data (quarterly data, billions of dollars)
     { date: '2023-01-01', value: 17834.2 },
     { date: '2023-02-01', value: 17834.2 },

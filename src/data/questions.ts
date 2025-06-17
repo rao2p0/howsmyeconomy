@@ -59,6 +59,6 @@ export const walletMoodQuestions: WalletMoodQuestion[] = [
     id: 'rainy-day',
     title: 'Rainy Day Radar',
     question: 'Can I handle unexpected expenses like medical bills or repairs?',
-    fredSeries: ['PSAVERT', 'CUSR0000SAM', 'CUSR0000SETD', 'HDTGPDUSQ163', 'DSPIC96']
+    fredSeries: ['PSAVERT', 'CUSR0000SAM', 'CUSR0000SETD', 'HDTGPDUSQ163N', 'DSPIC96']
   }
 ];

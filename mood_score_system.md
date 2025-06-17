@@ -129,7 +129,7 @@ This document defines how to assign a simple mood score to economic metrics trac
 | PSAVERT | > 6% | 4–6% | < 4% |
 | CUSR0000SAM | ↓ YoY | ±2% | ↑ > 2% |
 | CUSR0000SETD | ↓ YoY | ±2% | ↑ > 2% |
-| HDTGPDUSQ163 | ↓ YoY | Flat | ↑ YoY |
+| HDTGPDUSQ163N | ↓ YoY | Flat | ↑ YoY |
 | DSPIC96 | ↑ > 3% | Flat | ↓ YoY |
 
 ---

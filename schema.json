@@ -213,15 +213,15 @@
       "nay_message": "High auto loan rates increase car costs"
     },
     {
-      "id": "DMOTRC1",
-      "name": "Motor Vehicle Sales", 
-      "description": "Domestic auto sales indicate consumer confidence and the health of the automotive market.",
+      "id": "DAUTOSAAR",
+      "name": "Domestic Auto Sales", 
+      "description": "Domestic auto sales including passenger cars and station wagons assembled in the U.S., Canada, and Mexico. Key indicator of consumer confidence and automotive market health.",
       "category": "automotive",
-      "units": "Millions of Units, SAAR",
+      "units": "Millions of Units, Seasonally Adjusted Annual Rate",
       "update_frequency": "monthly",
-      "yay_message": "Strong auto sales show consumer confidence",
-      "meh_message": "Auto sales are steady",
-      "nay_message": "Weak auto sales signal economic concerns"
+      "yay_message": "Strong domestic auto sales show consumer confidence",
+      "meh_message": "Domestic auto sales are steady",
+      "nay_message": "Weak domestic auto sales signal economic concerns"
     },
     {
       "id": "UNRATE",

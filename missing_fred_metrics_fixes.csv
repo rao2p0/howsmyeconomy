@@ -9,6 +9,6 @@ CUSR0000SEEB01,"Try CUUR0000SEEB01 (College Tuition and Fees, not seasonally adj
 DSERRG3,Likely typo. Try DPCERX (Real PCE: Services) or related PCE categories.
 DHLCRC1,Use DHCSRC1Q027SBEA (Real PCE: Health Care).
 CPIMEDSL,"Updated to Consumer Price Index for Medical Care Services (seasonally adjusted)."
-DMOTRC1,Not available. Try DPCERC or DMOTRA (PCE: Motor Vehicles).
+DAUTOSAAR,Updated to use Motor Vehicle Retail Sales: Domestic Autos (SAAR) which tracks domestic auto sales specifically.
 
 HDTGPDUSQ163N,"Updated to correct quarterly series code (non-seasonally adjusted)."

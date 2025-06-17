@@ -34,7 +34,7 @@ This document defines how to assign a simple mood score to economic metrics trac
 | CUSR0000SETA02 | ↓ YoY | ±3% | ↑ > 3% |
 | CUSR0000SETB | ↓ > 5% YoY | ±5% | ↑ > 5% |
 | TERMCBAUTO48NS | ↓ > 0.5pp | ±0.5pp | ↑ > 0.5pp |
-| DMOTRC1 | ↓ YoY | Flat | ↑ YoY |
+| DAUTOSAAR | ↑ YoY | Flat | ↓ YoY |
 
 ---
 

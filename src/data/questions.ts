@@ -11,7 +11,7 @@ export const walletMoodQuestions: WalletMoodQuestion[] = [
     id: 'car-cost',
     title: 'Car Cost Calculator',
     question: 'Is buying or maintaining a car affordable?',
-    fredSeries: ['CUSR0000SETA01', 'CUSR0000SETA02', 'CUSR0000SETB', 'TERMCBAUTO48NS', 'DMOTRC1']
+    fredSeries: ['CUSR0000SETA01', 'CUSR0000SETA02', 'CUSR0000SETB', 'TERMCBAUTO48NS', 'DAUTOSAAR']
   },
   {
     id: 'job-jolt',

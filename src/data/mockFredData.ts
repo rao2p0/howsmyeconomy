@@ -338,41 +338,41 @@ export const mockFredData: FredData = {
     { date: '2025-06-01', value: 8.01 }
   ],
 
-  // Motor Vehicle Retail Sales: Domestic and Foreign
-  DMOTRC1: [
+  // Motor Vehicle Retail Sales: Domestic Autos (SAAR)
+  DAUTOSAAR: [
     // 2023 data (millions of units, SAAR)
-    { date: '2023-01-01', value: 14.9 },
-    { date: '2023-02-01', value: 15.2 },
-    { date: '2023-03-01', value: 15.8 },
-    { date: '2023-04-01', value: 15.4 },
-    { date: '2023-05-01', value: 15.7 },
-    { date: '2023-06-01', value: 15.9 },
-    { date: '2023-07-01', value: 16.1 },
-    { date: '2023-08-01', value: 15.8 },
-    { date: '2023-09-01', value: 15.6 },
-    { date: '2023-10-01', value: 15.3 },
-    { date: '2023-11-01', value: 15.1 },
-    { date: '2023-12-01', value: 14.8 },
+    { date: '2023-01-01', value: 9.2 },
+    { date: '2023-02-01', value: 9.4 },
+    { date: '2023-03-01', value: 9.8 },
+    { date: '2023-04-01', value: 9.6 },
+    { date: '2023-05-01', value: 9.9 },
+    { date: '2023-06-01', value: 10.1 },
+    { date: '2023-07-01', value: 10.3 },
+    { date: '2023-08-01', value: 10.0 },
+    { date: '2023-09-01', value: 9.8 },
+    { date: '2023-10-01', value: 9.5 },
+    { date: '2023-11-01', value: 9.3 },
+    { date: '2023-12-01', value: 9.0 },
     // 2024 data
-    { date: '2024-01-01', value: 15.2 },
-    { date: '2024-02-01', value: 15.5 },
-    { date: '2024-03-01', value: 15.8 },
-    { date: '2024-04-01', value: 16.1 },
-    { date: '2024-05-01', value: 16.4 },
-    { date: '2024-06-01', value: 16.2 },
-    { date: '2024-07-01', value: 15.9 },
-    { date: '2024-08-01', value: 15.7 },
-    { date: '2024-09-01', value: 15.4 },
-    { date: '2024-10-01', value: 15.2 },
-    { date: '2024-11-01', value: 15.0 },
-    { date: '2024-12-01', value: 14.8 },
+    { date: '2024-01-01', value: 9.4 },
+    { date: '2024-02-01', value: 9.7 },
+    { date: '2024-03-01', value: 10.0 },
+    { date: '2024-04-01', value: 10.3 },
+    { date: '2024-05-01', value: 10.6 },
+    { date: '2024-06-01', value: 10.4 },
+    { date: '2024-07-01', value: 10.1 },
+    { date: '2024-08-01', value: 9.9 },
+    { date: '2024-09-01', value: 9.6 },
+    { date: '2024-10-01', value: 9.4 },
+    { date: '2024-11-01', value: 9.2 },
+    { date: '2024-12-01', value: 9.0 },
     // 2025 data (real FRED data)
-    { date: '2025-01-01', value: 15.1 },
-    { date: '2025-02-01', value: 15.4 },
-    { date: '2025-03-01', value: 15.7 },
-    { date: '2025-04-01', value: 16.0 },
-    { date: '2025-05-01', value: 16.3 },
-    { date: '2025-06-01', value: 16.1 }
+    { date: '2025-01-01', value: 1.839 },
+    { date: '2025-02-01', value: 1.987 },
+    { date: '2025-03-01', value: 2.072 },
+    { date: '2025-04-01', value: 1.855 },
+    { date: '2025-05-01', value: 1.671 },
+    { date: '2025-06-01', value: 1.750 }
   ],
   
   // Unemployment Rate

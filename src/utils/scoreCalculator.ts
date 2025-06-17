@@ -13,7 +13,7 @@ const seriesNames: { [key: string]: string } = {
   'CUSR0000SETA02': 'Used Car Prices',
   'CUSR0000SETB': 'Gas Prices',
   'TERMCBAUTO48NS': 'Auto Loan Rates',
-  'DMOTRC1': 'Car Sales',
+  'DAUTOSAAR': 'Domestic Auto Sales',
   'UNRATE': 'Unemployment',
   'PAYEMS': 'Job Growth',
   'JTSJOL': 'Job Openings',
@@ -142,10 +142,10 @@ function getMoodScore(questionId: string, series: string, currentValue: number, 
           if (pointChange <= -0.5) return 1;
           if (pointChange >= 0.5) return -1;
           return 0;
-        case 'DMOTRC1':
-          // ↓ YoY = Yay, Flat = Meh, ↑ YoY = Nay
-          if (yoyChange < 0) return 1;
-          if (yoyChange > 0) return -1;
+        case 'DAUTOSAAR':
+          // ↑ YoY = Yay, Flat = Meh, ↓ YoY = Nay
+          if (yoyChange > 0) return 1;
+          if (yoyChange < 0) return -1;
           return 0;
       }
       break;

@@ -521,7 +521,7 @@
       "nay_message": "High repair costs create financial stress"
     },
     {
-      "id": "PPIFD",
+      "id": "PPIACO",
       "name": "Producer Price Index",
       "description": "Measures wholesale price changes before they reach consumers. Leading indicator of future inflation.",
       "category": "inflation",

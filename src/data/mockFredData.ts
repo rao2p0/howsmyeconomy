@@ -1302,8 +1302,8 @@ export const mockFredData: FredData = {
     { date: '2025-06-01', value: 10205 }
   ],
 
-  // Producer Price Index: Final Demand
-  PPIFD: [
+  // Producer Price Index: All Commodities
+  PPIACO: [
     // 2023 data
     { date: '2023-01-01', value: 116.2 },
     { date: '2023-02-01', value: 116.8 },

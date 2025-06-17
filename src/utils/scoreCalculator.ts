@@ -40,7 +40,7 @@ const seriesNames: { [key: string]: string } = {
 
   'CUSR0000SEHF02': 'Gas Utilities',
   'DSERRG3': 'Service Spending',
-  'PPIFD': 'Producer Prices',
+  'PPIACO': 'Producer Prices',
   'CUSR0000SETD': 'Shelter Costs',
   'HDTGPDUSQ163N': 'Household Debt'
 };
@@ -342,7 +342,7 @@ function getMoodScore(questionId: string, series: string, currentValue: number, 
           if (currentValue > 6) return 1;
           if (currentValue < 4) return -1;
           return 0;
-        case 'PPIFD':
+        case 'PPIACO':
           // ↓ YoY = Yay, Flat = Meh, ↑ YoY = Nay
           if (yoyChange < 0) return 1;
           if (yoyChange > 0) return -1;

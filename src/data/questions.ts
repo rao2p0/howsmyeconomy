@@ -53,7 +53,7 @@ export const walletMoodQuestions: WalletMoodQuestion[] = [
     id: 'paycheck-power',
     title: 'Paycheck Power',
     question: 'Will my wages or savings keep up with rising prices?',
-    fredSeries: ['CES0500000003', 'CPIAUCSL', 'PSAVERT', 'PPIFD', 'DSPIC96']
+    fredSeries: ['CES0500000003', 'CPIAUCSL', 'PSAVERT', 'PPIACO', 'DSPIC96']
   },
   {
     id: 'rainy-day',

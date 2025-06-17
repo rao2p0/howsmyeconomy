@@ -117,7 +117,7 @@ This document defines how to assign a simple mood score to economic metrics trac
 | CES0500000003 | ↑ > 3.5% | ±1% | ↓ YoY |
 | CPIAUCSL | < 2% | 2–3% | > 3% |
 | PSAVERT | > 6% | 4–6% | < 4% |
-| PPIFD | ↓ YoY | Flat | ↑ YoY |
+| PPIACO | ↓ YoY | Flat | ↑ YoY |
 | DSPIC96 | ↑ > 3% | ±1% | ↓ YoY |
 
 ---

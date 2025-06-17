@@ -2,7 +2,7 @@ Original Metric,Explanation/Fix
 CUSR0000SEEB03,"Updated to use correct FRED series for day care and preschool CPI."
 CUSR0000SEMF,"Try CUUR0000SEMF01 (Prescription Drugs, U.S. city average, not seasonally adjusted)."
 MEHOINUSA672N,Discontinued. Use MEPAINUSA672N (Median Personal Income) or A229RX0 (Real Disposable Income per Capita) as proxy.
-PPIFD,Try PPIACO (All Commodities) or PPIFID (Final Demand).
+PPIACO,"Updated to use Producer Price Index for All Commodities."
 CUSR0000SEEB03,Educational Books and Supplies: No exact match. Try CUUR0000SEEB03 or broader Education CPI.
 ECI_BENEFITS,Not available. Use ECIWAG (Wages) or access BLS API for benefits component.
 CUSR0000SEEB01,"Try CUUR0000SEEB01 (College Tuition and Fees, not seasonally adjusted)."

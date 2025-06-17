@@ -207,9 +207,6 @@ export function CategoryDetail() {
                 <div className="text-sm font-medium text-gray-600">Bad Indicators</div>
               </div>
             </div>
-            <p className="text-center text-lg font-medium text-gray-700 bg-gray-50 p-4 rounded-lg">
-              {scoreResult.insight}
-            </p>
           </CardContent>
         </Card>
 
@@ -269,7 +266,7 @@ function MetricCard({ indicator, index }: MetricCardProps) {
       style={{ animationDelay: `${index * 0.1}s` }}
     >
       <CardHeader className="pb-4">
-        <CardTitle className="text-lg font-playful font-medium text-gray-900 flex items-center gap-2">
+        <CardTitle className="text-xl font-playful font-medium text-gray-900 flex items-center gap-2">
           <span className="text-2xl">{moodInfo.icon}</span>
           <span className="flex-1">{indicator.name}</span>
           <div className="group relative">
@@ -344,5 +341,3 @@ function MetricCard({ indicator, index }: MetricCardProps) {
     </Card>
   );
 }
-
- 

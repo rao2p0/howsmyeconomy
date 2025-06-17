@@ -1041,42 +1041,7 @@ export const mockFredData: FredData = {
     { date: '2025-06-01', value: 465.8 }
   ],
 
-  // Consumer Price Index: Technical and business school tuition and fees
-  CUSR0000SEEB04: [
-    // 2023 data
-    { date: '2023-01-01', value: 312.4 },
-    { date: '2023-02-01', value: 313.8 },
-    { date: '2023-03-01', value: 315.2 },
-    { date: '2023-04-01', value: 316.6 },
-    { date: '2023-05-01', value: 318.0 },
-    { date: '2023-06-01', value: 319.4 },
-    { date: '2023-07-01', value: 320.8 },
-    { date: '2023-08-01', value: 322.2 },
-    { date: '2023-09-01', value: 323.6 },
-    { date: '2023-10-01', value: 325.0 },
-    { date: '2023-11-01', value: 326.4 },
-    { date: '2023-12-01', value: 327.8 },
-    // 2024 data
-    { date: '2024-01-01', value: 329.2 },
-    { date: '2024-02-01', value: 330.6 },
-    { date: '2024-03-01', value: 332.0 },
-    { date: '2024-04-01', value: 333.4 },
-    { date: '2024-05-01', value: 334.8 },
-    { date: '2024-06-01', value: 336.2 },
-    { date: '2024-07-01', value: 337.6 },
-    { date: '2024-08-01', value: 339.0 },
-    { date: '2024-09-01', value: 340.4 },
-    { date: '2024-10-01', value: 341.8 },
-    { date: '2024-11-01', value: 343.2 },
-    { date: '2024-12-01', value: 344.6 },
-    // 2025 data (real FRED data)
-    { date: '2025-01-01', value: 346.0 },
-    { date: '2025-02-01', value: 347.4 },
-    { date: '2025-03-01', value: 348.8 },
-    { date: '2025-04-01', value: 350.2 },
-    { date: '2025-05-01', value: 351.6 },
-    { date: '2025-06-01', value: 353.0 }
-  ],
+
   
   // Personal Saving Rate
   PSAVERT: [

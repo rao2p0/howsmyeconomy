@@ -454,17 +454,7 @@
       "meh_message": "Educational materials costs are rising moderately",
       "nay_message": "High costs for books and supplies strain education budgets"
     },
-    {
-      "id": "CUSR0000SEEB04",
-      "name": "Technical School Costs",
-      "description": "Consumer price index for technical and trade school education. Alternative to college education.",
-      "category": "education",
-      "units": "Index 1982-84=100",
-      "update_frequency": "monthly",
-      "yay_message": "Technical education is affordable",
-      "meh_message": "Technical school costs are moderate",
-      "nay_message": "Technical education costs are too high"
-    },
+
     {
       "id": "SLOAS",
       "name": "Student Loan Outstanding Amount",

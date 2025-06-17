@@ -400,15 +400,15 @@
       "nay_message": "Prescription drugs are becoming unaffordable"
     },
     {
-      "id": "DHLCRC1",
-      "name": "Health Care Benefits Costs",
-      "description": "Employer costs for health insurance and medical benefits. Affects job compensation packages.",
+      "id": "DHLCRC1Q027SBEA",
+      "name": "Health Care Spending",
+      "description": "Personal consumption expenditures for healthcare services. Tracks how much Americans actually spend on healthcare including doctor visits, hospital services, and medical procedures.",
       "category": "healthcare",
-      "units": "Index 2005=100",
+      "units": "Billions of Dollars, Seasonally Adjusted Annual Rate",
       "update_frequency": "quarterly",
-      "yay_message": "Health benefit costs are manageable for employers",
-      "meh_message": "Health benefit costs are rising steadily",
-      "nay_message": "High health benefit costs strain employer budgets"
+      "yay_message": "Healthcare spending growth is moderate and sustainable",
+      "meh_message": "Healthcare spending is growing at steady rates",
+      "nay_message": "Rapid healthcare spending growth strains household budgets"
     },
     {
       "id": "ECI_BENEFITS",

@@ -25,7 +25,7 @@ const seriesNames: { [key: string]: string } = {
   'DSPIC96': 'Real Income',
   'CPIMEDSL': 'Healthcare Costs',
   'CUSR0000SEMF': 'Drug Prices',
-  'DHLCRC1': 'Health Spending',
+  'DHLCRC1Q027SBEA': 'Health Care Spending',
   'ECI_BENEFITS': 'Health Benefits',
   'CUSR0000SEMD': 'Medical Goods',
   'CUSR0000SEEB01': 'College Tuition',
@@ -223,10 +223,10 @@ function getMoodScore(questionId: string, series: string, currentValue: number, 
           if (yoyChange < 0) return 1;
           if (yoyChange > 2) return -1;
           return 0;
-        case 'DHLCRC1':
-          // ↓ YoY = Yay, Flat = Meh, ↑ YoY = Nay
-          if (yoyChange < 0) return 1;
-          if (yoyChange > 0) return -1;
+        case 'DHLCRC1Q027SBEA':
+          // ↑ < 4% YoY = Yay, 4-6% = Meh, ↑ > 6% YoY = Nay
+          if (yoyChange < 4) return 1;
+          if (yoyChange > 6) return -1;
           return 0;
         case 'ECI_BENEFITS':
           // ↑ > 3% YoY = Yay, ±2% = Meh, ↓ YoY = Nay

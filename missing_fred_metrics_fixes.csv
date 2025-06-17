@@ -7,7 +7,7 @@ CUSR0000SEEA,Educational Books and Supplies: Found exact match as CUSR0000SEEA.
 ECI_BENEFITS,Not available. Use ECIWAG (Wages) or access BLS API for benefits component.
 CUSR0000SEEB01,"Try CUUR0000SEEB01 (College Tuition and Fees, not seasonally adjusted)."
 DSERRG3,Likely typo. Try DPCERX (Real PCE: Services) or related PCE categories.
-DHLCRC1,Use DHCSRC1Q027SBEA (Real PCE: Health Care).
+DHLCRC1Q027SBEA,Updated to use Personal consumption expenditures: Services: Health care which tracks actual healthcare spending by Americans.
 CPIMEDSL,"Updated to Consumer Price Index for Medical Care Services (seasonally adjusted)."
 DAUTOSAAR,Updated to use Motor Vehicle Retail Sales: Domestic Autos (SAAR) which tracks domestic auto sales specifically.
 

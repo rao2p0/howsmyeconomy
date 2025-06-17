@@ -782,41 +782,41 @@ export const mockFredData: FredData = {
     { date: '2025-06-01', value: 592.4 }
   ],
 
-  // Consumer Health Care Spending
-  DHLCRC1: [
-    // 2023 data (billions of dollars, SAAR)
-    { date: '2023-01-01', value: 2834 },
-    { date: '2023-02-01', value: 2847 },
-    { date: '2023-03-01', value: 2861 },
-    { date: '2023-04-01', value: 2874 },
-    { date: '2023-05-01', value: 2888 },
-    { date: '2023-06-01', value: 2901 },
-    { date: '2023-07-01', value: 2915 },
-    { date: '2023-08-01', value: 2928 },
-    { date: '2023-09-01', value: 2942 },
-    { date: '2023-10-01', value: 2955 },
-    { date: '2023-11-01', value: 2969 },
-    { date: '2023-12-01', value: 2982 },
+  // Personal Consumption Expenditures: Services: Health Care (SAAR)
+  DHLCRC1Q027SBEA: [
+    // 2023 data (billions of dollars, SAAR - quarterly data repeated for months)
+    { date: '2023-01-01', value: 3098.2 },
+    { date: '2023-02-01', value: 3098.2 },
+    { date: '2023-03-01', value: 3098.2 },
+    { date: '2023-04-01', value: 3145.8 },
+    { date: '2023-05-01', value: 3145.8 },
+    { date: '2023-06-01', value: 3145.8 },
+    { date: '2023-07-01', value: 3193.6 },
+    { date: '2023-08-01', value: 3193.6 },
+    { date: '2023-09-01', value: 3193.6 },
+    { date: '2023-10-01', value: 3241.2 },
+    { date: '2023-11-01', value: 3241.2 },
+    { date: '2023-12-01', value: 3241.2 },
     // 2024 data
-    { date: '2024-01-01', value: 2996 },
-    { date: '2024-02-01', value: 3009 },
-    { date: '2024-03-01', value: 3023 },
-    { date: '2024-04-01', value: 3036 },
-    { date: '2024-05-01', value: 3050 },
-    { date: '2024-06-01', value: 3063 },
-    { date: '2024-07-01', value: 3077 },
-    { date: '2024-08-01', value: 3090 },
-    { date: '2024-09-01', value: 3104 },
-    { date: '2024-10-01', value: 3117 },
-    { date: '2024-11-01', value: 3131 },
-    { date: '2024-12-01', value: 3144 },
+    { date: '2024-01-01', value: 3233.571 },
+    { date: '2024-02-01', value: 3233.571 },
+    { date: '2024-03-01', value: 3233.571 },
+    { date: '2024-04-01', value: 3274.327 },
+    { date: '2024-05-01', value: 3274.327 },
+    { date: '2024-06-01', value: 3274.327 },
+    { date: '2024-07-01', value: 3344.044 },
+    { date: '2024-08-01', value: 3344.044 },
+    { date: '2024-09-01', value: 3344.044 },
+    { date: '2024-10-01', value: 3405.051 },
+    { date: '2024-11-01', value: 3405.051 },
+    { date: '2024-12-01', value: 3405.051 },
     // 2025 data (real FRED data)
-    { date: '2025-01-01', value: 3158 },
-    { date: '2025-02-01', value: 3171 },
-    { date: '2025-03-01', value: 3185 },
-    { date: '2025-04-01', value: 3198 },
-    { date: '2025-05-01', value: 3212 },
-    { date: '2025-06-01', value: 3225 }
+    { date: '2025-01-01', value: 3449.022 },
+    { date: '2025-02-01', value: 3449.022 },
+    { date: '2025-03-01', value: 3449.022 },
+    { date: '2025-04-01', value: 3490.0 },
+    { date: '2025-05-01', value: 3490.0 },
+    { date: '2025-06-01', value: 3490.0 }
   ],
 
   // Employment Cost Index: Benefits

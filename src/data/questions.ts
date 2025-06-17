@@ -47,7 +47,7 @@ export const walletMoodQuestions: WalletMoodQuestion[] = [
     id: 'bills-breakdown',
     title: 'Bills Breakdown',
     question: 'Can I keep up with utility bills or childcare costs?',
-    fredSeries: ['CUSR0000SEHF01', 'CUSR0000SEEB03', 'CUSR0000SEHF02', 'DSERRG3', 'DSPIC96']
+    fredSeries: ['CUSR0000SEHF01', 'CUSR0000SEEB03', 'CUSR0000SEHF02', 'CUUR0000SEHF01', 'DSPIC96']
   },
   {
     id: 'paycheck-power',

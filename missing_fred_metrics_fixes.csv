@@ -1,14 +1,8 @@
-Original Metric,Explanation/Fix
-CUSR0000SEEA,"Updated to use educational books and supplies CPI instead of elementary school costs."
-CUSR0000SEMF,"Try CUUR0000SEMF01 (Prescription Drugs, U.S. city average, not seasonally adjusted)."
-MEHOINUSA672N,Discontinued. Use MEPAINUSA672N (Median Personal Income) or A229RX0 (Real Disposable Income per Capita) as proxy.
-PPIACO,"Updated to use Producer Price Index for All Commodities."
-CUSR0000SEEA,Educational Books and Supplies: Found exact match as CUSR0000SEEA.
-ECI_BENEFITS,Not available. Use ECIWAG (Wages) or access BLS API for benefits component.
-CUSR0000SEEB01,"Try CUUR0000SEEB01 (College Tuition and Fees, not seasonally adjusted)."
-DSERRG3,Likely typo. Try DPCERX (Real PCE: Services) or related PCE categories.
-DHLCRC1Q027SBEA,Updated to use Personal consumption expenditures: Services: Health care which tracks actual healthcare spending by Americans.
-CPIMEDSL,"Updated to Consumer Price Index for Medical Care Services (seasonally adjusted)."
-DAUTOSAAR,Updated to use Motor Vehicle Retail Sales: Domestic Autos (SAAR) which tracks domestic auto sales specifically.
-
-HDTGPDUSQ163N,"Updated to correct quarterly series code (non-seasonally adjusted)."
+Series,Fix
+CUSR0000SEEB04,Removed - Technical School Costs metric no longer needed.
+DMOTRC1,Replaced with DAUTOSAAR - Motor Vehicle Retail Sales: Domestic Autos
+DHLCRC1,Replaced with DHLCRC1Q027SBEA - Personal consumption expenditures: Services: Health care
+CUUR0000SEHF01,Verified working FRED series - Consumer Price Index for Electricity (Not Seasonally Adjusted).
+CUSR0000SEEA,Fixed - Replaced CUSR0000SEEB03 (2nd occurrence) with Educational Books and Supplies CPI
+CPIMEDSL,Verified working - Consumer Price Index for Medical Care in U.S. City Average
+HDTGPDUSQ163N,Verified working - Household Debt-to-GDP ratio 

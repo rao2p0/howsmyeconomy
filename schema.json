@@ -9,7 +9,7 @@
       "primary_key": true
     },
     "name": {
-      "type": "string", 
+      "type": "string",
       "description": "User-friendly name for display",
       "required": true,
       "example": "30-Year Fixed Mortgage Rate"
@@ -489,11 +489,11 @@
       "nay_message": "High natural gas costs are burdensome"
     },
     {
-      "id": "DSERRG3",
-      "name": "Average Retail Electricity Price",
-      "description": "Average price of electricity for residential customers. Direct measure of utility bill impact.",
+      "id": "CUUR0000SEHF01",
+      "name": "Electricity Price Index",
+      "description": "Consumer price index for electricity in U.S. urban areas. Tracks residential electricity costs affecting all households.",
       "category": "utilities",
-      "units": "Cents per Kilowatthour",
+      "units": "Index 1982-1984=100",
       "update_frequency": "monthly",
       "yay_message": "Electricity prices are reasonable",
       "meh_message": "Electricity prices are stable",

@@ -819,41 +819,41 @@ export const mockFredData: FredData = {
     { date: '2025-06-01', value: 3490.0 }
   ],
 
-  // Employment Cost Index: Benefits
-  ECI_BENEFITS: [
-    // 2023 data (quarterly data, using same value for 3 months)
-    { date: '2023-01-01', value: 178.4 },
-    { date: '2023-02-01', value: 178.4 },
-    { date: '2023-03-01', value: 178.4 },
-    { date: '2023-04-01', value: 180.2 },
-    { date: '2023-05-01', value: 180.2 },
-    { date: '2023-06-01', value: 180.2 },
-    { date: '2023-07-01', value: 182.1 },
-    { date: '2023-08-01', value: 182.1 },
-    { date: '2023-09-01', value: 182.1 },
-    { date: '2023-10-01', value: 183.9 },
-    { date: '2023-11-01', value: 183.9 },
-    { date: '2023-12-01', value: 183.9 },
+  // Employment Cost Index: Benefits: Private Industry Workers
+  ECIBEN: [
+    // 2023 data (ECI Index Dec 2005=100, quarterly data repeated for months)
+    { date: '2023-01-01', value: 152.2 },
+    { date: '2023-02-01', value: 152.2 },
+    { date: '2023-03-01', value: 152.2 },
+    { date: '2023-04-01', value: 153.6 },
+    { date: '2023-05-01', value: 153.6 },
+    { date: '2023-06-01', value: 153.6 },
+    { date: '2023-07-01', value: 155.0 },
+    { date: '2023-08-01', value: 155.0 },
+    { date: '2023-09-01', value: 155.0 },
+    { date: '2023-10-01', value: 156.2 },
+    { date: '2023-11-01', value: 156.2 },
+    { date: '2023-12-01', value: 156.2 },
     // 2024 data
-    { date: '2024-01-01', value: 185.8 },
-    { date: '2024-02-01', value: 185.8 },
-    { date: '2024-03-01', value: 185.8 },
-    { date: '2024-04-01', value: 187.6 },
-    { date: '2024-05-01', value: 187.6 },
-    { date: '2024-06-01', value: 187.6 },
-    { date: '2024-07-01', value: 189.5 },
-    { date: '2024-08-01', value: 189.5 },
-    { date: '2024-09-01', value: 189.5 },
-    { date: '2024-10-01', value: 191.3 },
-    { date: '2024-11-01', value: 191.3 },
-    { date: '2024-12-01', value: 191.3 },
+    { date: '2024-01-01', value: 157.6 },
+    { date: '2024-02-01', value: 157.6 },
+    { date: '2024-03-01', value: 157.6 },
+    { date: '2024-04-01', value: 159.0 },
+    { date: '2024-05-01', value: 159.0 },
+    { date: '2024-06-01', value: 159.0 },
+    { date: '2024-07-01', value: 160.1 },
+    { date: '2024-08-01', value: 160.1 },
+    { date: '2024-09-01', value: 160.1 },
+    { date: '2024-10-01', value: 161.3 },
+    { date: '2024-11-01', value: 161.3 },
+    { date: '2024-12-01', value: 161.3 },
     // 2025 data (real FRED data)
-    { date: '2025-01-01', value: 193.2 },
-    { date: '2025-02-01', value: 193.2 },
-    { date: '2025-03-01', value: 193.2 },
-    { date: '2025-04-01', value: 195.0 },
-    { date: '2025-05-01', value: 195.0 },
-    { date: '2025-06-01', value: 195.0 }
+    { date: '2025-01-01', value: 163.2 },
+    { date: '2025-02-01', value: 163.2 },
+    { date: '2025-03-01', value: 163.2 },
+    { date: '2025-04-01', value: 165.0 },
+    { date: '2025-05-01', value: 165.0 },
+    { date: '2025-06-01', value: 165.0 }
   ],
 
   // Consumer Price Index: Medical care commodities

@@ -411,15 +411,15 @@
       "nay_message": "Rapid healthcare spending growth strains household budgets"
     },
     {
-      "id": "ECI_BENEFITS",
-      "name": "Employee Benefits Index",
-      "description": "Employment cost index for employee benefits including health insurance. Shows benefit cost trends.",
+      "id": "ECIBEN",
+      "name": "Employee Benefits Cost Index",
+      "description": "Employment cost index measuring benefit costs for private industry workers. Tracks healthcare, retirement, and other benefit cost trends that affect both employers and employees.",
       "category": "healthcare",
-      "units": "Index 2005=100",
+      "units": "Index Dec 2005=100",
       "update_frequency": "quarterly",
-      "yay_message": "Employee benefits are improving",
-      "meh_message": "Employee benefits are stable",
-      "nay_message": "Employee benefits are declining"
+      "yay_message": "Employee benefit costs are growing at healthy rates",
+      "meh_message": "Employee benefit costs are rising moderately",
+      "nay_message": "Employee benefit costs are declining or stagnant"
     },
     {
       "id": "CUSR0000SEEB01",
@@ -472,7 +472,8 @@
       "description": "Consumer price index for electricity. Major utility cost for all households.",
       "category": "utilities",
       "units": "Index 1982-84=100",
-      "update_frequency": "monthly",
+      "update_frequency": "monthly",      "description": "Consumer price index for college tuition and fees. Key measure of higher education affordability.",
+
       "yay_message": "Electricity costs are stable or declining",
       "meh_message": "Electricity costs are rising moderately",
       "nay_message": "High electricity costs strain household budgets"

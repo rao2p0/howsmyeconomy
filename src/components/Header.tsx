@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { TrendingUp, Sparkles } from 'lucide-react';
 
 export function Header() {
@@ -23,9 +24,11 @@ export function Header() {
           <div className="animate-wiggle">
             <TrendingUp size={48} className="text-yellow-300 drop-shadow-lg" />
           </div>
-          <h1 className="text-5xl md:text-6xl font-playful font-bold text-shadow-fun animate-bounce-in">
-            HowsMyEconomy.com
-          </h1>
+          <Link to="/" className="hover:scale-105 transition-transform duration-300">
+            <h1 className="text-5xl md:text-6xl font-playful font-bold text-shadow-fun animate-bounce-in hover:text-yellow-100 transition-colors">
+              HowsMyEconomy.com
+            </h1>
+          </Link>
           <div className="animate-wiggle" style={{ animationDelay: '0.3s' }}>
             <span className="text-5xl">📊</span>
           </div>

@@ -256,7 +256,55 @@ function MetricCard({ indicator }: MetricCardProps) {
     }
   };
 
+  // Helper function to format and explain units in a user-friendly way
+  const getFormattedUnits = (units: string) => {
+    const lowerUnits = units.toLowerCase();
+    
+    // Handle percentages
+    if (lowerUnits.includes('percent')) {
+      return { symbol: '%', explanation: 'Percentage' };
+    }
+    
+    // Handle dollar amounts
+    if (lowerUnits.includes('dollar')) {
+      if (lowerUnits.includes('billion')) return { symbol: '$B', explanation: 'Billions of dollars' };
+      if (lowerUnits.includes('per hour')) return { symbol: '$/hr', explanation: 'Dollars per hour' };
+      return { symbol: '$', explanation: 'Dollars' };
+    }
+    
+    // Handle indices
+    if (lowerUnits.includes('index')) {
+      if (lowerUnits.includes('1982')) return { symbol: 'Index', explanation: 'Index (base: 1982-84=100)' };
+      if (lowerUnits.includes('2000')) return { symbol: 'Index', explanation: 'Index (base: Jan 2000=100)' };
+      if (lowerUnits.includes('2005')) return { symbol: 'Index', explanation: 'Index (base: Dec 2005=100)' };
+      if (lowerUnits.includes('2012')) return { symbol: 'Index', explanation: 'Index (base: 2012=100)' };
+      if (lowerUnits.includes('2017')) return { symbol: 'Index', explanation: 'Index (base: 2017=100)' };
+      return { symbol: 'Index', explanation: 'Economic index' };
+    }
+    
+    // Handle quantities
+    if (lowerUnits.includes('thousand')) {
+      if (lowerUnits.includes('person')) return { symbol: 'K people', explanation: 'Thousands of people' };
+      if (lowerUnits.includes('unit')) return { symbol: 'K units', explanation: 'Thousands of units' };
+      return { symbol: 'K', explanation: 'Thousands' };
+    }
+    
+    if (lowerUnits.includes('million')) {
+      return { symbol: 'M units', explanation: 'Millions of units' };
+    }
+    
+    // Handle ratios
+    if (lowerUnits.includes('ratio')) {
+      return { symbol: 'Ratio', explanation: 'Ratio comparison' };
+    }
+    
+    // Default case - show original units but truncated if too long
+    const truncated = units.length > 20 ? units.substring(0, 17) + '...' : units;
+    return { symbol: truncated, explanation: units };
+  };
+
   const moodInfo = getMoodIcon(indicator.mood);
+  const unitInfo = getFormattedUnits(indicator.units);
 
   return (
     <Card 
@@ -284,20 +332,30 @@ function MetricCard({ indicator }: MetricCardProps) {
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
-        {/* Metric Value */}
-        <div className="text-center">
-          <div className="text-3xl font-bold text-gray-800">
-            {typeof indicator.value === 'number' 
-              ? indicator.value.toLocaleString(undefined, { 
-                  minimumFractionDigits: 1, 
-                  maximumFractionDigits: 2 
-                })
-              : indicator.value
-            }
-          </div>
-          <div className="text-sm text-gray-600 font-medium flex items-center justify-center gap-1">
-            <Scale size={12} />
-            {indicator.units || 'Value'}
+        {/* Metric Value with improved units display */}
+        <div className="text-center bg-white/90 backdrop-blur-sm p-4 rounded-lg border border-white/50">
+          <div className="flex flex-col items-center gap-2">
+            <div className="text-4xl font-bold text-gray-800">
+              {typeof indicator.value === 'number' 
+                ? indicator.value.toLocaleString(undefined, { 
+                    minimumFractionDigits: 1, 
+                    maximumFractionDigits: 2 
+                  })
+                : indicator.value
+              }
+            </div>
+            {/* More prominent units display */}
+            <div className="flex flex-col items-center gap-1">
+              <div className="text-lg font-semibold text-blue-700 bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
+                {unitInfo.symbol}
+              </div>
+              <div 
+                className="text-xs text-gray-600 cursor-help border-b border-dotted border-gray-400" 
+                title={`Full units: ${indicator.units}`}
+              >
+                {unitInfo.explanation}
+              </div>
+            </div>
           </div>
         </div>
 

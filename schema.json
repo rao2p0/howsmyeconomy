@@ -422,15 +422,15 @@
       "nay_message": "Employee benefit costs are declining or stagnant"
     },
     {
-      "id": "CUSR0000SEEB01",
-      "name": "College Tuition Costs",
-      "description": "Consumer price index for college tuition and fees. Key measure of higher education affordability.",
+      "id": "CUUR0000SEEB",
+      "name": "Education and Childcare Costs",
+      "description": "Consumer price index for tuition, other school fees, and childcare in U.S. urban areas. Comprehensive measure of educational expenses affecting families from early childhood through higher education.",
       "category": "education",
-      "units": "Index 1982-84=100",
+      "units": "Index 1982-1984=100",
       "update_frequency": "monthly",
-      "yay_message": "College costs are stable or declining",
-      "meh_message": "College costs are rising moderately",
-      "nay_message": "College is becoming unaffordable"
+      "yay_message": "Education and childcare costs are stable or declining",
+      "meh_message": "Education and childcare costs are rising moderately",
+      "nay_message": "Education and childcare are becoming unaffordable"
     },
     {
       "id": "CUSR0000SEEB03",

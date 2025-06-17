@@ -7,4 +7,5 @@ CUSR0000SEEA,Fixed - Replaced CUSR0000SEEB03 (2nd occurrence) with Educational B
 CPIMEDSL,Verified working - Consumer Price Index for Medical Care in U.S. City Average
 HDTGPDUSQ163N,Verified working - Household Debt-to-GDP ratio
 PCU4461104461101,Verified working FRED series - Producer Price Index for Pharmacies and Drug Retailers: Retailing of Prescription Drugs
-ECIBEN,Verified working FRED series - Employment Cost Index: Benefits: Private Industry Workers 
+ECIBEN,Verified working FRED series - Employment Cost Index: Benefits: Private Industry Workers
+CUUR0000SEEB,Verified working FRED series - Consumer Price Index for Tuition, Other School Fees, and Childcare (Not Seasonally Adjusted) 

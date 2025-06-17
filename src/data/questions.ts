@@ -35,7 +35,7 @@ export const walletMoodQuestions: WalletMoodQuestion[] = [
     id: 'tuition-tracker',
     title: 'Tuition Tracker',
     question: 'Is college or trade school affordable?',
-    fredSeries: ['CUSR0000SEEB01', 'SLOAS', 'CUSR0000SEEA', 'PSAVERT']
+    fredSeries: ['CUUR0000SEEB', 'SLOAS', 'CUSR0000SEEA', 'PSAVERT']
   },
   {
     id: 'nest-egg',

@@ -78,7 +78,7 @@ This document defines how to assign a simple mood score to economic metrics trac
 
 | Metric | Yay | Meh | Nay |
 |--------|-----|-----|-----|
-| CUSR0000SEEB01 | ↓ YoY | Flat | ↑ > 2% YoY |
+| CUUR0000SEEB | ↓ YoY | Flat | ↑ > 2% YoY |
 | SLOAS | ↓ YoY | Flat | ↑ YoY |
 | CUSR0000SEEA | ↓ YoY | ±2% | ↑ > 2% |
 

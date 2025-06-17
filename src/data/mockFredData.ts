@@ -893,41 +893,41 @@ export const mockFredData: FredData = {
     { date: '2025-06-01', value: 205.0 }
   ],
   
-  // Consumer Price Index: College tuition and fees
-  CUSR0000SEEB01: [
-    // 2023 data
-    { date: '2023-01-01', value: 891.4 },
-    { date: '2023-02-01', value: 893.9 },
-    { date: '2023-03-01', value: 896.5 },
-    { date: '2023-04-01', value: 899.0 },
-    { date: '2023-05-01', value: 901.6 },
-    { date: '2023-06-01', value: 904.1 },
-    { date: '2023-07-01', value: 906.7 },
-    { date: '2023-08-01', value: 909.2 },
-    { date: '2023-09-01', value: 911.8 },
-    { date: '2023-10-01', value: 914.3 },
-    { date: '2023-11-01', value: 916.9 },
-    { date: '2023-12-01', value: 919.4 },
+  // Consumer Price Index: Tuition, Other School Fees, and Childcare (Not Seasonally Adjusted)
+  CUUR0000SEEB: [
+    // 2023 data (Index 1982-1984=100, Not Seasonally Adjusted)
+    { date: '2023-01-01', value: 851.2 },
+    { date: '2023-02-01', value: 853.8 },
+    { date: '2023-03-01', value: 856.4 },
+    { date: '2023-04-01', value: 859.0 },
+    { date: '2023-05-01', value: 861.6 },
+    { date: '2023-06-01', value: 864.2 },
+    { date: '2023-07-01', value: 866.8 },
+    { date: '2023-08-01', value: 869.4 },
+    { date: '2023-09-01', value: 872.0 },
+    { date: '2023-10-01', value: 874.6 },
+    { date: '2023-11-01', value: 877.2 },
+    { date: '2023-12-01', value: 879.8 },
     // 2024 data
-    { date: '2024-01-01', value: 916.2 },
-    { date: '2024-02-01', value: 918.8 },
-    { date: '2024-03-01', value: 921.1 },
-    { date: '2024-04-01', value: 923.7 },
-    { date: '2024-05-01', value: 926.2 },
-    { date: '2024-06-01', value: 928.8 },
-    { date: '2024-07-01', value: 931.1 },
-    { date: '2024-08-01', value: 933.7 },
-    { date: '2024-09-01', value: 936.2 },
-    { date: '2024-10-01', value: 938.8 },
-    { date: '2024-11-01', value: 941.1 },
-    { date: '2024-12-01', value: 943.7 },
+    { date: '2024-01-01', value: 876.4 },
+    { date: '2024-02-01', value: 878.9 },
+    { date: '2024-03-01', value: 881.1 },
+    { date: '2024-04-01', value: 883.7 },
+    { date: '2024-05-01', value: 886.2 },
+    { date: '2024-06-01', value: 888.8 },
+    { date: '2024-07-01', value: 891.1 },
+    { date: '2024-08-01', value: 893.7 },
+    { date: '2024-09-01', value: 896.2 },
+    { date: '2024-10-01', value: 898.8 },
+    { date: '2024-11-01', value: 901.1 },
+    { date: '2024-12-01', value: 903.7 },
     // 2025 data (real FRED data)
-    { date: '2025-01-01', value: 946.2 },
-    { date: '2025-02-01', value: 948.8 },
-    { date: '2025-03-01', value: 951.1 },
-    { date: '2025-04-01', value: 953.7 },
-    { date: '2025-05-01', value: 956.2 },
-    { date: '2025-06-01', value: 958.8 }
+    { date: '2025-01-01', value: 879.6 },
+    { date: '2025-02-01', value: 880.9 },
+    { date: '2025-03-01', value: 882.2 },
+    { date: '2025-04-01', value: 882.2 },
+    { date: '2025-05-01', value: 884.2 },
+    { date: '2025-06-01', value: 884.2 }
   ],
 
   // Student Loans Owned and Securitized, Outstanding

@@ -28,7 +28,7 @@ const seriesNames: { [key: string]: string } = {
   'DHLCRC1Q027SBEA': 'Health Care Spending',
   'ECIBEN': 'Health Benefits',
   'CUSR0000SEMD': 'Medical Goods',
-  'CUSR0000SEEB01': 'College Tuition',
+  'CUUR0000SEEB': 'Education & Childcare',
   'SLOAS': 'Student Loans',
   'CUSR0000SEEA': 'Educational Books',
   'CUSR0000SEEB03': 'Childcare',
@@ -243,7 +243,7 @@ function getMoodScore(questionId: string, series: string, currentValue: number, 
 
     case 'tuition-tracker':
       switch (series) {
-        case 'CUSR0000SEEB01':
+        case 'CUUR0000SEEB':
           // ↓ YoY = Yay, Flat = Meh, ↑ > 2% YoY = Nay
           if (yoyChange < 0) return 1;
           if (yoyChange > 2) return -1;

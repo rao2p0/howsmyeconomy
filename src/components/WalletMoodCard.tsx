@@ -117,7 +117,7 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
       className="block h-[520px] transition-all duration-300 hover:scale-105 transform"
     >
       <Card className={cn(
-        "relative h-full overflow-hidden transition-all duration-500 transform hover:-translate-y-2 animate-bounce-in border-4 border-white/50 shadow-xl hover:shadow-2xl flex flex-col cursor-pointer",
+        "relative h-full overflow-hidden transition-all duration-500 transform hover:-translate-y-2 border-4 border-white/50 shadow-xl hover:shadow-2xl flex flex-col cursor-pointer",
         `bg-gradient-to-br ${bgGradient}`
       )}>
         {/* Header - Fixed Height */}
@@ -174,13 +174,6 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
                 <span className="text-gray-800 font-semibold">{scoreResult.badCount} Bad</span>
               </div>
             </div>
-            
-            <p 
-              id={`breakdown-${question.id}`}
-              className="text-sm font-semibold text-gray-900 bg-white/80 backdrop-blur-sm rounded-xl p-3 border border-white/40"
-            >
-              {scoreResult.insight}
-            </p>
             
             {/* Click to explore hint */}
             <div className="text-xs text-gray-600 font-medium mt-2 opacity-75">

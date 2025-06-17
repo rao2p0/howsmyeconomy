@@ -212,11 +212,10 @@ export function CategoryDetail() {
 
         {/* Individual Metrics */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {scoreResult.indicatorBreakdown.map((indicator, index) => (
+          {scoreResult.indicatorBreakdown.map((indicator) => (
             <MetricCard 
               key={indicator.series} 
               indicator={indicator}
-              index={index}
             />
           ))}
         </div>
@@ -236,10 +235,9 @@ interface MetricCardProps {
     units: string;
     fredUrl: string;
   };
-  index: number;
 }
 
-function MetricCard({ indicator, index }: MetricCardProps) {
+function MetricCard({ indicator }: MetricCardProps) {
   const getMoodColor = (mood: string) => {
     switch (mood) {
       case 'good': return 'from-green-100 to-emerald-100 border-green-200';
@@ -262,8 +260,7 @@ function MetricCard({ indicator, index }: MetricCardProps) {
 
   return (
     <Card 
-      className={`border-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br ${getMoodColor(indicator.mood)} animate-bounce-in`}
-      style={{ animationDelay: `${index * 0.1}s` }}
+      className={`border-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br ${getMoodColor(indicator.mood)}`}
     >
       <CardHeader className="pb-4">
         <CardTitle className="text-xl font-playful font-medium text-gray-900 flex items-center gap-2">

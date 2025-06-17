@@ -151,17 +151,12 @@ export function Dashboard() {
         
         <main className="max-w-7xl mx-auto px-4 pb-12">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {scoreResults.map(({ question, scoreResult }: ScoreResultWithQuestion, index: number) => (
-              <div
+            {scoreResults.map(({ question, scoreResult }: ScoreResultWithQuestion) => (
+              <WalletMoodCard
                 key={question.id}
-                className="animate-bounce-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <WalletMoodCard
-                  question={question}
-                  scoreResult={scoreResult}
-                />
-              </div>
+                question={question}
+                scoreResult={scoreResult}
+              />
             ))}
           </div>
         </main>
@@ -171,4 +166,4 @@ export function Dashboard() {
       </div>
     </ToastProvider>
   );
-} 
+}

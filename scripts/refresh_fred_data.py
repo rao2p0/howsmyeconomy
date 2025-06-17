@@ -82,13 +82,14 @@ class FredApiClient:
             time.sleep(self.min_request_interval - elapsed)
         self.last_request_time = time.time()
     
-    def get_series_observations(self, series_id: str, start_date: str = "2024-01-01") -> List[FredDataPoint]:
+    def get_series_observations(self, series_id: str, start_date: str = "2024-01-01", limit: Optional[int] = None) -> List[FredDataPoint]:
         """
         Fetch observations for a FRED series
         
         Args:
             series_id: FRED series identifier
-            start_date: Start date in YYYY-MM-DD format
+            start_date: Start date in YYYY-MM-DD format (ignored if limit is set)
+            limit: If set, fetch the last N observations instead of using start_date
             
         Returns:
             List of FredDataPoint objects
@@ -100,9 +101,16 @@ class FredApiClient:
             'series_id': series_id,
             'api_key': self.api_key,
             'file_type': 'json',
-            'observation_start': start_date,
-            'sort_order': 'asc'
+            'sort_order': 'desc'  # Get most recent first
         }
+        
+        # For annual metrics, use limit instead of start_date
+        if limit:
+            params['limit'] = limit
+            logger.info(f"Fetching last {limit} observations for {series_id}")
+        else:
+            params['observation_start'] = start_date
+            params['sort_order'] = 'asc'  # For date-based queries, ascending order
         
         try:
             response = requests.get(url, params=params, timeout=30)
@@ -119,6 +127,10 @@ class FredApiClient:
                     date=obs['date'],
                     value=value
                 ))
+            
+            # If we used limit (desc order), reverse to get chronological order
+            if limit:
+                data_points.reverse()
             
             logger.info(f"Fetched {len(data_points)} observations for {series_id}")
             return data_points
@@ -245,7 +257,7 @@ class FredDataManager:
     
     def append_data_to_csv(self, series_id: str, metric_info: MetricInfo, 
                           data_points: List[FredDataPoint], metadata: Dict):
-        """Append new data points to CSV"""
+        """Append new data points to CSV (or replace for annual metrics)"""
         if not data_points:
             return
         
@@ -273,12 +285,30 @@ class FredDataManager:
                 'fred_notes': metadata.get('notes', '')
             })
         
-        # Append to CSV
-        file_exists = self.csv_file.exists()
-        df = pd.DataFrame(records)
-        
-        df.to_csv(self.csv_file, mode='a', header=not file_exists, index=False)
-        logger.info(f"Appended {len(records)} records for {series_id} to {self.csv_file}")
+        # Handle annual metrics differently - replace existing data
+        if metric_info.update_frequency.lower() in ['annual', 'annually'] and self.csv_file.exists():
+            logger.info(f"Replacing existing data for annual metric {series_id}")
+            
+            # Read existing data
+            existing_df = pd.read_csv(self.csv_file)
+            
+            # Remove existing records for this series
+            filtered_df = existing_df[existing_df['series_id'] != series_id]
+            
+            # Add new records
+            new_df = pd.DataFrame(records)
+            combined_df = pd.concat([filtered_df, new_df], ignore_index=True)
+            
+            # Write back to CSV
+            combined_df.to_csv(self.csv_file, index=False)
+            logger.info(f"Replaced data for annual metric {series_id} with {len(records)} records")
+        else:
+            # Normal append for non-annual metrics
+            file_exists = self.csv_file.exists()
+            df = pd.DataFrame(records)
+            
+            df.to_csv(self.csv_file, mode='a', header=not file_exists, index=False)
+            logger.info(f"Appended {len(records)} records for {series_id} to {self.csv_file}")
     
     def update_metric(self, metric_info: MetricInfo, fred_client: FredApiClient, 
                      existing_data: pd.DataFrame, force_update: bool = False) -> bool:
@@ -292,27 +322,39 @@ class FredDataManager:
         logger.info(f"Updating metric: {series_id} ({metric_info.name})")
         
         try:
-            # Fetch new data
-            start_date = "2024-01-01"
-            if not force_update:
-                last_date = self.get_last_update_date(series_id, existing_data)
-                if last_date:
-                    # Start from day after last update
-                    last_datetime = datetime.strptime(last_date, '%Y-%m-%d')
-                    start_datetime = last_datetime + timedelta(days=1)
-                    start_date = start_datetime.strftime('%Y-%m-%d')
+            # Handle annual metrics differently
+            if metric_info.update_frequency.lower() in ['annual', 'annually']:
+                # For annual metrics, fetch last 5 data points instead of using date range
+                logger.info(f"Using limit-based fetch for annual metric {series_id}")
+                data_points = fred_client.get_series_observations(series_id, limit=5)
+            else:
+                # For non-annual metrics, use date-based approach
+                start_date = "2024-01-01"
+                if not force_update:
+                    last_date = self.get_last_update_date(series_id, existing_data)
+                    if last_date:
+                        # Start from day after last update
+                        last_datetime = datetime.strptime(last_date, '%Y-%m-%d')
+                        start_datetime = last_datetime + timedelta(days=1)
+                        start_date = start_datetime.strftime('%Y-%m-%d')
+                
+                data_points = fred_client.get_series_observations(series_id, start_date)
             
-            # Get observations and metadata
-            data_points = fred_client.get_series_observations(series_id, start_date)
+            # Get metadata
             metadata = fred_client.get_series_metadata(series_id)
             
             if not data_points:
                 logger.warning(f"No new data available for {series_id}")
                 return True  # Not an error, just no new data
             
-            # Filter for truly new data (avoid duplicates)
-            if not force_update:
+            # Filter for truly new data (avoid duplicates) - but only for non-annual metrics
+            # For annual metrics, we always want to refresh with the latest data
+            if not force_update and metric_info.update_frequency.lower() not in ['annual', 'annually']:
                 data_points = self.filter_new_data(series_id, data_points, existing_data)
+            elif metric_info.update_frequency.lower() in ['annual', 'annually']:
+                # For annual metrics, remove existing data for this series first to avoid duplicates
+                logger.info(f"Replacing existing annual data for {series_id}")
+                # We'll handle this by filtering out existing data in the CSV append logic
             
             # Save to CSV
             self.append_data_to_csv(series_id, metric_info, data_points, metadata)

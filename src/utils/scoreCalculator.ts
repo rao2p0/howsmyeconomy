@@ -1,5 +1,6 @@
 import { Demographics, WalletMoodQuestion, ScoreResult, IndicatorMood } from '../types';
 import { getFredData } from '../data/fredDataProvider';
+import { loadSchemaMetadata, getFredUrl, formatUnitsForDisplay } from './schemaMetadata';
 
 // Mapping of FRED series to human-readable names
 const seriesNames: { [key: string]: string } = {
@@ -403,17 +404,24 @@ export async function calculateScore(
   // Load FRED data (mock or real based on configuration)
   const fredData = await getFredData();
   
+  // Load schema metadata for units and other info
+  const schemaMetadata = await loadSchemaMetadata();
+  
   // Get mood scores for each indicator
   const moodScores: number[] = [];
   const indicatorBreakdown: IndicatorMood[] = question.fredSeries.map(series => {
     const data = fredData[series];
     if (!data || data.length < 12) {
       moodScores.push(0); // Neutral if no data
+      const metadata = schemaMetadata[series];
       return {
         series,
         mood: 'neutral' as const,
         value: 0,
-        name: seriesNames[series] || series
+        name: seriesNames[series] || series,
+        timestamp: 'No data',
+        units: metadata ? formatUnitsForDisplay(metadata.units) : '',
+        fredUrl: getFredUrl(series)
       };
     }
     
@@ -423,11 +431,15 @@ export async function calculateScore(
     
     if (!currentDataPoint || !yearAgoDataPoint) {
       moodScores.push(0);
+      const metadata = schemaMetadata[series];
       return {
         series,
         mood: 'neutral' as const,
         value: currentDataPoint?.value || 0,
-        name: seriesNames[series] || series
+        name: seriesNames[series] || series,
+        timestamp: currentDataPoint?.date || 'No data',
+        units: metadata ? formatUnitsForDisplay(metadata.units) : '',
+        fredUrl: getFredUrl(series)
       };
     }
     
@@ -437,11 +449,15 @@ export async function calculateScore(
     const moodScore = getMoodScore(question.id, series, currentValue, previousValue);
     moodScores.push(moodScore);
     
+    const metadata = schemaMetadata[series];
     return {
       series,
       mood: moodScoreToMood(moodScore),
       value: currentValue,
-      name: seriesNames[series] || series
+      name: seriesNames[series] || series,
+      timestamp: currentDataPoint.date,
+      units: metadata ? formatUnitsForDisplay(metadata.units) : '',
+      fredUrl: getFredUrl(series)
     };
   });
 

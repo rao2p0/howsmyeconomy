@@ -1,0 +1,526 @@
+{
+  "schema_version": "1.0",
+  "description": "Database schema for FRED economic metrics used in HowsMyEconomy.com",
+  "fields": {
+    "id": {
+      "type": "string",
+      "description": "FRED series ID (e.g., MORTGAGE30US)",
+      "required": true,
+      "primary_key": true
+    },
+    "name": {
+      "type": "string",
+      "description": "User-friendly name for display",
+      "required": true,
+      "example": "30-Year Fixed Mortgage Rate"
+    },
+    "description": {
+      "type": "string",
+      "description": "Short user-facing explanation of what the metric is and why it matters",
+      "required": true,
+      "max_length": 200
+    },
+    "category": {
+      "type": "string",
+      "description": "Economic category this metric belongs to",
+      "required": true,
+      "enum": ["housing", "automotive", "employment", "inflation", "healthcare", "education", "retirement", "utilities", "wages", "emergency"]
+    },
+    "units": {
+      "type": "string",
+      "description": "Units of measurement (e.g., 'Percent', 'Index', 'Thousands of Units')",
+      "required": true
+    },
+    "update_frequency": {
+      "type": "string",
+      "description": "How often this metric is updated by FRED",
+      "required": true,
+      "enum": ["daily", "weekly", "monthly", "quarterly", "annually"]
+    },
+    "data": {
+      "type": "array",
+      "description": "Time series data points starting from Jan 2024",
+      "required": true,
+      "items": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "YYYY-MM-DD",
+            "description": "Date of the data point"
+          },
+          "value": {
+            "type": "number",
+            "description": "Numeric value for this date",
+            "nullable": true
+          }
+        },
+        "required": ["date", "value"]
+      }
+    },
+    "yay_message": {
+      "type": "string",
+      "description": "Short user-facing message when metric is in 'yay' state",
+      "required": true,
+      "max_length": 100
+    },
+    "meh_message": {
+      "type": "string", 
+      "description": "Short user-facing message when metric is in 'meh' state",
+      "required": true,
+      "max_length": 100
+    },
+    "nay_message": {
+      "type": "string",
+      "description": "Short user-facing message when metric is in 'nay' state", 
+      "required": true,
+      "max_length": 100
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "ISO8601",
+      "description": "Timestamp of last successful refresh from FRED API",
+      "required": true
+    },
+    "fred_metadata": {
+      "type": "object",
+      "description": "Additional metadata from FRED API",
+      "required": false,
+      "properties": {
+        "title": {"type": "string"},
+        "observation_start": {"type": "string"},
+        "observation_end": {"type": "string"},
+        "frequency": {"type": "string"},
+        "frequency_short": {"type": "string"},
+        "seasonal_adjustment": {"type": "string"},
+        "seasonal_adjustment_short": {"type": "string"},
+        "last_updated": {"type": "string"},
+        "popularity": {"type": "number"},
+        "notes": {"type": "string"}
+      }
+    },
+    "data_quality": {
+      "type": "object",
+      "description": "Data quality metrics and flags",
+      "required": false,
+      "properties": {
+        "total_points": {"type": "number"},
+        "missing_points": {"type": "number"},
+        "last_successful_fetch": {"type": "string", "format": "ISO8601"},
+        "consecutive_failures": {"type": "number", "default": 0},
+        "is_active": {"type": "boolean", "default": true}
+      }
+    }
+  },
+  "metrics_to_track": [
+    {
+      "id": "MORTGAGE30US",
+      "name": "30-Year Fixed Mortgage Rate",
+      "description": "Average interest rate for 30-year fixed-rate mortgages in the US. Lower rates make buying homes more affordable.",
+      "category": "housing",
+      "units": "Percent",
+      "update_frequency": "weekly",
+      "yay_message": "Mortgage rates are favorable for home buyers",
+      "meh_message": "Mortgage rates are stable but not ideal", 
+      "nay_message": "High mortgage rates are hurting affordability"
+    },
+    {
+      "id": "CSUSHPINSA",
+      "name": "Home Price Index", 
+      "description": "Tracks changes in single-family home prices across major US cities. Rising prices can reduce affordability.",
+      "category": "housing",
+      "units": "Index Jan 2000=100",
+      "update_frequency": "monthly",
+      "yay_message": "Home price growth is moderate and sustainable",
+      "meh_message": "Home prices are rising at a moderate pace",
+      "nay_message": "Rapid home price increases are reducing affordability"
+    },
+    {
+      "id": "CUSR0000SEHA",
+      "name": "Rent Costs",
+      "description": "Consumer price index for rent of primary residence. Tracks how much Americans pay for housing.",
+      "category": "housing", 
+      "units": "Index 1982-84=100",
+      "update_frequency": "monthly",
+      "yay_message": "Rent costs are stable or declining",
+      "meh_message": "Rent costs are rising moderately",
+      "nay_message": "Rent costs are increasing rapidly"
+    },
+    {
+      "id": "HOUST",
+      "name": "Housing Starts",
+      "description": "Number of new residential construction projects begun. More housing starts can help with supply and affordability.",
+      "category": "housing",
+      "units": "Thousands of Units, SAAR", 
+      "update_frequency": "monthly",
+      "yay_message": "Strong housing construction is helping supply",
+      "meh_message": "Housing construction is steady",
+      "nay_message": "Low housing construction is limiting supply"
+    },
+    {
+      "id": "MEHOINUSA672N",
+      "name": "Median Household Income",
+      "description": "Median household income in the United States. Higher incomes improve affordability across all categories.",
+      "category": "wages",
+      "units": "2022 CPI-U-RS Adjusted Dollars",
+      "update_frequency": "annually",
+      "yay_message": "Household incomes are growing strongly",
+      "meh_message": "Household income growth is moderate", 
+      "nay_message": "Household incomes are stagnating"
+    },
+    {
+      "id": "CUSR0000SETA01",
+      "name": "New Vehicle Prices",
+      "description": "Consumer price index for new vehicles. Tracks the cost of buying a new car or truck.",
+      "category": "automotive",
+      "units": "Index 1982-84=100",
+      "update_frequency": "monthly",
+      "yay_message": "New car prices are stable or declining",
+      "meh_message": "New car prices are rising moderately",
+      "nay_message": "New car prices are increasing rapidly"
+    },
+    {
+      "id": "CUSR0000SETA02", 
+      "name": "Used Vehicle Prices",
+      "description": "Consumer price index for used cars and trucks. Important for many families seeking affordable transportation.",
+      "category": "automotive",
+      "units": "Index 1982-84=100",
+      "update_frequency": "monthly",
+      "yay_message": "Used car prices are becoming more affordable",
+      "meh_message": "Used car prices are stable",
+      "nay_message": "Used car prices are too high"
+    },
+    {
+      "id": "CUSR0000SETB",
+      "name": "Gasoline Prices",
+      "description": "Consumer price index for motor fuel (gasoline). Affects daily commuting costs and overall inflation.",
+      "category": "automotive",
+      "units": "Index 1982-84=100", 
+      "update_frequency": "monthly",
+      "yay_message": "Gas prices are low and affordable",
+      "meh_message": "Gas prices are at moderate levels",
+      "nay_message": "High gas prices are straining budgets"
+    },
+    {
+      "id": "TERMCBAUTO48NS",
+      "name": "Auto Loan Rates",
+      "description": "Interest rates on 48-month new car loans. Lower rates make financing a vehicle more affordable.",
+      "category": "automotive",
+      "units": "Percent",
+      "update_frequency": "monthly",
+      "yay_message": "Auto loan rates are favorable",
+      "meh_message": "Auto loan rates are moderate",
+      "nay_message": "High auto loan rates increase car costs"
+    },
+    {
+      "id": "DAUTOSAAR",
+      "name": "Domestic Auto Sales", 
+      "description": "Domestic auto sales including passenger cars and station wagons assembled in the U.S., Canada, and Mexico. Key indicator of consumer confidence and automotive market health.",
+      "category": "automotive",
+      "units": "Millions of Units, Seasonally Adjusted Annual Rate",
+      "update_frequency": "monthly",
+      "yay_message": "Strong domestic auto sales show consumer confidence",
+      "meh_message": "Domestic auto sales are steady",
+      "nay_message": "Weak domestic auto sales signal economic concerns"
+    },
+    {
+      "id": "UNRATE",
+      "name": "Unemployment Rate",
+      "description": "Percentage of labor force that is unemployed. Lower unemployment means more job opportunities.",
+      "category": "employment",
+      "units": "Percent",
+      "update_frequency": "monthly",
+      "yay_message": "Low unemployment means more job opportunities",
+      "meh_message": "Unemployment is at moderate levels", 
+      "nay_message": "High unemployment limits job prospects"
+    },
+    {
+      "id": "PAYEMS",
+      "name": "Nonfarm Payrolls",
+      "description": "Monthly change in total nonfarm employment. Positive job growth indicates a healthy economy.",
+      "category": "employment",
+      "units": "Thousands of Persons",
+      "update_frequency": "monthly",
+      "yay_message": "Strong job growth indicates a healthy economy",
+      "meh_message": "Job growth is moderate",
+      "nay_message": "Weak job growth signals economic concerns"
+    },
+    {
+      "id": "JTSJOL",
+      "name": "Job Openings",
+      "description": "Total number of job openings in the US. More openings mean better prospects for job seekers.",
+      "category": "employment", 
+      "units": "Thousands",
+      "update_frequency": "monthly",
+      "yay_message": "Plenty of job openings for workers",
+      "meh_message": "Job openings are at moderate levels",
+      "nay_message": "Few job openings limit opportunities"
+    },
+    {
+      "id": "JTSQUR",
+      "name": "Quit Rate",
+      "description": "Percentage of workers who quit their jobs. Higher quit rates often indicate worker confidence and job mobility.",
+      "category": "employment",
+      "units": "Percent",
+      "update_frequency": "monthly",
+      "yay_message": "High quit rate shows worker confidence",
+      "meh_message": "Quit rate is at normal levels",
+      "nay_message": "Low quit rate suggests limited opportunities"
+    },
+    {
+      "id": "CES0500000003",
+      "name": "Average Hourly Earnings",
+      "description": "Average hourly earnings for all private sector employees. Rising wages help keep up with living costs.",
+      "category": "wages",
+      "units": "Dollars per Hour",
+      "update_frequency": "monthly", 
+      "yay_message": "Wages are growing faster than inflation",
+      "meh_message": "Wage growth is keeping pace with costs",
+      "nay_message": "Wages are not keeping up with rising costs"
+    },
+    {
+      "id": "CUSR0000SAF11",
+      "name": "Food Prices",
+      "description": "Consumer price index for food at home. Tracks grocery costs that affect every household budget.",
+      "category": "inflation",
+      "units": "Index 1982-84=100",
+      "update_frequency": "monthly",
+      "yay_message": "Food prices are stable or declining",
+      "meh_message": "Food prices are rising moderately",
+      "nay_message": "Food prices are increasing rapidly"
+    },
+    {
+      "id": "CPILFESL",
+      "name": "Core Inflation",
+      "description": "Consumer price index excluding food and energy. Measures underlying inflation trends.",
+      "category": "inflation",
+      "units": "Index 1982-84=100",
+      "update_frequency": "monthly",
+      "yay_message": "Core inflation is under control",
+      "meh_message": "Core inflation is at moderate levels",
+      "nay_message": "High core inflation erodes purchasing power"
+    },
+    {
+      "id": "PCEPI", 
+      "name": "PCE Price Index",
+      "description": "Federal Reserve's preferred inflation measure. Shows how much more expensive things are getting.",
+      "category": "inflation",
+      "units": "Index 2012=100",
+      "update_frequency": "monthly",
+      "yay_message": "Inflation is low and stable",
+      "meh_message": "Inflation is at target levels",
+      "nay_message": "High inflation is reducing buying power"
+    },
+    {
+      "id": "DSPIC96",
+      "name": "Real Disposable Income",
+      "description": "Personal income after taxes, adjusted for inflation. Shows how much spending power Americans actually have.",
+      "category": "wages",
+      "units": "Chained 2012 Dollars, SAAR",
+      "update_frequency": "monthly",
+      "yay_message": "Real incomes are growing",
+      "meh_message": "Real incomes are stable",
+      "nay_message": "Real incomes are declining"
+    },
+    {
+      "id": "CPIAUCSL",
+      "name": "Consumer Price Index (All Items)",
+      "description": "Overall inflation measure including all consumer goods and services. Lower inflation preserves purchasing power.",
+      "category": "inflation",
+      "units": "Index 1982-84=100",
+      "update_frequency": "monthly",
+      "yay_message": "Inflation is low and stable",
+      "meh_message": "Inflation is at moderate levels",
+      "nay_message": "High inflation is eroding purchasing power"
+    },
+    {
+      "id": "SP500",
+      "name": "S&P 500 Stock Index",
+      "description": "Major stock market index tracking 500 large U.S. companies. Important for retirement and investment accounts.",
+      "category": "retirement",
+      "units": "Index",
+      "update_frequency": "daily",
+      "yay_message": "Stock market gains are boosting retirement accounts",
+      "meh_message": "Stock market is stable",
+      "nay_message": "Stock market declines are hurting retirement savings"
+    },
+    {
+      "id": "DGS10",
+      "name": "10-Year Treasury Rate",
+      "description": "Interest rate on 10-year government bonds. Affects mortgage rates and retirement income from safe investments.",
+      "category": "retirement",
+      "units": "Percent",
+      "update_frequency": "daily",
+      "yay_message": "Treasury rates provide good safe investment returns",
+      "meh_message": "Treasury rates are at moderate levels",
+      "nay_message": "Low treasury rates hurt safe investment income"
+    },
+    {
+      "id": "PSAVERT",
+      "name": "Personal Saving Rate",
+      "description": "Percentage of income that Americans save. Higher saving rates indicate better financial security.",
+      "category": "emergency",
+      "units": "Percent",
+      "update_frequency": "monthly",
+      "yay_message": "Americans are saving at healthy rates",
+      "meh_message": "Saving rates are moderate",
+      "nay_message": "Low saving rates indicate financial stress"
+    },
+    {
+      "id": "CPIMEDSL",
+      "name": "Medical Care Costs",
+      "description": "Consumer price index for medical care in cities. Tracks healthcare affordability for families.",
+      "category": "healthcare",
+      "units": "Index 1982-84=100",
+      "update_frequency": "monthly",
+      "yay_message": "Medical care costs are stable or declining",
+      "meh_message": "Medical care costs are rising moderately",
+      "nay_message": "Medical care costs are increasing rapidly"
+    },
+    {
+      "id": "PCU4461104461101",
+      "name": "Prescription Drug Retail Prices",
+      "description": "Producer price index for pharmacies and drug retailers selling prescription drugs. Tracks wholesale pricing pressures that affect consumer drug costs.",
+      "category": "healthcare",
+      "units": "Index Jun 2000=100",
+      "update_frequency": "monthly",
+      "yay_message": "Prescription drug wholesale prices are stable",
+      "meh_message": "Drug wholesale prices are rising moderately",
+      "nay_message": "Rising wholesale drug prices signal higher costs for consumers"
+    },
+    {
+      "id": "CUSR0000SEMD",
+      "name": "Prescription Drug Costs",
+      "description": "Consumer price index for prescription drugs and medical supplies. Critical for healthcare affordability.",
+      "category": "healthcare",
+      "units": "Index 1982-84=100",
+      "update_frequency": "monthly",
+      "yay_message": "Prescription drug costs are stable",
+      "meh_message": "Drug costs are rising moderately",
+      "nay_message": "Prescription drugs are becoming unaffordable"
+    },
+    {
+      "id": "DHLCRC1Q027SBEA",
+      "name": "Health Care Spending",
+      "description": "Personal consumption expenditures for healthcare services. Tracks how much Americans actually spend on healthcare including doctor visits, hospital services, and medical procedures.",
+      "category": "healthcare",
+      "units": "Billions of Dollars, Seasonally Adjusted Annual Rate",
+      "update_frequency": "quarterly",
+      "yay_message": "Healthcare spending growth is moderate and sustainable",
+      "meh_message": "Healthcare spending is growing at steady rates",
+      "nay_message": "Rapid healthcare spending growth strains household budgets"
+    },
+    {
+      "id": "ECIBEN",
+      "name": "Employee Benefits Cost Index",
+      "description": "Employment cost index measuring benefit costs for private industry workers. Tracks healthcare, retirement, and other benefit cost trends that affect both employers and employees.",
+      "category": "healthcare",
+      "units": "Index Dec 2005=100",
+      "update_frequency": "quarterly",
+      "yay_message": "Employee benefit costs are growing at healthy rates",
+      "meh_message": "Employee benefit costs are rising moderately",
+      "nay_message": "Employee benefit costs are declining or stagnant"
+    },
+    {
+      "id": "CUUR0000SEEB",
+      "name": "Education and Childcare Costs",
+      "description": "Consumer price index for tuition, other school fees, and childcare in U.S. urban areas. Comprehensive measure of educational expenses affecting families from early childhood through higher education.",
+      "category": "education",
+      "units": "Index 1982-1984=100",
+      "update_frequency": "monthly",
+      "yay_message": "Education and childcare costs are stable or declining",
+      "meh_message": "Education and childcare costs are rising moderately",
+      "nay_message": "Education and childcare are becoming unaffordable"
+    },
+    {
+      "id": "CUSR0000SEEA",
+      "name": "Educational Books and Supplies",
+      "description": "Consumer price index for educational books and supplies. Essential school and learning materials costs.",
+      "category": "education",
+      "units": "Index 1982-84=100",
+      "update_frequency": "monthly",
+      "yay_message": "Educational materials are affordable",
+      "meh_message": "Educational materials costs are rising moderately",
+      "nay_message": "High costs for books and supplies strain education budgets"
+    },
+
+    {
+      "id": "SLOAS",
+      "name": "Student Loan Outstanding Amount",
+      "description": "Total outstanding student loan debt. Indicates education financing burden on households.",
+      "category": "education",
+      "units": "Billions of Dollars",
+      "update_frequency": "quarterly",
+      "yay_message": "Student debt burden is decreasing",
+      "meh_message": "Student debt levels are stable",
+      "nay_message": "Student debt is reaching unsustainable levels"
+    },
+    {
+      "id": "CUSR0000SEHF01",
+      "name": "Electricity Costs",
+      "description": "Consumer price index for electricity. Major utility cost for all households.",
+      "category": "utilities",
+      "units": "Index 1982-84=100",
+      "update_frequency": "monthly",      "description": "Consumer price index for college tuition and fees. Key measure of higher education affordability.",
+
+      "yay_message": "Electricity costs are stable or declining",
+      "meh_message": "Electricity costs are rising moderately",
+      "nay_message": "High electricity costs strain household budgets"
+    },
+    {
+      "id": "CUSR0000SEHF02",
+      "name": "Natural Gas Costs",
+      "description": "Consumer price index for natural gas. Important heating and energy cost for households.",
+      "category": "utilities",
+      "units": "Index 1982-84=100",
+      "update_frequency": "monthly",
+      "yay_message": "Natural gas costs are affordable",
+      "meh_message": "Natural gas costs are moderate",
+      "nay_message": "High natural gas costs are burdensome"
+    },
+    {
+      "id": "CUUR0000SEHF01",
+      "name": "Electricity Price Index",
+      "description": "Consumer price index for electricity in U.S. urban areas. Tracks residential electricity costs affecting all households.",
+      "category": "utilities",
+      "units": "Index 1982-1984=100",
+      "update_frequency": "monthly",
+      "yay_message": "Electricity prices are reasonable",
+      "meh_message": "Electricity prices are stable",
+      "nay_message": "High electricity prices are straining budgets"
+    },
+    {
+      "id": "CUSR0000SETD",
+      "name": "Repair and Maintenance Costs",
+      "description": "Consumer price index for motor vehicle maintenance and repair. Unexpected car expense category.",
+      "category": "emergency",
+      "units": "Index 1982-84=100",
+      "update_frequency": "monthly",
+      "yay_message": "Repair costs are stable",
+      "meh_message": "Repair costs are rising moderately",
+      "nay_message": "High repair costs create financial stress"
+    },
+    {
+      "id": "PPIACO",
+      "name": "Producer Price Index",
+      "description": "Measures wholesale price changes before they reach consumers. Leading indicator of future inflation.",
+      "category": "inflation",
+      "units": "Index 1982=100",
+      "update_frequency": "monthly",
+      "yay_message": "Producer prices signal stable consumer prices ahead",
+      "meh_message": "Producer prices are rising moderately",
+      "nay_message": "Rising producer prices signal higher consumer costs coming"
+    },
+    {
+      "id": "HDTGPDUSQ163N",
+      "name": "Household Debt to GDP",
+      "description": "Total household debt as percentage of economic output. Indicates overall debt burden sustainability.",
+      "category": "emergency",
+      "units": "Ratio",
+      "update_frequency": "quarterly",
+      "yay_message": "Household debt levels are sustainable",
+      "meh_message": "Household debt is at moderate levels",
+      "nay_message": "High household debt creates financial vulnerability"
+    }
+  ]
+} 

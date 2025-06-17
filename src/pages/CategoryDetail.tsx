@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, TrendingUp, TrendingDown, Minus } from 'lucide-react';
+import { ArrowLeft, TrendingUp, TrendingDown, Minus, Info, ExternalLink, Calendar, Scale } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { walletMoodQuestions } from '../data/questions';
@@ -235,6 +235,9 @@ interface MetricCardProps {
     mood: 'good' | 'neutral' | 'bad';
     value: number;
     name: string;
+    timestamp: string;
+    units: string;
+    fredUrl: string;
   };
   index: number;
 }
@@ -268,7 +271,22 @@ function MetricCard({ indicator, index }: MetricCardProps) {
       <CardHeader className="pb-4">
         <CardTitle className="text-lg font-playful font-medium text-gray-900 flex items-center gap-2">
           <span className="text-2xl">{moodInfo.icon}</span>
-          {indicator.name}
+          <span className="flex-1">{indicator.name}</span>
+          <div className="group relative">
+            <a 
+              href={indicator.fredUrl} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:text-blue-800 transition-colors"
+              title={`View ${indicator.series} on FRED`}
+            >
+              <Info size={18} />
+            </a>
+            <div className="absolute bottom-full right-0 mb-2 w-64 p-2 bg-black text-white text-xs rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
+              <div className="font-semibold">{indicator.series}</div>
+              <div>Click to view on FRED website</div>
+            </div>
+          </div>
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -283,7 +301,24 @@ function MetricCard({ indicator, index }: MetricCardProps) {
               : indicator.value
             }
           </div>
-          <div className="text-sm text-gray-600 font-medium">Current Value</div>
+          <div className="text-sm text-gray-600 font-medium flex items-center justify-center gap-1">
+            <Scale size={12} />
+            {indicator.units || 'Value'}
+          </div>
+        </div>
+
+        {/* Timestamp */}
+        <div className="text-center">
+          <div className="text-sm text-gray-500 flex items-center justify-center gap-1">
+            <Calendar size={12} />
+            {indicator.timestamp !== 'No data' 
+              ? new Date(indicator.timestamp).toLocaleDateString('en-US', { 
+                  year: 'numeric', 
+                  month: 'short' 
+                })
+              : 'No data'
+            }
+          </div>
         </div>
 
         {/* Mood Status */}

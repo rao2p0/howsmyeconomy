@@ -26,6 +26,9 @@ export interface IndicatorMood {
   mood: 'good' | 'neutral' | 'bad';
   value: number;
   name: string;
+  timestamp: string;
+  units: string;
+  fredUrl: string;
 }
 
 export interface ScoreResult {

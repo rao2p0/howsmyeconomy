@@ -168,34 +168,20 @@ export function CategoryDetail() {
         </div>
       </div>
 
-      {/* Data Source Info */}
-      <div className="max-w-6xl mx-auto px-4 pt-8">
-        <div className={`border-l-4 p-4 rounded-lg shadow-md mb-6 ${
-          dataSourceInfo.source === 'real' 
-            ? 'bg-green-100 border-green-500 text-green-700'
-            : 'bg-yellow-100 border-yellow-500 text-yellow-700'
-        }`}>
-          <div className="flex items-center">
-            <span className="text-2xl mr-3">
-              {dataSourceInfo.source === 'real' ? '✅' : '⚠️'}
-            </span>
-            <div>
-              <p className="font-bold">
-                {dataSourceInfo.source === 'real' 
-                  ? 'Using REAL FRED economic data' 
-                  : 'WARNING: Using MOCK data for development'
-                }
-              </p>
-              <p className="text-sm">
-                {dataSourceInfo.source === 'real'
-                  ? 'Data from Federal Reserve Economic Data (FRED)'
-                  : 'Not real economic data. Do not use for financial decisions.'
-                }
-              </p>
+      {/* Mock Data Warning - Only show if using mock data */}
+      {dataSourceInfo.source === 'mock' && (
+        <div className="max-w-6xl mx-auto px-4 pt-8">
+          <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-lg shadow-md mb-6">
+            <div className="flex items-center">
+              <span className="text-2xl mr-3">⚠️</span>
+              <div>
+                <p className="font-bold">WARNING: Using MOCK data for development</p>
+                <p className="text-sm">Not real economic data. Do not use for financial decisions.</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Content */}
       <div className="max-w-6xl mx-auto px-4 py-8">

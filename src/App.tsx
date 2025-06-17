@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Dashboard } from './pages/Dashboard';
 import { Disclaimer } from './pages/Disclaimer';
+import { CategoryDetail } from './pages/CategoryDetail';
 import { Footer } from './components/Footer';
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/disclaimer" element={<Disclaimer />} />
+            <Route path="/category/:categoryId" element={<CategoryDetail />} />
           </Routes>
         </div>
         <Footer />

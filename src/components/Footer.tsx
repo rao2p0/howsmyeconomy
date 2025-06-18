@@ -21,8 +21,7 @@ export function Footer() {
           <span className="text-2xl animate-bounce" style={{ animationDelay: '0.3s' }}>💫</span>
         </div>
         <p className="text-sm font-modern text-gray-400 max-w-2xl mx-auto mb-6">
-          Economic indicators updated monthly. Scores reflect current economic conditions. 
-          Made with ❤️ to make economics accessible and fun!
+           Made with ❤️ to make economics accessible and fun!
         </p>
         <div className="flex justify-center gap-4 mb-6">
           <span className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">

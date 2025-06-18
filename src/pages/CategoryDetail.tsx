@@ -4,6 +4,7 @@ import { ArrowLeft, TrendingUp, TrendingDown, Minus, Info, ExternalLink, Calenda
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { MiniChart } from '../components/ui/mini-chart';
+import { OverallShareButton } from '../components/OverallShareButton';
 import { walletMoodQuestions } from '../data/questions';
 import { calculateScore } from '../utils/scoreCalculator';
 import { getMetricMoodMessage } from '../utils/schemaLoader';
@@ -162,9 +163,21 @@ export function CategoryDetail() {
             <p className="text-xl text-blue-200 font-medium mb-2">
               {question.question}
             </p>
-                         <div className={`inline-block bg-gradient-to-r ${overallMood.color} px-6 py-2 rounded-full font-bold text-lg`}>
-               {scoreResult.goodCount}/{scoreResult.goodCount + scoreResult.neutralCount + scoreResult.badCount} indicators looking good - {overallMood.mood}
-             </div>
+            <div className={`inline-block bg-gradient-to-r ${overallMood.color} px-6 py-2 rounded-full font-bold text-lg mb-4`}>
+              {scoreResult.goodCount}/{scoreResult.goodCount + scoreResult.neutralCount + scoreResult.badCount} indicators looking good - {overallMood.mood}
+            </div>
+            {/* Overall Share Button for Category */}
+            <div className="mt-4">
+              <OverallShareButton
+                overallScore={scoreResult.score}
+                goodCount={scoreResult.goodCount}
+                totalCount={scoreResult.goodCount + scoreResult.neutralCount + scoreResult.badCount}
+                context="detail"
+                categoryName={question.title}
+                size="md"
+                className="bg-white/20 hover:bg-white/30 border-2 border-white/50"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -220,6 +233,19 @@ export function CategoryDetail() {
             />
           ))}
         </div>
+      </div>
+      
+      {/* Floating Share Button - Fixed Position */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <OverallShareButton
+          overallScore={scoreResult.score}
+          goodCount={scoreResult.goodCount}
+          totalCount={scoreResult.goodCount + scoreResult.neutralCount + scoreResult.badCount}
+          context="detail"
+          categoryName={question.title}
+          size="sm"
+          className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white shadow-2xl"
+        />
       </div>
     </div>
   );

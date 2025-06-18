@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Header } from '../components/Header';
 import { WalletMoodCard } from '../components/WalletMoodCard';
+import { OverallShareButton } from '../components/OverallShareButton';
 import { Toast, ToastProvider, ToastViewport } from '../components/Toast';
 import { Toaster } from '../components/ui/toaster';
 import { walletMoodQuestions } from '../data/questions';
@@ -143,9 +144,18 @@ export function Dashboard() {
               </h2>
               <span className="text-4xl animate-bounce" style={{ animationDelay: '0.5s' }}>{overallMood.emoji}</span>
             </div>
-            <p className="text-xl font-playful font-medium">
+            <p className="text-xl font-playful font-medium mb-4">
               {overallMood.mood}
             </p>
+            {/* Overall Share Button */}
+            <OverallShareButton
+              overallScore={averageScore}
+              goodCount={scoreResults.reduce((sum, { scoreResult }) => sum + scoreResult.goodCount, 0)}
+              totalCount={scoreResults.reduce((sum, { scoreResult }) => sum + scoreResult.goodCount + scoreResult.neutralCount + scoreResult.badCount, 0)}
+              context="homepage"
+              size="lg"
+              className="bg-white/20 hover:bg-white/30 border-2 border-white/50"
+            />
           </div>
         </div>
         
@@ -163,6 +173,18 @@ export function Dashboard() {
 
         <Toaster />
         <ToastViewport />
+        
+        {/* Floating Share Button - Fixed Position */}
+        <div className="fixed bottom-6 right-6 z-50">
+          <OverallShareButton
+            overallScore={averageScore}
+            goodCount={scoreResults.reduce((sum, { scoreResult }) => sum + scoreResult.goodCount, 0)}
+            totalCount={scoreResults.reduce((sum, { scoreResult }) => sum + scoreResult.goodCount + scoreResult.neutralCount + scoreResult.badCount, 0)}
+            context="homepage"
+            size="sm"
+            className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white shadow-2xl"
+          />
+        </div>
       </div>
     </ToastProvider>
   );

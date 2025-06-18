@@ -1,13 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { Chart, registerables } from 'chart.js';
 import { Share, TrendingUp, TrendingDown, Minus } from 'lucide-react';
 import { WalletMoodQuestion, ScoreResult } from '../types';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { cn } from '../lib/utils';
-
-Chart.register(...registerables);
 
 interface WalletMoodCardProps {
   question: WalletMoodQuestion;
@@ -28,114 +25,86 @@ const cardBackgrounds = [
 ];
 
 export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
-  const chartRef = useRef<HTMLCanvasElement>(null);
-  const chartInstanceRef = useRef<Chart | null>(null);
   const cardIndex = parseInt(question.id.slice(-1)) || 0;
   const bgGradient = cardBackgrounds[cardIndex % cardBackgrounds.length];
 
-  useEffect(() => {
-    if (!chartRef.current) return;
-
-    // Destroy existing chart
-    if (chartInstanceRef.current) {
-      chartInstanceRef.current.destroy();
-      chartInstanceRef.current = null;
-    }
-
-    // Create new chart
-    const ctx = chartRef.current.getContext('2d');
-    if (!ctx) return;
-
-    // Clear any previous content
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-
-    // Prepare data for 180° doughnut chart
+  // Custom SVG semicircle component for reliable rendering
+  const SemicircleChart = () => {
     const total = scoreResult.goodCount + scoreResult.neutralCount + scoreResult.badCount;
-    
-    // Ensure we have at least some data to display
-    const data = total === 0 
-      ? [1, 1, 1] // Default equal segments if no data
-      : [scoreResult.goodCount, scoreResult.neutralCount, scoreResult.badCount];
-    
-    const colors = ['#4CAF50', '#FF9800', '#F44336']; // Green, Orange, Red
-    const labels = ['Good', 'Neutral', 'Bad'];
-
-    try {
-      chartInstanceRef.current = new Chart(ctx, {
-      type: 'doughnut',
-      data: {
-        labels: labels,
-        datasets: [
-          {
-            data: data,
-            backgroundColor: colors,
-            borderWidth: 2,
-            borderColor: '#ffffff',
-            borderRadius: 4,
-            hoverBorderWidth: 3,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        layout: {
-          padding: {
-            bottom: 10
-          }
-        },
-                 circumference: Math.PI, // 180 degrees in radians
-         rotation: -Math.PI, // Start from bottom to create bottom semicircle
-        cutout: '65%',
-        radius: '90%',
-        plugins: {
-          legend: {
-            display: false,
-          },
-          tooltip: {
-            enabled: true,
-            backgroundColor: 'rgba(0,0,0,0.8)',
-            titleColor: '#fff',
-            bodyColor: '#fff',
-            borderColor: '#fff',
-            borderWidth: 1,
-            cornerRadius: 8,
-            callbacks: {
-              label: function(context: any) {
-                const label = context.label || '';
-                const value = total === 0 ? 0 : context.parsed;
-                return `${label}: ${value}/${total} indicators`;
-              }
-            }
-          },
-        },
-        animation: {
-          duration: 1000,
-          easing: 'easeOutQuart',
-        },
-        interaction: {
-          intersect: false,
-        },
-        elements: {
-          arc: {
-            borderWidth: 2,
-            hoverBorderWidth: 3,
-          }
-        }
-      },
-    });
-    } catch (error) {
-      console.error('Failed to create chart:', error);
-      // Fallback: chart will not render, but component will still show data
+    if (total === 0) {
+      return (
+        <svg width="224" height="112" viewBox="0 0 224 112" className="drop-shadow-lg">
+          <path
+            d="M 20 92 A 92 92 0 0 1 204 92"
+            fill="none"
+            stroke="#E5E7EB"
+            strokeWidth="24"
+            strokeLinecap="round"
+          />
+          <text x="112" y="75" textAnchor="middle" className="text-sm fill-gray-500 font-medium">
+            No data
+          </text>
+        </svg>
+      );
     }
 
-    return () => {
-      if (chartInstanceRef.current) {
-        chartInstanceRef.current.destroy();
-        chartInstanceRef.current = null;
-      }
+    const radius = 92;
+    const strokeWidth = 24;
+    const centerX = 112;
+    const centerY = 92;
+    
+    const goodAngle = (scoreResult.goodCount / total) * Math.PI;
+    const neutralAngle = (scoreResult.neutralCount / total) * Math.PI;
+    const badAngle = (scoreResult.badCount / total) * Math.PI;
+    
+    const createPath = (startAngle: number, endAngle: number) => {
+      const x1 = centerX + radius * Math.cos(Math.PI - startAngle);
+      const y1 = centerY - radius * Math.sin(Math.PI - startAngle);
+      const x2 = centerX + radius * Math.cos(Math.PI - endAngle);
+      const y2 = centerY - radius * Math.sin(Math.PI - endAngle);
+      
+      const largeArc = endAngle - startAngle > Math.PI / 2 ? 1 : 0;
+      
+      return `M ${x1} ${y1} A ${radius} ${radius} 0 ${largeArc} 1 ${x2} ${y2}`;
     };
-  }, [scoreResult.goodCount, scoreResult.neutralCount, scoreResult.badCount]);
+
+    return (
+      <svg width="224" height="112" viewBox="0 0 224 112" className="drop-shadow-lg">
+        {/* Good segment */}
+        {scoreResult.goodCount > 0 && (
+          <path
+            d={createPath(0, goodAngle)}
+            fill="none"
+            stroke="#4CAF50"
+            strokeWidth={strokeWidth}
+            strokeLinecap="round"
+          />
+        )}
+        {/* Neutral segment */}
+        {scoreResult.neutralCount > 0 && (
+          <path
+            d={createPath(goodAngle, goodAngle + neutralAngle)}
+            fill="none"
+            stroke="#FF9800"
+            strokeWidth={strokeWidth}
+            strokeLinecap="round"
+          />
+        )}
+        {/* Bad segment */}
+        {scoreResult.badCount > 0 && (
+          <path
+            d={createPath(goodAngle + neutralAngle, Math.PI)}
+            fill="none"
+            stroke="#F44336"
+            strokeWidth={strokeWidth}
+            strokeLinecap="round"
+          />
+        )}
+      </svg>
+    );
+  };
+
+  // Note: Chart.js useEffect removed in favor of custom SVG semicircle
 
   const handleShare = () => {
     const tweetText = `The economy's ${scoreResult.emoji} ${scoreResult.mood.toLowerCase()} for "${question.question}" - ${scoreResult.goodCount}/${scoreResult.goodCount + scoreResult.neutralCount + scoreResult.badCount} indicators looking good! Check the full economic mood at HowsMyEconomy.com #EconomyMood #EconomicData`;
@@ -177,15 +146,11 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
 
         {/* Main Content - Flexible Height */}
         <CardContent className="flex-1 flex flex-col items-center justify-center px-6 pb-20">
-          {/* Chart Container - Optimized for semicircle */}
-          <div className="relative w-56 h-32 mb-4">
-            <canvas
-              ref={chartRef}
-              className="w-full h-full drop-shadow-lg"
-              aria-describedby={`breakdown-${question.id}`}
-            />
+          {/* Chart Container - Custom SVG Semicircle */}
+          <div className="relative w-56 h-28 mb-4">
+            <SemicircleChart />
             {/* Emoji and mood positioned below the arc */}
-            <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+            <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
               <div className="text-3xl mb-1 animate-bounce" style={{ animationDuration: '2s' }}>
                 {scoreResult.emoji}
               </div>

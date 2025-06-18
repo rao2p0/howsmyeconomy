@@ -71,13 +71,13 @@ Timestamp: ${new Date().toLocaleString()}`;
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="your@email.com"
                 required
-                className="w-full px-4 py-3 rounded-lg border-2 border-white/30 bg-white/90 backdrop-blur-sm text-gray-800 placeholder-gray-500 focus:border-yellow-300 focus:ring-2 focus:ring-yellow-300/50 focus:outline-none transition-all duration-200"
+                className="w-full h-12 px-4 rounded-lg border-2 border-white/30 bg-white/90 backdrop-blur-sm text-gray-800 placeholder-gray-500 focus:border-yellow-300 focus:ring-2 focus:ring-yellow-300/50 focus:outline-none transition-all duration-200"
               />
             </div>
             <Button
               type="submit"
               disabled={isSubmitting || !email.trim()}
-              className="px-6 py-3 bg-yellow-400 hover:bg-yellow-300 text-gray-800 font-bold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+              className="h-12 px-6 bg-yellow-400 hover:bg-yellow-300 text-gray-800 font-bold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
             >
               {isSubmitting ? (
                 <div className="animate-spin rounded-full h-5 w-5 border-2 border-gray-600/30 border-t-gray-600"></div>

@@ -41,7 +41,7 @@ export function Header() {
             🎯 The Economy's Real-Time Mood Check! 🎯
           </p>
           <p className="text-lg md:text-xl font-modern text-blue-100 max-w-3xl mx-auto leading-relaxed animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            Get instant insights into how the economy is really doing with 10 key indicators! 
+            Get instant insights into how the economy is really doing with 10 key questions! 
             Based on Federal Reserve data, but way more fun to understand! ✨
           </p>
           <div className="flex flex-wrap justify-center gap-2 mt-6 animate-fade-in" style={{ animationDelay: '0.4s' }}>

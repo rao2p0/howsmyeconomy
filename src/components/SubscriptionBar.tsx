@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Bell, Send, Mail } from 'lucide-react';
 import { Button } from './ui/button';
 import { useToast } from './ui/use-toast';
+import { emailService } from '../services/emailService';
 
 export function SubscriptionBar() {
   const [email, setEmail] = useState('');
@@ -15,30 +16,29 @@ export function SubscriptionBar() {
     setIsSubmitting(true);
 
     try {
-      // For now, we'll use a mailto link to notify you of new subscribers
-      const subject = `New HowsMyEconomy Subscription: ${email}`;
-      const body = `New subscriber:
-Email: ${email}
-Subscribed via footer subscription bar
-Timestamp: ${new Date().toLocaleString()}`;
+      const result = await emailService.submitSubscription(
+        email,
+        'Footer Subscription Bar',
+        'weekly' // Default frequency for footer subscription
+      );
 
-      const mailtoUrl = `mailto:your-email@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      
-      // Open mailto link
-      window.location.href = mailtoUrl;
-
-      toast({
-        title: "Subscribed! 🎉",
-        description: "You'll receive economic updates in your inbox.",
-      });
-
-      // Reset form
-      setEmail('');
+      if (result.success) {
+        toast({
+          title: "Subscribed! 🎉",
+          description: "You'll receive economic updates in your inbox.",
+        });
+        
+        // Reset form
+        setEmail('');
+      } else {
+        throw new Error(result.message);
+      }
 
     } catch (error) {
+      console.error('Subscription error:', error);
       toast({
         title: "Subscription failed 😞",
-        description: "Please try again later.",
+        description: error instanceof Error ? error.message : "Please try again later.",
         variant: "destructive",
       });
     } finally {
@@ -93,7 +93,7 @@ Timestamp: ${new Date().toLocaleString()}`;
         
         <div className="text-center mt-4">
           <p className="text-xs text-blue-200">
-            📈 No spam, just insights
+            📈 No spam, just insights • Stored securely in Google Sheets
           </p>
         </div>
       </div>

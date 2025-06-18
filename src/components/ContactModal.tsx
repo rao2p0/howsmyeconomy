@@ -3,6 +3,8 @@ import { X, Mail, Send, Bell, MessageCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { useToast } from './ui/use-toast';
+import { emailService } from '../services/emailService';
+import { EMAIL_CONFIG } from '../config/emailConfig';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -32,45 +34,31 @@ export function ContactModal({ isOpen, onClose, defaultTab = 'contact' }: Contac
     setIsSubmitting(true);
 
     try {
-      // Simulate form submission - you'll need to implement the actual backend
-      const formData = {
-        ...contactForm,
-        source: 'HowsMyEconomy Contact Form',
-        timestamp: new Date().toISOString(),
-        userAgent: navigator.userAgent
-      };
+      const result = await emailService.submitContact(
+        contactForm.name,
+        contactForm.email,
+        contactForm.message,
+        contactForm.feedbackType
+      );
 
-      // For now, we'll use a mailto link as fallback
-      const subject = `HowsMyEconomy Feedback: ${contactForm.feedbackType}`;
-      const body = `Name: ${contactForm.name}
-Email: ${contactForm.email}
-Feedback Type: ${contactForm.feedbackType}
+      if (result.success) {
+        toast({
+          title: "Feedback Sent! 📧",
+          description: "Thank you for your feedback. We'll get back to you soon!",
+        });
 
-Message:
-${contactForm.message}
-
----
-Submitted via HowsMyEconomy contact form
-Timestamp: ${new Date().toLocaleString()}`;
-
-      const mailtoUrl = `mailto:your-email@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      
-      // Open mailto link
-      window.location.href = mailtoUrl;
-
-      toast({
-        title: "Feedback Sent! 📧",
-        description: "Thank you for your feedback. We'll get back to you soon!",
-      });
-
-      // Reset form
-      setContactForm({ name: '', email: '', feedbackType: 'general', message: '' });
-      setTimeout(() => onClose(), 1000);
+        // Reset form
+        setContactForm({ name: '', email: '', feedbackType: 'general', message: '' });
+        setTimeout(() => onClose(), 1000);
+      } else {
+        throw new Error(result.message);
+      }
 
     } catch (error) {
+      console.error('Contact submission error:', error);
       toast({
         title: "Oops! Something went wrong 😞",
-        description: "Please try again or contact us directly.",
+        description: error instanceof Error ? error.message : "Please try again or contact us directly.",
         variant: "destructive",
       });
     } finally {
@@ -83,41 +71,30 @@ Timestamp: ${new Date().toLocaleString()}`;
     setIsSubmitting(true);
 
     try {
-      // Simulate subscription - you'll need to implement the actual backend
-      const subscriptionData = {
-        ...subscribeForm,
-        source: 'HowsMyEconomy Subscription',
-        timestamp: new Date().toISOString()
-      };
+      const result = await emailService.submitSubscription(
+        subscribeForm.email,
+        'Contact Modal Subscription',
+        subscribeForm.frequency
+      );
 
-      // For now, we'll use a mailto link to notify you of new subscribers
-      const subject = `New HowsMyEconomy Subscription: ${subscribeForm.email}`;
-      const body = `New subscriber details:
-Email: ${subscribeForm.email}
-Frequency: ${subscribeForm.frequency}
+      if (result.success) {
+        toast({
+          title: "Subscribed! 🎉",
+          description: "You'll receive economic updates based on your preference.",
+        });
 
----
-Subscribed via HowsMyEconomy
-Timestamp: ${new Date().toLocaleString()}`;
-
-      const mailtoUrl = `mailto:your-email@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      
-      // Open mailto link
-      window.location.href = mailtoUrl;
-
-      toast({
-        title: "Subscribed! 🎉",
-        description: "You'll receive economic updates based on your preference.",
-      });
-
-      // Reset form
-      setSubscribeForm({ email: '', frequency: 'weekly' });
-      setTimeout(() => onClose(), 1000);
+        // Reset form
+        setSubscribeForm({ email: '', frequency: 'weekly' });
+        setTimeout(() => onClose(), 1000);
+      } else {
+        throw new Error(result.message);
+      }
 
     } catch (error) {
+      console.error('Subscription error:', error);
       toast({
         title: "Subscription failed 😞",
-        description: "Please try again later.",
+        description: error instanceof Error ? error.message : "Please try again later.",
         variant: "destructive",
       });
     } finally {
@@ -285,9 +262,11 @@ Timestamp: ${new Date().toLocaleString()}`;
                   onChange={(e) => setSubscribeForm(prev => ({ ...prev, frequency: e.target.value }))}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 >
-                  <option value="weekly">Weekly Summary</option>
-                  <option value="monthly">Monthly Report</option>
-                  <option value="major-updates">Major Updates Only</option>
+                  {EMAIL_CONFIG.FREQUENCY_OPTIONS.map(option => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
                 </select>
               </div>
 
@@ -318,6 +297,12 @@ Timestamp: ${new Date().toLocaleString()}`;
                   </div>
                 )}
               </Button>
+              
+              <div className="text-center">
+                <p className="text-xs text-gray-500">
+                  📋 Data stored securely in Google Sheets
+                </p>
+              </div>
             </form>
           )}
         </CardContent>

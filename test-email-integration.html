@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Integration Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: 0 auto; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, select { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+        button { background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        #result { margin-top: 20px; padding: 10px; border-radius: 4px; }
+        .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .debug { background: #f8f9fa; color: #495057; border: 1px solid #dee2e6; margin-top: 10px; padding: 10px; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Email Integration Test</h1>
+    <p>Use this page to test your Google Apps Script email collection before integrating with your main app.</p>
+    
+    <form id="testForm">
+        <div class="form-group">
+            <label for="scriptUrl">Google Apps Script URL:</label>
+            <input type="url" id="scriptUrl" value="https://script.google.com/macros/s/AKfycbx2BQ5CnZhPzo5k8GjEgg-SaxqyGX7Zg2zlVVZiEXAgb1OTPRTL9ZnVnLLBOFW0uKWmNw/exec" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="email">Test Email:</label>
+            <input type="email" id="email" value="test@example.com" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="source">Source:</label>
+            <select id="source">
+                <option value="Test Page">Test Page</option>
+                <option value="Footer Subscription Bar">Footer Subscription Bar</option>
+                <option value="Contact Modal">Contact Modal</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="frequency">Frequency:</label>
+            <select id="frequency">
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+                <option value="major-updates">Major Updates Only</option>
+            </select>
+        </div>
+        
+        <button type="submit">🚀 Test Email Submission</button>
+    </form>
+    
+    <div id="result"></div>
+    <div id="debug"></div>
+
+    <script>
+        document.getElementById('testForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const resultDiv = document.getElementById('result');
+            const debugDiv = document.getElementById('debug');
+            
+            // Clear previous results
+            resultDiv.innerHTML = '';
+            debugDiv.innerHTML = '';
+            
+            // Get form data
+            const scriptUrl = document.getElementById('scriptUrl').value;
+            const email = document.getElementById('email').value;
+            const source = document.getElementById('source').value;
+            const frequency = document.getElementById('frequency').value;
+            
+            const submissionData = {
+                email: email,
+                source: source,
+                frequency: frequency,
+                timestamp: new Date().toISOString(),
+                page: window.location.href,
+                userAgent: navigator.userAgent
+            };
+            
+            console.log('📧 Submitting data:', submissionData);
+            debugDiv.innerHTML = '<strong>Debug Info:</strong><br>📧 Submitting to: ' + scriptUrl + '<br>📋 Data: ' + JSON.stringify(submissionData, null, 2);
+            
+            try {
+                const response = await fetch(scriptUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(submissionData)
+                });
+                
+                console.log('📡 Response status:', response.status);
+                debugDiv.innerHTML += '<br>📡 Response status: ' + response.status + ' ' + response.statusText;
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`HTTP ${response.status}: ${errorText}`);
+                }
+                
+                const result = await response.json();
+                console.log('✅ Success:', result);
+                
+                debugDiv.innerHTML += '<br>✅ Response data: ' + JSON.stringify(result, null, 2);
+                
+                if (result.success) {
+                    resultDiv.className = 'success';
+                    resultDiv.innerHTML = '🎉 Success! Email submitted to Google Sheets.<br>Message: ' + result.message;
+                } else {
+                    resultDiv.className = 'error';
+                    resultDiv.innerHTML = '❌ Submission failed.<br>Error: ' + result.message;
+                }
+                
+            } catch (error) {
+                console.error('💥 Error:', error);
+                debugDiv.innerHTML += '<br>💥 Error: ' + error.message;
+                
+                resultDiv.className = 'error';
+                resultDiv.innerHTML = '❌ Request failed: ' + error.message;
+            }
+        });
+    </script>
+</body>
+</html> 

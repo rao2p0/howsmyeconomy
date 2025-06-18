@@ -1,13 +1,17 @@
 // Google Apps Script for HowsMyEconomy Email Collection
 // This script receives POST requests and stores email data in a Google Sheet
 
+// Replace this with your actual Google Sheet ID (the long string between /d/ and /edit in the URL)
+const SPREADSHEET_ID = '1c2ixD-oniWWWocj14kcagV6Ok5mXxzXv-NMIZr165l4';
+
 function doPost(e) {
   try {
     // Parse the JSON data from the request
     const data = JSON.parse(e.postData.contents);
     
-    // Get the active spreadsheet (make sure to create one and get its ID)
-    const sheet = SpreadsheetApp.getActiveSheet();
+    // Get the specific spreadsheet by ID and the first sheet
+    const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
+    const sheet = spreadsheet.getActiveSheet();
     
     // If this is the first submission, add headers
     if (sheet.getLastRow() === 0) {
@@ -18,11 +22,13 @@ function doPost(e) {
         'Frequency',
         'Page URL',
         'User Agent',
-        'IP Address'
+        'Name',
+        'Message',
+        'Feedback Type'
       ]);
     }
     
-    // Add the new subscription data
+    // Add the new submission data
     sheet.appendRow([
       new Date().toISOString(),
       data.email || '',
@@ -30,7 +36,9 @@ function doPost(e) {
       data.frequency || 'Not specified',
       data.page || '',
       data.userAgent || '',
-      data.ipAddress || 'Not available'
+      data.name || '', // For contact form submissions
+      data.message || '', // For contact form submissions
+      data.feedbackType || '' // For contact form submissions
     ]);
     
     // Return success response

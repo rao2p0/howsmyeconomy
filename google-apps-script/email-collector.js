@@ -4,6 +4,19 @@
 // Replace this with your actual Google Sheet ID (the long string between /d/ and /edit in the URL)
 const SPREADSHEET_ID = '1c2ixD-oniWWWocj14kcagV6Ok5mXxzXv-NMIZr165l4';
 
+// Simple test function - accessible via GET request
+function doGet(e) {
+  const output = ContentService.createTextOutput(JSON.stringify({
+    status: 'success',
+    message: 'Google Apps Script is working!',
+    timestamp: new Date().toISOString(),
+    spreadsheetId: SPREADSHEET_ID
+  }));
+  
+  output.setMimeType(ContentService.MimeType.JSON);
+  return output;
+}
+
 function doPost(e) {
   try {
     // Parse the JSON data from the request
@@ -42,41 +55,22 @@ function doPost(e) {
     ]);
     
     // Return success response
-    return ContentService
-      .createTextOutput(JSON.stringify({
-        success: true,
-        message: 'Email successfully added to spreadsheet'
-      }))
-      .setMimeType(ContentService.MimeType.JSON)
-      .setHeaders({
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'POST',
-        'Access-Control-Allow-Headers': 'Content-Type'
-      });
+    const output = ContentService.createTextOutput(JSON.stringify({
+      success: true,
+      message: 'Email successfully added to spreadsheet'
+    }));
+    
+    output.setMimeType(ContentService.MimeType.JSON);
+    return output;
       
   } catch (error) {
     // Return error response
-    return ContentService
-      .createTextOutput(JSON.stringify({
-        success: false,
-        message: 'Error: ' + error.toString()
-      }))
-      .setMimeType(ContentService.MimeType.JSON)
-      .setHeaders({
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'POST',
-        'Access-Control-Allow-Headers': 'Content-Type'
-      });
+    const output = ContentService.createTextOutput(JSON.stringify({
+      success: false,
+      message: 'Error: ' + error.toString()
+    }));
+    
+    output.setMimeType(ContentService.MimeType.JSON);
+    return output;
   }
-}
-
-// Handle preflight OPTIONS requests for CORS
-function doOptions(e) {
-  return ContentService
-    .createTextOutput('')
-    .setHeaders({
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type'
-    });
 } 

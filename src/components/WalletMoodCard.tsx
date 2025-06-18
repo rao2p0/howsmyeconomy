@@ -99,7 +99,7 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
   }, [scoreResult.goodCount, scoreResult.neutralCount, scoreResult.badCount]);
 
   const handleShare = () => {
-    const tweetText = `The economy's ${scoreResult.emoji} ${scoreResult.mood.toLowerCase()} at ${scoreResult.score}/100 for "${question.question}" Check the full economic mood at HowsMyEconomy.com #EconomyMood #EconomicData`;
+    const tweetText = `The economy's ${scoreResult.emoji} ${scoreResult.mood.toLowerCase()} for "${question.question}" - ${scoreResult.goodCount}/${scoreResult.goodCount + scoreResult.neutralCount + scoreResult.badCount} indicators looking good! Check the full economic mood at HowsMyEconomy.com #EconomyMood #EconomicData`;
     const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`;
     window.open(tweetUrl, '_blank', 'width=550,height=420');
   };

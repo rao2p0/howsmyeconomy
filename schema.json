@@ -478,17 +478,7 @@
       "meh_message": "Natural gas costs are moderate",
       "nay_message": "High natural gas costs are burdensome"
     },
-    {
-      "id": "CUUR0000SEHF01",
-      "name": "Electricity Price Index",
-      "description": "Consumer price index for electricity in U.S. urban areas. Tracks residential electricity costs affecting all households.",
-      "category": "utilities",
-      "units": "Index 1982-1984=100",
-      "update_frequency": "monthly",
-      "yay_message": "Electricity prices are reasonable",
-      "meh_message": "Electricity prices are stable",
-      "nay_message": "High electricity prices are straining budgets"
-    },
+
     {
       "id": "CUSR0000SETD",
       "name": "Repair and Maintenance Costs",

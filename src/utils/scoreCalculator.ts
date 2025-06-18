@@ -40,7 +40,6 @@ const seriesNames: { [key: string]: string } = {
   'CUSR0000SEHF01': 'Electricity',
 
   'CUSR0000SEHF02': 'Gas Utilities',
-  'CUUR0000SEHF01': 'Electricity Index',
   'PPIACO': 'Producer Prices',
   'CUSR0000SETD': 'Shelter Costs',
   'HDTGPDUSQ163N': 'Household Debt'
@@ -365,11 +364,7 @@ function getMoodScore(questionId: string, series: string, currentValue: number, 
           if (yoyChange < 0) return 1;
           if (yoyChange > 2) return -1;
           return 0;
-        case 'CUUR0000SEHF01':
-          // ↓ YoY = Yay, ±2% = Meh, ↑ > 2% YoY = Nay
-          if (yoyChange < 0) return 1;
-          if (yoyChange > 2) return -1;
-          return 0;
+
         case 'DSPIC96':
           // ↑ > 3% = Yay, Flat = Meh, ↓ YoY = Nay
           if (yoyChange > 3) return 1;

@@ -1232,42 +1232,7 @@ export const mockFredData: FredData = {
     { date: '2025-06-01', value: 381.0 }
   ],
 
-  // Consumer Price Index: Electricity (Not Seasonally Adjusted)
-  CUUR0000SEHF01: [
-    // 2023 data (CPI Index 1982-1984=100)
-    { date: '2023-01-01', value: 266.5 },
-    { date: '2023-02-01', value: 266.9 },
-    { date: '2023-03-01', value: 265.0 },
-    { date: '2023-04-01', value: 263.2 },
-    { date: '2023-05-01', value: 262.1 },
-    { date: '2023-06-01', value: 271.4 },
-    { date: '2023-07-01', value: 270.3 },
-    { date: '2023-08-01', value: 270.8 },
-    { date: '2023-09-01', value: 272.4 },
-    { date: '2023-10-01', value: 268.3 },
-    { date: '2023-11-01', value: 267.5 },
-    { date: '2023-12-01', value: 269.2 },
-    // 2024 data
-    { date: '2024-01-01', value: 276.7 },
-    { date: '2024-02-01', value: 276.4 },
-    { date: '2024-03-01', value: 278.2 },
-    { date: '2024-04-01', value: 276.7 },
-    { date: '2024-05-01', value: 277.6 },
-    { date: '2024-06-01', value: 283.3 },
-    { date: '2024-07-01', value: 283.4 },
-    { date: '2024-08-01', value: 281.3 },
-    { date: '2024-09-01', value: 282.5 },
-    { date: '2024-10-01', value: 280.5 },
-    { date: '2024-11-01', value: 275.8 },
-    { date: '2024-12-01', value: 276.7 },
-    // 2025 data (real FRED data)
-    { date: '2025-01-01', value: 281.9 },
-    { date: '2025-02-01', value: 283.2 },
-    { date: '2025-03-01', value: 286.0 },
-    { date: '2025-04-01', value: 286.7 },
-    { date: '2025-05-01', value: 290.1 },
-    { date: '2025-06-01', value: 290.1 }
-  ],
+
 
   // Producer Price Index: All Commodities
   PPIACO: [

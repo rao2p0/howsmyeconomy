@@ -3,7 +3,7 @@ CUSR0000SEEB04,Removed - Technical School Costs metric no longer needed.
 CUSR0000SEEB03,Removed - Childcare Costs metric no longer needed (redundant with CUUR0000SEEB comprehensive education and childcare index).
 DMOTRC1,Replaced with DAUTOSAAR - Motor Vehicle Retail Sales: Domestic Autos
 DHLCRC1,Replaced with DHLCRC1Q027SBEA - Personal consumption expenditures: Services: Health care
-CUUR0000SEHF01,Verified working FRED series - Consumer Price Index for Electricity (Not Seasonally Adjusted).
+
 CUSR0000SEEA,Fixed - Replaced CUSR0000SEEB03 (2nd occurrence) with Educational Books and Supplies CPI
 CPIMEDSL,Verified working - Consumer Price Index for Medical Care in U.S. City Average
 HDTGPDUSQ163N,Verified working - Household Debt-to-GDP ratio

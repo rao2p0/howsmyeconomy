@@ -103,9 +103,7 @@ This document defines how to assign a simple mood score to economic metrics trac
 | Metric | Yay | Meh | Nay |
 |--------|-----|-----|-----|
 | CUSR0000SEHF01 | ↓ YoY | ±2% | ↑ > 2% |
-
 | CUSR0000SEHF02 | ↓ YoY | ±2% | ↑ > 2% |
-| CUUR0000SEHF01 | ↓ YoY | ±2% | ↑ > 2% YoY |
 | DSPIC96 | ↑ > 3% | Flat | ↓ YoY |
 
 ---

@@ -61,6 +61,29 @@ export function Dashboard() {
     ? scoreResults.reduce((sum: number, { scoreResult }: ScoreResultWithQuestion) => sum + scoreResult.score, 0) / scoreResults.length
     : 0;
 
+  // Calculate unique indicators count (avoid double-counting indicators that appear in multiple questions)
+  const getUniqueIndicatorCounts = () => {
+    const uniqueIndicators = new Set<string>();
+    let goodCount = 0;
+    let neutralCount = 0;
+    let badCount = 0;
+
+    scoreResults.forEach(({ scoreResult }) => {
+      scoreResult.indicatorBreakdown.forEach(indicator => {
+        if (!uniqueIndicators.has(indicator.series)) {
+          uniqueIndicators.add(indicator.series);
+          if (indicator.mood === 'good') goodCount++;
+          else if (indicator.mood === 'neutral') neutralCount++;
+          else if (indicator.mood === 'bad') badCount++;
+        }
+      });
+    });
+
+    return { goodCount, neutralCount, badCount, totalCount: uniqueIndicators.size };
+  };
+
+  const uniqueIndicatorCounts = getUniqueIndicatorCounts();
+
   // Use mood_score_system.md rules: +0.5+ = Yay, -0.5 to +0.5 = Meh, <-0.5 = Nay
   const getOverallMood = (score: number) => {
     if (score >= 0.5) return { emoji: '😀', mood: 'The economy is looking good!', color: 'from-green-400 to-emerald-500', vibe: 'Yay!' };
@@ -150,8 +173,8 @@ export function Dashboard() {
             {/* Overall Share Button */}
             <OverallShareButton
               overallScore={averageScore}
-              goodCount={scoreResults.reduce((sum, { scoreResult }) => sum + scoreResult.goodCount, 0)}
-              totalCount={scoreResults.reduce((sum, { scoreResult }) => sum + scoreResult.goodCount + scoreResult.neutralCount + scoreResult.badCount, 0)}
+              goodCount={uniqueIndicatorCounts.goodCount}
+              totalCount={uniqueIndicatorCounts.totalCount}
               context="homepage"
               size="lg"
               className="bg-white/20 hover:bg-white/30 border-2 border-white/50"
@@ -178,8 +201,8 @@ export function Dashboard() {
         <div className="fixed bottom-6 right-6 z-50">
           <OverallShareButton
             overallScore={averageScore}
-            goodCount={scoreResults.reduce((sum, { scoreResult }) => sum + scoreResult.goodCount, 0)}
-            totalCount={scoreResults.reduce((sum, { scoreResult }) => sum + scoreResult.goodCount + scoreResult.neutralCount + scoreResult.badCount, 0)}
+            goodCount={uniqueIndicatorCounts.goodCount}
+            totalCount={uniqueIndicatorCounts.totalCount}
             context="homepage"
             size="sm"
             className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white shadow-2xl"

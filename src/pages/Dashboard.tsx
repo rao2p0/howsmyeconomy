@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Header } from '../components/Header';
 import { WalletMoodCard } from '../components/WalletMoodCard';
 import { OverallShareButton } from '../components/OverallShareButton';
-import { ContactSection } from '../components/ContactSection';
+import { ContactButton } from '../components/ContactButton';
 import { Toast, ToastProvider, ToastViewport } from '../components/Toast';
 import { Toaster } from '../components/ui/toaster';
 import { walletMoodQuestions } from '../data/questions';
@@ -194,8 +194,7 @@ export function Dashboard() {
             ))}
           </div>
           
-          {/* Contact Section */}
-          <ContactSection className="mb-8" />
+
         </main>
 
         <Toaster />
@@ -212,6 +211,9 @@ export function Dashboard() {
             className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white shadow-2xl"
           />
         </div>
+        
+        {/* Floating Contact Button - Fixed Position */}
+        <ContactButton variant="floating" />
       </div>
     </ToastProvider>
   );

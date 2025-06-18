@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Sparkles } from 'lucide-react';
-import { ContactSection } from './ContactSection';
+import { ContactButton } from './ContactButton';
 
 export function Footer() {
   return (
@@ -31,10 +31,7 @@ export function Footer() {
           </span>
         </div>
         
-        {/* Contact Section */}
-        <div className="mb-8">
-          <ContactSection compact={true} className="bg-white/10 backdrop-blur-sm" />
-        </div>
+
         
         {/* Footer Links */}
         <div className="border-t border-white/20 pt-6">
@@ -52,6 +49,8 @@ export function Footer() {
               >
                 📋 Disclaimer
               </Link>
+              <span className="text-gray-500">•</span>
+              <ContactButton variant="footer" />
               <span className="text-gray-500">•</span>
               <span className="text-gray-400">
                 Not Financial Advice 🎭

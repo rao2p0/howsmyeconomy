@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { TrendingUp, Sparkles } from 'lucide-react';
+import { ContactButton } from './ContactButton';
 
 export function Header() {
   return (
@@ -17,6 +18,11 @@ export function Header() {
       </div>
       <div className="absolute bottom-8 right-1/3 text-green-300 animate-bounce" style={{ animationDelay: '0.5s' }}>
         <Sparkles size={18} />
+      </div>
+      
+      {/* Subtle Contact Button */}
+      <div className="absolute top-4 right-4 z-20">
+        <ContactButton variant="header" className="bg-white/10 hover:bg-white/20 text-white border border-white/30" />
       </div>
       
       <div className="max-w-7xl mx-auto px-4 text-center relative z-10">

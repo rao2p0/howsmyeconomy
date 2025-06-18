@@ -41,7 +41,7 @@ const seriesNames: { [key: string]: string } = {
 
   'CUSR0000SEHF02': 'Gas Utilities',
   'PPIACO': 'Producer Prices',
-  'CUSR0000SETD': 'Shelter Costs',
+  'CUSR0000SETD': 'Automotive Repairs',
   'HDTGPDUSQ163N': 'Household Debt'
 };
 

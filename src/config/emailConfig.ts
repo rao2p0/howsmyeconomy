@@ -2,9 +2,9 @@
 // Replace GOOGLE_APPS_SCRIPT_URL with your actual deployed Google Apps Script web app URL
 
 export const EMAIL_CONFIG = {
-  // Replace this with your Google Apps Script web app URL after deployment
-  GOOGLE_APPS_SCRIPT_URL: 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec',
-  
+  // Use the Web App URL that ends with /exec (NOT the library URL)
+  GOOGLE_APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbx2BQ5CnZhPzo5k8GjEgg-SaxqyGX7Zg2zlVVZiEXAgb1OTPRTL9ZnVnLLBOFW0uKWmNw/exec',
+
   // Timeout for email submission requests (in milliseconds)
   REQUEST_TIMEOUT: 10000,
   

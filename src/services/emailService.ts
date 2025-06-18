@@ -16,6 +16,11 @@ export class EmailService {
       };
     }
 
+    console.log('📧 Attempting to submit email data:', {
+      url: EMAIL_CONFIG.GOOGLE_APPS_SCRIPT_URL,
+      data: data
+    });
+
     try {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), EMAIL_CONFIG.REQUEST_TIMEOUT);
@@ -31,11 +36,16 @@ export class EmailService {
 
       clearTimeout(timeoutId);
 
+      console.log('📡 Response status:', response.status, response.statusText);
+
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorText = await response.text();
+        console.error('❌ HTTP Error:', response.status, errorText);
+        throw new Error(`HTTP error! status: ${response.status} - ${errorText}`);
       }
 
       const result = await response.json();
+      console.log('✅ Response data:', result);
       
       return {
         success: result.success || false,
@@ -44,7 +54,7 @@ export class EmailService {
       };
 
     } catch (error) {
-      console.error('Email submission error:', error);
+      console.error('💥 Email submission error:', error);
       
       if (error instanceof Error) {
         if (error.name === 'AbortError') {
@@ -76,8 +86,11 @@ export class EmailService {
     frequency?: string,
     additionalData?: Record<string, any>
   ): Promise<EmailSubmissionResult> {
+    console.log('🎯 Starting subscription submission for:', email);
+
     // Validate email
     if (!email || !isValidEmail(email)) {
+      console.error('❌ Invalid email:', email);
       return {
         success: false,
         message: 'Please enter a valid email address.',
@@ -87,6 +100,7 @@ export class EmailService {
 
     // Create submission data
     const submissionData = createSubmissionData(email, source, frequency, additionalData);
+    console.log('📋 Submission data prepared:', submissionData);
 
     // Submit to Google Sheets
     return await this.makeRequest(submissionData);
@@ -98,6 +112,8 @@ export class EmailService {
     message: string,
     feedbackType?: string
   ): Promise<EmailSubmissionResult> {
+    console.log('📞 Starting contact submission for:', email);
+
     // Validate inputs
     if (!name || !email || !message) {
       return {

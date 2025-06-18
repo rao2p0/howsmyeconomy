@@ -39,18 +39,29 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
     // Destroy existing chart
     if (chartInstanceRef.current) {
       chartInstanceRef.current.destroy();
+      chartInstanceRef.current = null;
     }
 
     // Create new chart
     const ctx = chartRef.current.getContext('2d');
     if (!ctx) return;
 
+    // Clear any previous content
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
     // Prepare data for 180° doughnut chart
-    const data = [scoreResult.goodCount, scoreResult.neutralCount, scoreResult.badCount];
+    const total = scoreResult.goodCount + scoreResult.neutralCount + scoreResult.badCount;
+    
+    // Ensure we have at least some data to display
+    const data = total === 0 
+      ? [1, 1, 1] // Default equal segments if no data
+      : [scoreResult.goodCount, scoreResult.neutralCount, scoreResult.badCount];
+    
     const colors = ['#4CAF50', '#FF9800', '#F44336']; // Green, Orange, Red
     const labels = ['Good', 'Neutral', 'Bad'];
 
-    chartInstanceRef.current = new Chart(ctx, {
+    try {
+      chartInstanceRef.current = new Chart(ctx, {
       type: 'doughnut',
       data: {
         labels: labels,
@@ -58,42 +69,70 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
           {
             data: data,
             backgroundColor: colors,
-            borderWidth: 3,
+            borderWidth: 2,
             borderColor: '#ffffff',
+            borderRadius: 4,
+            hoverBorderWidth: 3,
           },
         ],
       },
-              options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          circumference: Math.PI, // 180 degrees
-          rotation: Math.PI, // Start from bottom
-          cutout: '60%',
-          plugins: {
-            legend: {
-              display: false,
-            },
-            tooltip: {
-              callbacks: {
-                label: function(context: any) {
-                  const label = context.label || '';
-                  const value = context.parsed;
-                  const total = scoreResult.goodCount + scoreResult.neutralCount + scoreResult.badCount;
-                  return `${label}: ${value}/${total} indicators`;
-                }
-              }
-            },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            bottom: 10
+          }
+        },
+                 circumference: Math.PI, // 180 degrees in radians
+         rotation: -Math.PI, // Start from bottom to create bottom semicircle
+        cutout: '65%',
+        radius: '90%',
+        plugins: {
+          legend: {
+            display: false,
           },
-          animation: {
-            duration: 1200,
-            easing: 'easeOutBounce',
+          tooltip: {
+            enabled: true,
+            backgroundColor: 'rgba(0,0,0,0.8)',
+            titleColor: '#fff',
+            bodyColor: '#fff',
+            borderColor: '#fff',
+            borderWidth: 1,
+            cornerRadius: 8,
+            callbacks: {
+              label: function(context: any) {
+                const label = context.label || '';
+                const value = total === 0 ? 0 : context.parsed;
+                return `${label}: ${value}/${total} indicators`;
+              }
+            }
           },
         },
+        animation: {
+          duration: 1000,
+          easing: 'easeOutQuart',
+        },
+        interaction: {
+          intersect: false,
+        },
+        elements: {
+          arc: {
+            borderWidth: 2,
+            hoverBorderWidth: 3,
+          }
+        }
+      },
     });
+    } catch (error) {
+      console.error('Failed to create chart:', error);
+      // Fallback: chart will not render, but component will still show data
+    }
 
     return () => {
       if (chartInstanceRef.current) {
         chartInstanceRef.current.destroy();
+        chartInstanceRef.current = null;
       }
     };
   }, [scoreResult.goodCount, scoreResult.neutralCount, scoreResult.badCount]);
@@ -138,17 +177,15 @@ export function WalletMoodCard({ question, scoreResult }: WalletMoodCardProps) {
 
         {/* Main Content - Flexible Height */}
         <CardContent className="flex-1 flex flex-col items-center justify-center px-6 pb-20">
-          {/* Chart Container - Proper size for visibility */}
-          <div className="relative w-48 h-24 mb-4">
+          {/* Chart Container - Optimized for semicircle */}
+          <div className="relative w-56 h-32 mb-4">
             <canvas
               ref={chartRef}
-              width="192"
-              height="96"
               className="w-full h-full drop-shadow-lg"
               aria-describedby={`breakdown-${question.id}`}
             />
             {/* Emoji and mood positioned below the arc */}
-            <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+            <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
               <div className="text-3xl mb-1 animate-bounce" style={{ animationDuration: '2s' }}>
                 {scoreResult.emoji}
               </div>

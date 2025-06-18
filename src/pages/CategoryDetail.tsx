@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
 import { Button } from '../components/ui/button';
 import { MiniChart } from '../components/ui/mini-chart';
 import { OverallShareButton } from '../components/OverallShareButton';
+import { ContactSection } from '../components/ContactSection';
 import { walletMoodQuestions } from '../data/questions';
 import { calculateScore } from '../utils/scoreCalculator';
 import { getMetricMoodMessage } from '../utils/schemaLoader';
@@ -225,7 +226,7 @@ export function CategoryDetail() {
         </Card>
 
         {/* Individual Metrics */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {scoreResult.indicatorBreakdown.map((indicator) => (
             <MetricCard 
               key={indicator.series} 
@@ -233,6 +234,9 @@ export function CategoryDetail() {
             />
           ))}
         </div>
+        
+        {/* Contact Section */}
+        <ContactSection className="mb-8" />
       </div>
       
       {/* Floating Share Button - Fixed Position */}

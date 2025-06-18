@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Sparkles } from 'lucide-react';
+import { ContactSection } from './ContactSection';
 
 export function Footer() {
   return (
@@ -28,6 +29,11 @@ export function Footer() {
           <span className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">
             🎉 Easy to Understand
           </span>
+        </div>
+        
+        {/* Contact Section */}
+        <div className="mb-8">
+          <ContactSection compact={true} className="bg-white/10 backdrop-blur-sm" />
         </div>
         
         {/* Footer Links */}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Header } from '../components/Header';
 import { WalletMoodCard } from '../components/WalletMoodCard';
 import { OverallShareButton } from '../components/OverallShareButton';
+import { ContactSection } from '../components/ContactSection';
 import { Toast, ToastProvider, ToastViewport } from '../components/Toast';
 import { Toaster } from '../components/ui/toaster';
 import { walletMoodQuestions } from '../data/questions';
@@ -183,7 +184,7 @@ export function Dashboard() {
         </div>
         
         <main className="max-w-7xl mx-auto px-4 pb-12">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-12">
             {scoreResults.map(({ question, scoreResult }: ScoreResultWithQuestion) => (
               <WalletMoodCard
                 key={question.id}
@@ -192,6 +193,9 @@ export function Dashboard() {
               />
             ))}
           </div>
+          
+          {/* Contact Section */}
+          <ContactSection className="mb-8" />
         </main>
 
         <Toaster />

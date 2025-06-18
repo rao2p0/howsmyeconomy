@@ -464,8 +464,8 @@ export async function calculateScore(
     const metadata = schemaMetadata[series];
     const frequency = metadata?.update_frequency || 'monthly';
     
-    // Minimum data requirements based on frequency
-    const minDataPoints = frequency === 'annually' ? 2 : frequency === 'quarterly' ? 4 : 12;
+    // Minimum data requirements based on frequency (reduced for sparse datasets)
+    const minDataPoints = frequency === 'annually' ? 2 : frequency === 'quarterly' ? 4 : 4;
     
     if (!data || data.length < minDataPoints) {
       moodScores.push(0); // Neutral if no data

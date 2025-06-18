@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Header } from '../components/Header';
 import { WalletMoodCard } from '../components/WalletMoodCard';
 import { OverallShareButton } from '../components/OverallShareButton';
-import { ContactButton } from '../components/ContactButton';
+
 import { Toast, ToastProvider, ToastViewport } from '../components/Toast';
 import { Toaster } from '../components/ui/toaster';
 import { walletMoodQuestions } from '../data/questions';
@@ -164,7 +164,7 @@ export function Dashboard() {
             <div className="flex items-center justify-center gap-4 mb-2">
               <span className="text-4xl animate-bounce">{overallMood.emoji}</span>
               <h2 className="text-2xl md:text-3xl font-playful font-bold text-shadow-fun">
-                Economy Mood: {overallMood.vibe} ({averageScore.toFixed(2)})
+                Economy Mood: {overallMood.vibe} ({uniqueIndicatorCounts.goodCount} / {uniqueIndicatorCounts.totalCount})
               </h2>
               <span className="text-4xl animate-bounce" style={{ animationDelay: '0.5s' }}>{overallMood.emoji}</span>
             </div>
@@ -211,9 +211,7 @@ export function Dashboard() {
             className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white shadow-2xl"
           />
         </div>
-        
-        {/* Floating Contact Button - Fixed Position */}
-        <ContactButton variant="floating" />
+
       </div>
     </ToastProvider>
   );

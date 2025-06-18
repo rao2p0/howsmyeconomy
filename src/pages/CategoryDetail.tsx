@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
 import { Button } from '../components/ui/button';
 import { MiniChart } from '../components/ui/mini-chart';
 import { OverallShareButton } from '../components/OverallShareButton';
-import { ContactButton } from '../components/ContactButton';
+
 import { walletMoodQuestions } from '../data/questions';
 import { calculateScore } from '../utils/scoreCalculator';
 import { getMetricMoodMessage } from '../utils/schemaLoader';
@@ -250,9 +250,7 @@ export function CategoryDetail() {
           className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white shadow-2xl"
         />
       </div>
-      
-      {/* Floating Contact Button - Fixed Position */}
-      <ContactButton variant="floating" />
+
     </div>
   );
 }

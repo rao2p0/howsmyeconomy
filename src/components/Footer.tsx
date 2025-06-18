@@ -1,11 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Sparkles } from 'lucide-react';
-import { ContactButton } from './ContactButton';
+import { SubscriptionBar } from './SubscriptionBar';
 
 export function Footer() {
   return (
-    <footer className="bg-gradient-to-r from-gray-800 via-gray-900 to-black text-white py-12 mt-16 relative overflow-hidden">
+    <footer className="mt-16 relative overflow-hidden">
+      {/* Subscription Bar */}
+      <SubscriptionBar />
+      
+      {/* Footer Content */}
+      <div className="bg-gradient-to-r from-gray-800 via-gray-900 to-black text-white py-12 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-r from-purple-900/20 to-pink-900/20"></div>
       <div className="max-w-7xl mx-auto px-4 text-center relative z-10">
         <div className="flex items-center justify-center gap-2 mb-4">
@@ -50,14 +55,13 @@ export function Footer() {
                 📋 Disclaimer
               </Link>
               <span className="text-gray-500">•</span>
-              <ContactButton variant="footer" />
-              <span className="text-gray-500">•</span>
               <span className="text-gray-400">
                 Not Financial Advice 🎭
               </span>
             </div>
           </div>
         </div>
+      </div>
       </div>
     </footer>
   );

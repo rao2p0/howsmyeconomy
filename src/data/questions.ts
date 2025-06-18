@@ -5,7 +5,7 @@ export const walletMoodQuestions: WalletMoodQuestion[] = [
     id: 'home-hunt',
     title: 'Home Hunt Helper',
     question: 'Can I afford to buy a home or keep up with rent?',
-    fredSeries: ['MORTGAGE30US', 'CSUSHPINSA', 'CUSR0000SEHA', 'HOUST', 'MEHOINUSA672N']
+    fredSeries: ['MORTGAGE30US', 'CSUSHPINSA', 'CUSR0000SEHA', 'HOUST', 'MEHOINUSA672N', 'MSPUS']
   },
   {
     id: 'car-cost',

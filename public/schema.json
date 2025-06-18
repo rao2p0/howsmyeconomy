@@ -158,6 +158,17 @@
       "nay_message": "Low housing construction is limiting supply"
     },
     {
+      "id": "MSPUS",
+      "name": "Median Sales Price of Houses",
+      "description": "Median sales price of houses sold in the United States. Tracks typical home affordability for buyers.",
+      "category": "housing",
+      "units": "Dollars",
+      "update_frequency": "quarterly",
+      "yay_message": "Home prices are affordable for typical buyers",
+      "meh_message": "Home prices are at moderate levels",
+      "nay_message": "High home prices are limiting affordability"
+    },
+    {
       "id": "MEHOINUSA672N",
       "name": "Median Household Income",
       "description": "Median household income in the United States. Higher incomes improve affordability across all categories.",

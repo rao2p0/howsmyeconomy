@@ -22,6 +22,7 @@ This document defines how to assign a simple mood score to economic metrics trac
 | CSUSHPINSA | ↓ YoY | ±2% YoY | ↑ > 2% YoY |
 | CUSR0000SEHA | ↓ YoY | ±2% YoY | ↑ > 2% YoY |
 | HOUST | ↑ > 5% YoY | ±5% | ↓ > 5% YoY |
+| MSPUS | ↓ YoY | ±2% YoY | ↑ > 2% YoY |
 | MEHOINUSA672N | ↑ > 3% YoY | ±3% | ↓ > 3% |
 
 ---

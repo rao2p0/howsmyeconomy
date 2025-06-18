@@ -8,6 +8,7 @@ const seriesNames: { [key: string]: string } = {
   'CSUSHPINSA': 'Home Prices',
   'CUSR0000SEHA': 'Rent Costs',
   'HOUST': 'Housing Starts',
+  'MSPUS': 'Median Home Price',
   'MEHOINUSA672N': 'Median Income',
   'CUSR0000SETA01': 'New Car Prices',
   'CUSR0000SETA02': 'Used Car Prices',
@@ -77,9 +78,12 @@ function getQuarterlyDataPoint(data: any[], targetDate: Date): any {
   
   if (currentQuarterPoint) return currentQuarterPoint;
   
-  // If no current quarter, get most recent available
-  const validPoints = data.filter(point => new Date(point.date) <= targetDate);
-  return validPoints[validPoints.length - 1];
+  // If no current quarter, get most recent available before the target date
+  const sortedData = data
+    .filter(point => new Date(point.date) <= targetDate)
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  
+  return sortedData.length > 0 ? sortedData[0] : data[data.length - 1];
 }
 
 // Get year-ago data point for annual series
@@ -105,7 +109,36 @@ function getQuarterlyYearAgoDataPoint(data: any[], currentDate: Date): any {
   const yearAgo = new Date(currentDate);
   yearAgo.setFullYear(yearAgo.getFullYear() - 1);
   
-  return getQuarterlyDataPoint(data, yearAgo);
+  console.log(`[DEBUG] Looking for year-ago data. Current: ${currentDate.toISOString()}, Year-ago target: ${yearAgo.toISOString()}`);
+  
+  // Try to get exact year-ago quarter first
+  const quarterlyPoint = getQuarterlyDataPoint(data, yearAgo);
+  if (quarterlyPoint) {
+    console.log(`[DEBUG] Found quarterly point:`, quarterlyPoint);
+    return quarterlyPoint;
+  }
+  
+  // If no exact match, find the closest available data point from previous year
+  const targetYear = yearAgo.getFullYear();
+  const yearAgoPoints = data.filter(point => {
+    const pointDate = new Date(point.date);
+    return pointDate.getFullYear() === targetYear;
+  });
+  
+  console.log(`[DEBUG] Year-ago points for ${targetYear}:`, yearAgoPoints);
+  
+  if (yearAgoPoints.length > 0) {
+    // Return the latest point from that year
+    const result = yearAgoPoints.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())[0];
+    console.log(`[DEBUG] Using latest from year:`, result);
+    return result;
+  }
+  
+  // Final fallback: get any available point that's roughly a year ago
+  const sortedData = data.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  const fallback = sortedData[Math.max(0, sortedData.length - 5)]; // Get a point from earlier in the data
+  console.log(`[DEBUG] Using fallback:`, fallback);
+  return fallback;
 }
 
 // Get most recent data point for a given date
@@ -165,6 +198,11 @@ function getMoodScore(questionId: string, series: string, currentValue: number, 
           // ↑ > 5% YoY = Yay, ±5% = Meh, ↓ > 5% YoY = Nay
           if (yoyChange > 5) return 1;
           if (yoyChange < -5) return -1;
+          return 0;
+        case 'MSPUS':
+          // ↓ YoY = Yay, ±2% YoY = Meh, ↑ > 2% YoY = Nay
+          if (yoyChange < 0) return 1;
+          if (yoyChange > 2) return -1;
           return 0;
         case 'MEHOINUSA672N':
           // ↑ > 3% YoY = Yay, ±3% = Meh, ↓ > 3% = Nay
@@ -465,7 +503,7 @@ export async function calculateScore(
     const frequency = metadata?.update_frequency || 'monthly';
     
     // Minimum data requirements based on frequency (reduced for sparse datasets)
-    const minDataPoints = frequency === 'annually' ? 2 : frequency === 'quarterly' ? 4 : 4;
+    const minDataPoints = frequency === 'annually' ? 2 : frequency === 'quarterly' ? 2 : 4;
     
     if (!data || data.length < minDataPoints) {
       moodScores.push(0); // Neutral if no data
@@ -499,13 +537,18 @@ export async function calculateScore(
     }
     
     if (!currentDataPoint || !yearAgoDataPoint) {
+      // Debug logging for MSPUS
+      if (series === 'MSPUS') {
+        console.log(`MSPUS Debug - Current: ${currentDataPoint?.date}/${currentDataPoint?.value}, YearAgo: ${yearAgoDataPoint?.date}/${yearAgoDataPoint?.value}`);
+        console.log(`MSPUS Data points:`, data.map(d => `${d.date}: ${d.value}`));
+      }
       moodScores.push(0);
       return {
         series,
         mood: 'neutral' as const,
         value: currentDataPoint?.value || 0,
         name: seriesNames[series] || series,
-        timestamp: currentDataPoint?.date || 'No data',
+        timestamp: currentDataPoint?.date || 'Insufficient for trend',
         units: metadata ? formatUnitsForDisplay(metadata.units) : '',
         fredUrl: getFredUrl(series),
         chartData: data || [] // Add full time series data for charting

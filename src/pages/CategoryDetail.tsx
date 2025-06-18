@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, TrendingUp, TrendingDown, Minus, Info, ExternalLink, Calendar, Scale } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Button } from '../components/ui/button';
+import { MiniChart } from '../components/ui/mini-chart';
 import { walletMoodQuestions } from '../data/questions';
 import { calculateScore } from '../utils/scoreCalculator';
 import { getMetricMoodMessage } from '../utils/schemaLoader';
@@ -234,6 +235,7 @@ interface MetricCardProps {
     timestamp: string;
     units: string;
     fredUrl: string;
+    chartData: Array<{date: string; value: number}>;
   };
 }
 
@@ -388,6 +390,17 @@ function MetricCard({ indicator }: MetricCardProps) {
               : 'No data'
             }
           </div>
+        </div>
+
+        {/* Time Series Chart */}
+        <div className="bg-white/90 backdrop-blur-sm rounded-lg border border-white/50 p-3">
+          <div className="text-xs text-gray-500 mb-2 text-center font-medium">Recent Trend</div>
+          <MiniChart 
+            data={indicator.chartData}
+            mood={indicator.mood}
+            seriesName={indicator.name}
+            units={unitInfo.symbol}
+          />
         </div>
 
         {/* Mood Status */}

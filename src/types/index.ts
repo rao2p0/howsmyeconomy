@@ -29,6 +29,7 @@ export interface IndicatorMood {
   timestamp: string;
   units: string;
   fredUrl: string;
+  chartData: FredDataPoint[];
 }
 
 export interface ScoreResult {

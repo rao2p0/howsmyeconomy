@@ -481,7 +481,8 @@ export async function calculateScore(
         name: seriesNames[series] || series,
         timestamp: 'No data',
         units: metadata ? formatUnitsForDisplay(metadata.units) : '',
-        fredUrl: getFredUrl(series)
+        fredUrl: getFredUrl(series),
+        chartData: [] // Empty array for no data case
       };
     }
     
@@ -511,7 +512,8 @@ export async function calculateScore(
         name: seriesNames[series] || series,
         timestamp: currentDataPoint?.date || 'No data',
         units: metadata ? formatUnitsForDisplay(metadata.units) : '',
-        fredUrl: getFredUrl(series)
+        fredUrl: getFredUrl(series),
+        chartData: data || [] // Add full time series data for charting
       };
     }
     
@@ -528,7 +530,8 @@ export async function calculateScore(
       name: seriesNames[series] || series,
       timestamp: currentDataPoint.date,
       units: metadata ? formatUnitsForDisplay(metadata.units) : '',
-      fredUrl: getFredUrl(series)
+      fredUrl: getFredUrl(series),
+      chartData: data || [] // Add full time series data for charting
     };
   });
 

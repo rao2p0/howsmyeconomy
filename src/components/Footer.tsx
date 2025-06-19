@@ -24,13 +24,13 @@ export function Footer() {
            Made with ❤️ to make economics accessible and fun!
         </p>
         <div className="flex justify-center gap-4 mb-6">
-          <span className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">
+          <span className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium text-gray-400">
             🎯 Real Data
           </span>
-          <span className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">
+          <span className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium text-gray-400">
             📈 Live Updates
           </span>
-          <span className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">
+          <span className="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium text-gray-400">
             🎉 Easy to Understand
           </span>
         </div>
@@ -49,7 +49,7 @@ export function Footer() {
             <div className="flex items-center gap-4 text-sm">
               <Link 
                 to="/disclaimer" 
-                className="text-blue-300 hover:text-blue-200 underline underline-offset-2 transition-colors duration-200"
+                className="text-blue-300 hover:text-blue-200 transition-colors duration-200"
               >
                 📋 Disclaimer
               </Link>

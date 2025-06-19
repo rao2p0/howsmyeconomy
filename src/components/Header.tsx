@@ -1,11 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { TrendingUp, Sparkles } from 'lucide-react';
+import { VisualModeToggle } from './VisualModeToggle';
 
 
 export function Header() {
   return (
     <div className="bg-rainbow text-white py-12 relative overflow-hidden">
+      {/* Visual Mode Toggle */}
+      <div className="absolute top-4 right-4 z-20">
+        <VisualModeToggle />
+      </div>
+      
       {/* Floating decorative elements */}
       <div className="absolute top-4 left-4 text-yellow-300 animate-bounce">
         <Sparkles size={24} />

@@ -142,14 +142,9 @@ export function CategoryDetail() {
       {/* Header */}
       <div className="bg-gradient-to-r from-gray-800 via-gray-900 to-black text-white py-8">
         <div className="max-w-6xl mx-auto px-4">
-          <Link to="/">
-            <Button 
-              variant="ghost" 
-              className="text-white hover:bg-white/10 mb-4 gap-2"
-            >
-              <ArrowLeft size={16} />
-              Back to Dashboard
-            </Button>
+          <Link to="/" className="inline-flex items-center gap-2 text-white hover:text-gray-300 mb-4">
+            <ArrowLeft size={16} />
+            Back to Dashboard
           </Link>
           <div className="text-center">
             <div className="flex items-center justify-center gap-4 mb-4">

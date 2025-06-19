@@ -149,7 +149,7 @@ export function CategoryDetail() {
           <div className="text-center">
             <div className="flex items-center justify-center gap-4 mb-4">
               {getOverallTrendIcon(scoreResult.score)}
-              <h1 className="text-4xl md:text-5xl font-playful font-bold text-shadow-fun">
+              <h1 className="text-4xl md:text-5xl font-playful font-bold text-white">
                 {question.title}
               </h1>
               <span className="text-4xl animate-wiggle">

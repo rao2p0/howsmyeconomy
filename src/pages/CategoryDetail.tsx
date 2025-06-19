@@ -156,7 +156,7 @@ export function CategoryDetail() {
                 {overallMood.emoji}
               </span>
             </div>
-            <p className="text-xl text-blue-200 font-medium mb-2">
+            <p className="text-xl text-white font-medium mb-2">
               {question.question}
             </p>
             <div className={`inline-block bg-gradient-to-r ${overallMood.color} px-6 py-2 rounded-full font-bold text-lg mb-4`}>

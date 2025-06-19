@@ -2,48 +2,31 @@ import React, { useState } from 'react';
 import { Bell, Send, Mail } from 'lucide-react';
 import { Button } from './ui/button';
 import { useToast } from './ui/use-toast';
-import { emailService } from '../services/emailService';
+import { tallyService } from '../services/tallyService';
 
 export function SubscriptionBar() {
   const [email, setEmail] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
-  const handleSubscribe = async (e: React.FormEvent) => {
+  const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email.trim()) return;
     
-    setIsSubmitting(true);
+    // Open Tally form with prefilled data
+    tallyService.openSubscriptionForm({
+      email: email.trim(),
+      source: 'Footer Subscription Bar',
+      frequency: 'weekly'
+    });
 
-    try {
-      const result = await emailService.submitSubscription(
-        email,
-        'Footer Subscription Bar',
-        'weekly' // Default frequency for footer subscription
-      );
-
-      if (result.success) {
-        toast({
-          title: "Subscribed! 🎉",
-          description: "You'll receive economic updates in your inbox.",
-        });
-        
-        // Reset form
-        setEmail('');
-      } else {
-        throw new Error(result.message);
-      }
-
-    } catch (error) {
-      console.error('Subscription error:', error);
-      toast({
-        title: "Subscription failed 😞",
-        description: error instanceof Error ? error.message : "Please try again later.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+    // Show success message and reset form
+    toast({
+      title: "Opening subscription form! 📝",
+      description: "Complete the form to receive economic updates.",
+    });
+    
+    // Reset form
+    setEmail('');
   };
 
   return (
@@ -76,24 +59,20 @@ export function SubscriptionBar() {
             </div>
             <Button
               type="submit"
-              disabled={isSubmitting || !email.trim()}
+              disabled={!email.trim()}
               className="h-12 px-6 bg-yellow-400 hover:bg-yellow-300 text-gray-800 font-bold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
             >
-              {isSubmitting ? (
-                <div className="animate-spin rounded-full h-5 w-5 border-2 border-gray-600/30 border-t-gray-600"></div>
-              ) : (
-                <div className="flex items-center gap-2">
-                  <Send size={18} />
-                  Subscribe
-                </div>
-              )}
+              <div className="flex items-center gap-2">
+                <Send size={18} />
+                Subscribe
+              </div>
             </Button>
           </div>
         </form>
         
         <div className="text-center mt-4">
           <p className="text-xs text-blue-200">
-            📈 No spam, just insights • Stored securely in Google Sheets
+            📈 No spam, just insights • Powered by Tally.so
           </p>
         </div>
       </div>

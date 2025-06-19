@@ -3,8 +3,7 @@ import { X, Mail, Send, Bell, MessageCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { useToast } from './ui/use-toast';
-import { emailService } from '../services/emailService';
-import { EMAIL_CONFIG } from '../config/emailConfig';
+import { tallyService } from '../services/tallyService';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -29,77 +28,44 @@ export function ContactModal({ isOpen, onClose, defaultTab = 'contact' }: Contac
 
   if (!isOpen) return null;
 
-  const handleContactSubmit = async (e: React.FormEvent) => {
+  const handleContactSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    
+    // Open Tally contact form with prefilled data
+    tallyService.openContactForm({
+      name: contactForm.name,
+      email: contactForm.email,
+      message: contactForm.message
+    });
 
-    try {
-      const result = await emailService.submitContact(
-        contactForm.name,
-        contactForm.email,
-        contactForm.message,
-        contactForm.feedbackType
-      );
+    toast({
+      title: "Opening contact form! 📝",
+      description: "Complete the form to send your message.",
+    });
 
-      if (result.success) {
-        toast({
-          title: "Feedback Sent! 📧",
-          description: "Thank you for your feedback. We'll get back to you soon!",
-        });
-
-        // Reset form
-        setContactForm({ name: '', email: '', feedbackType: 'general', message: '' });
-        setTimeout(() => onClose(), 1000);
-      } else {
-        throw new Error(result.message);
-      }
-
-    } catch (error) {
-      console.error('Contact submission error:', error);
-      toast({
-        title: "Oops! Something went wrong 😞",
-        description: error instanceof Error ? error.message : "Please try again or contact us directly.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+    // Reset form and close modal
+    setContactForm({ name: '', email: '', feedbackType: 'general', message: '' });
+    setTimeout(() => onClose(), 1000);
   };
 
-  const handleSubscribeSubmit = async (e: React.FormEvent) => {
+  const handleSubscribeSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    
+    // Open Tally subscription form with prefilled data
+    tallyService.openSubscriptionForm({
+      email: subscribeForm.email,
+      source: 'Contact Modal Subscription',
+      frequency: subscribeForm.frequency
+    });
 
-    try {
-      const result = await emailService.submitSubscription(
-        subscribeForm.email,
-        'Contact Modal Subscription',
-        subscribeForm.frequency
-      );
+    toast({
+      title: "Opening subscription form! 📝",
+      description: "Complete the form to subscribe to updates.",
+    });
 
-      if (result.success) {
-        toast({
-          title: "Subscribed! 🎉",
-          description: "You'll receive economic updates based on your preference.",
-        });
-
-        // Reset form
-        setSubscribeForm({ email: '', frequency: 'weekly' });
-        setTimeout(() => onClose(), 1000);
-      } else {
-        throw new Error(result.message);
-      }
-
-    } catch (error) {
-      console.error('Subscription error:', error);
-      toast({
-        title: "Subscription failed 😞",
-        description: error instanceof Error ? error.message : "Please try again later.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+    // Reset form and close modal
+    setSubscribeForm({ email: '', frequency: 'weekly' });
+    setTimeout(() => onClose(), 1000);
   };
 
   return (

@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Sparkles } from 'lucide-react';
-import { SubscriptionBar } from './SubscriptionBar';
+// import { SubscriptionBar } from './SubscriptionBar';
 
 export function Footer() {
   return (
     <footer className="mt-16 relative overflow-hidden">
-      {/* Subscription Bar */}
-      <SubscriptionBar />
+      {/* Subscription Bar - Temporarily commented out */}
+      {/* <SubscriptionBar /> */}
       
       {/* Footer Content */}
       <div className="bg-gradient-to-r from-gray-800 via-gray-900 to-black text-white py-12 relative overflow-hidden">

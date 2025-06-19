@@ -4,7 +4,7 @@
 export const EMAIL_CONFIG = {
   // Use the Web App URL that ends with /exec (NOT the library URL)
   // Update this to match the working URL from your connectivity test
-  GOOGLE_APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxjr-nsdKLofOLGbLK5uHBITdAnYADE2vi0j8bfEqza3nN5_Nr/exec',
+  GOOGLE_APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbwyZMwUO_TxBJd0duCo_cPXgigTYuHgkCTs_ipTOh7WxUhDUFGNgrLn6Oj2Qnk5DOdwog/exec',
 
   // Timeout for email submission requests (in milliseconds)
   REQUEST_TIMEOUT: 10000,

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POST Request Debug Tool</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 800px; margin: 0 auto; }
+        .test-section { margin: 20px 0; padding: 15px; border: 2px solid #ddd; border-radius: 8px; }
+        button { background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; margin: 5px; }
+        button:hover { background: #0056b3; }
+        .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; padding: 10px; border-radius: 4px; margin: 10px 0; }
+        .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; padding: 10px; border-radius: 4px; margin: 10px 0; }
+        .info { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; padding: 10px; border-radius: 4px; margin: 10px 0; }
+        pre { background: #f8f9fa; padding: 10px; border-radius: 4px; overflow-x: auto; }
+        input { width: 100%; padding: 8px; margin: 5px 0; border: 1px solid #ddd; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <h1>🔧 POST Request Debug Tool</h1>
+    <p>This tool will help us debug why POST requests are failing while GET requests work.</p>
+    
+    <div class="test-section">
+        <h2>📍 Step 1: Verify the Working URL</h2>
+        <input type="url" id="workingUrl" value="https://script.google.com/macros/s/AKfycbwyZMwUO_TxBJd0duCo_cPXgigTYuHgkCTs_ipTOh7WxUhDUFGNgrLn6Oj2Qnk5DOdwog/exec" placeholder="Working URL from connectivity test">
+        <button onclick="testGet()">🔄 Test GET (Should Work)</button>
+        <div id="getResult"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>📮 Step 2: Test Simple POST</h2>
+        <button onclick="testSimplePost()">📤 Test Simple POST</button>
+        <div id="postResult"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>📧 Step 3: Test Email Data POST</h2>
+        <button onclick="testEmailPost()">📧 Test Email POST</button>
+        <div id="emailResult"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>🔍 Step 4: Check Multiple URLs</h2>
+        <button onclick="checkAllUrls()">🕵️ Check All URL Variations</button>
+        <div id="urlResults"></div>
+    </div>
+
+    <script>
+        async function testGet() {
+            const url = document.getElementById('workingUrl').value;
+            const resultDiv = document.getElementById('getResult');
+            
+            try {
+                const response = await fetch(url, { method: 'GET' });
+                const data = await response.json();
+                
+                resultDiv.innerHTML = `
+                    <div class="success">
+                        ✅ GET Request Successful<br>
+                        Status: ${response.status}<br>
+                        Message: ${data.message}<br>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    </div>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        ❌ GET Request Failed<br>
+                        Error: ${error.message}
+                    </div>
+                `;
+            }
+        }
+        
+        async function testSimplePost() {
+            const url = document.getElementById('workingUrl').value;
+            const resultDiv = document.getElementById('postResult');
+            
+            const simpleData = { test: 'hello', timestamp: new Date().toISOString() };
+            
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(simpleData)
+                });
+                
+                console.log('POST Response:', response);
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`HTTP ${response.status}: ${errorText}`);
+                }
+                
+                const data = await response.json();
+                
+                resultDiv.innerHTML = `
+                    <div class="success">
+                        ✅ Simple POST Successful<br>
+                        Status: ${response.status}<br>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    </div>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        ❌ Simple POST Failed<br>
+                        Error: ${error.message}<br>
+                        <pre>Sent: ${JSON.stringify(simpleData, null, 2)}</pre>
+                    </div>
+                `;
+            }
+        }
+        
+        async function testEmailPost() {
+            const url = document.getElementById('workingUrl').value;
+            const resultDiv = document.getElementById('emailResult');
+            
+            const emailData = {
+                email: 'test@example.com',
+                source: 'Debug Tool',
+                frequency: 'weekly',
+                timestamp: new Date().toISOString(),
+                page: window.location.href,
+                userAgent: navigator.userAgent
+            };
+            
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(emailData)
+                });
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`HTTP ${response.status}: ${errorText}`);
+                }
+                
+                const data = await response.json();
+                
+                resultDiv.innerHTML = `
+                    <div class="success">
+                        ✅ Email POST Successful<br>
+                        Status: ${response.status}<br>
+                        Success: ${data.success}<br>
+                        Message: ${data.message}<br>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    </div>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        ❌ Email POST Failed<br>
+                        Error: ${error.message}<br>
+                        <pre>Sent: ${JSON.stringify(emailData, null, 2)}</pre>
+                    </div>
+                `;
+            }
+        }
+        
+        async function checkAllUrls() {
+            const baseUrls = [
+                'AKfycbxjr-nsdKLofOLGbLK5uHBITdAnYADE2vi0j8bfEqza3nN5_Nr',
+                'AKfycbxjr-nsdKLofOLGbLK5uHBITdAnYADE2vi0j8bfEqza3nN5_NmgrrveL0-HzhQOBZgliw',
+                'AKfycbx2BQ5CnZhPzo5k8GjEgg-SaxqyGX7Zg2zlVVZiEXAgb1OTPRTL9ZnVnLLBOFW0uKWmNw'
+            ];
+            
+            const resultDiv = document.getElementById('urlResults');
+            resultDiv.innerHTML = '<div class="info">🔄 Testing all URL variations...</div>';
+            
+            let results = '<h3>URL Test Results:</h3>';
+            
+            for (const urlId of baseUrls) {
+                const fullUrl = `https://script.google.com/macros/s/${urlId}/exec`;
+                
+                try {
+                    const response = await fetch(fullUrl, { method: 'GET' });
+                    const data = await response.json();
+                    
+                    results += `
+                        <div class="success">
+                            ✅ ${urlId.substring(0, 20)}...<br>
+                            Status: ${response.status} | Message: ${data.message}
+                        </div>
+                    `;
+                } catch (error) {
+                    results += `
+                        <div class="error">
+                            ❌ ${urlId.substring(0, 20)}...<br>
+                            Error: ${error.message}
+                        </div>
+                    `;
+                }
+            }
+            
+            resultDiv.innerHTML = results;
+        }
+    </script>
+</body>
+</html> 

@@ -457,7 +457,9 @@ input:focus {
 
 /* Share button specific fix - darker text on gradient background */
 .theme-serious .bg-gradient-to-r.from-purple-500.to-pink-500,
-.theme-serious .bg-gradient-to-r.from-purple-600.to-pink-600 {
+.theme-serious .bg-gradient-to-r.from-purple-600.to-pink-600,
+.theme-serious .bg-gradient-to-r.from-blue-500.to-purple-600,
+.theme-serious .bg-gradient-to-r.from-blue-600.to-purple-700 {
   color: #1f2937 !important;
 }
 

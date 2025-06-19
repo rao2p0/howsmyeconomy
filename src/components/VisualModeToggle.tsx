@@ -60,15 +60,6 @@ export function VisualModeToggle() {
           )}
         </div>
       </div>
-      
-      {/* Mode Label */}
-      <div className="text-center mt-2">
-        <span className={`text-xs font-medium transition-colors duration-200 ${
-          isFunMode ? 'text-purple-600' : 'text-gray-600'
-        }`}>
-          {isFunMode ? "Make It Fun" : "I'm Serious"}
-        </span>
-      </div>
     </div>
   );
-} 
+}

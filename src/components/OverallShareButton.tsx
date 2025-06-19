@@ -82,8 +82,8 @@ export function OverallShareButton({
       className={`font-playful font-bold gap-2 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 ${config.button} ${className}`}
       aria-label="Share overall economic data on X"
     >
-      <Share size={config.icon} className="animate-pulse" />
+      <Share size={config.icon} className="animate-pulse text-white" />
       {config.text}
     </Button>
   );
-} 
+}

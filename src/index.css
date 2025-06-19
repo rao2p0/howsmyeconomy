@@ -454,6 +454,13 @@ input:focus {
 .theme-serious button:hover {
   background-color: #f3f4f6 !important;
 }
+
+/* Share button specific fix - keep white text on gradient background */
+.theme-serious .bg-gradient-to-r.from-purple-500.to-pink-500,
+.theme-serious .bg-gradient-to-r.from-purple-600.to-pink-600 {
+  color: #ffffff !important;
+}
+
 .theme-serious .btn-playful { color: #ffffff !important; }
 
 /* Exception: ONLY buttons on DARK backgrounds (like disclaimer page) should have white text */

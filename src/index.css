@@ -636,7 +636,7 @@ input:focus {
   color: #ffffff !important;
 }
 
-/* SPECIFIC FIX FOR THE INFO ICON IN VISUAL MODE TOGGLE */
+/* SPECIFIC FIX FOR THE INFO MESSAGE TEXT TO BE WHITE */
 .theme-serious .text-gray-400 {
   color: #ffffff !important;
 }

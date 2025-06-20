@@ -12,6 +12,23 @@ export function Header() {
         <VisualModeToggle />
       </div>
       
+      {/* Bolt Badge */}
+      <div className="absolute top-4 right-20 z-20">
+        <a 
+          href="https://bolt.new/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="block hover:scale-110 transition-transform duration-200"
+          aria-label="Powered by Bolt"
+        >
+          <img 
+            src="/white_circle_360x360.png" 
+            alt="Powered by Bolt" 
+            className="w-12 h-12 md:w-14 md:h-14 drop-shadow-lg hover:drop-shadow-xl transition-all duration-200"
+          />
+        </a>
+      </div>
+      
       {/* Floating decorative elements */}
       <div className="absolute top-4 left-4 text-yellow-300 animate-bounce">
         <Sparkles size={24} />

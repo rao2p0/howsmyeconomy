@@ -635,3 +635,8 @@ input:focus {
 .theme-serious .bg-gradient-to-r.from-gray-800 button svg {
   color: #ffffff !important;
 }
+
+/* SPECIFIC FIX FOR THE INFO ICON IN VISUAL MODE TOGGLE */
+.theme-serious .text-gray-400 {
+  color: #ffffff !important;
+}

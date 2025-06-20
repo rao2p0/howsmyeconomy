@@ -7,13 +7,13 @@ import { VisualModeToggle } from './VisualModeToggle';
 export function Header() {
   return (
     <div className="bg-rainbow text-white py-12 relative overflow-hidden">
-      {/* Visual Mode Toggle */}
-      <div className="absolute top-4 right-4 z-20">
+      {/* Visual Mode Toggle - Moved to Left */}
+      <div className="absolute top-4 left-4 z-20">
         <VisualModeToggle />
       </div>
       
       {/* Bolt Badge */}
-      <div className="absolute top-4 right-20 z-20">
+      <div className="absolute top-4 right-4 z-20">
         <a 
           href="https://bolt.new/" 
           target="_blank" 
@@ -30,10 +30,10 @@ export function Header() {
       </div>
       
       {/* Floating decorative elements */}
-      <div className="absolute top-4 left-4 text-yellow-300 animate-bounce">
+      <div className="absolute top-8 left-20 text-yellow-300 animate-bounce">
         <Sparkles size={24} />
       </div>
-      <div className="absolute top-8 right-8 text-pink-300 animate-pulse">
+      <div className="absolute top-8 right-20 text-pink-300 animate-pulse">
         <Sparkles size={20} />
       </div>
       <div className="absolute bottom-4 left-1/4 text-blue-300 animate-wiggle">
